@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -12,6 +12,9 @@ import Search from './screens/Search';
 import AuthStackScreens from './screens/Auth/AuthStackScreens';
 import Settings from './screens/Settings';
 import AddBook from './screens/AddBook';
+
+//Components
+import MyTabbar from './components/myTabbar';
 
 // Navigation fonksiyonlarının açılması.
 // @TODO: Bu sayfanın daha temiz olması için tekrar gözden geçirilebilir.
@@ -37,6 +40,7 @@ const Router = (props) => {
   const TabScreens = () => (
     <TabsStackScreens.Navigator
       initialRouteName="HomeScreen"
+      tabBar={(props) => <MyTabbar {...props} />}
       tabBarOptions={{
         activeTintColor: 'tomato',
         inactiveTintColor: 'gray',
@@ -73,4 +77,10 @@ const mapStateToProps = ({auth}) => {
   const {isAuth} = auth;
   return {isAuth};
 };
+
+const styles = StyleSheet.create({
+  tabbar: {
+    backgroundColor: 'red',
+  },
+});
 export default connect(mapStateToProps, null)(Router);
