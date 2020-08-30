@@ -12,6 +12,7 @@ import Search from './screens/Search';
 import AuthStackScreens from './screens/Auth/AuthStackScreens';
 import Settings from './screens/Settings';
 import AddBook from './screens/AddBook';
+import MyTabbar from './components/TabBar/index';
 
 // Navigation fonksiyonlarının açılması.
 // @TODO: Bu sayfanın daha temiz olması için tekrar gözden geçirilebilir.
@@ -26,7 +27,11 @@ const Router = (props) => {
     return (
       <HomeScreens.Navigator>
         {!props.isAuth ? (
-          <HomeScreens.Screen name="Home" component={Home} />
+          <HomeScreens.Screen
+            name="Home"
+            component={Home}
+            options={{headerShown: false}}
+          />
         ) : (
           <HomeScreens.Screen name="AddBook" component={AddBook} />
         )}
@@ -36,7 +41,8 @@ const Router = (props) => {
   // Tab ekranları tanımlanıyor.
   const TabScreens = () => (
     <TabsStackScreens.Navigator
-      initialRouteName="HomeScreen"
+      initialRouteName="Search"
+      tabBar={(props) => <MyTabbar {...props} />}
       tabBarOptions={{
         activeTintColor: 'tomato',
         inactiveTintColor: 'gray',
@@ -46,7 +52,7 @@ const Router = (props) => {
         name="HomeScreen"
         component={HomeScreensNavigation}
       />
-      <TabsStackScreens.Screen name="Login" component={AuthStackScreens} />
+      <TabsStackScreens.Screen name="Login" component={AuthStackScreens} options={{headerShown: false}}/>
     </TabsStackScreens.Navigator>
   );
 
@@ -63,7 +69,7 @@ const Router = (props) => {
         <StackScreens.Screen
           name="Dashboard"
           component={DrawerScreens}
-          options={{title: 'ReBook'}}
+          options={{title: 'ReBook', headerShown: false}}
         />
       </StackScreens.Navigator>
     </NavigationContainer>
