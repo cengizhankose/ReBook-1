@@ -14,7 +14,7 @@ import Settings from './screens/Settings';
 import AddBook from './screens/AddBook';
 
 //Components
-import MyTabbar from './components/myTabbar';
+import MyTabbar from './components/MyTabbar/myTabbar';
 
 // Navigation fonksiyonlarının açılması.
 // @TODO: Bu sayfanın daha temiz olması için tekrar gözden geçirilebilir.
