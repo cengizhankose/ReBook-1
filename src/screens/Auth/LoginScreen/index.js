@@ -1,4 +1,7 @@
 import React, {useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {loginUserAction} from '../../../redux/auth/actions';
+
 import {
   View,
   Text,
@@ -23,8 +26,14 @@ import CheckBox from '../../../components/CheckBox/index';
 import {styles} from './styles';
 
 const index = (props) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('taha@gmail.com');
+  const [password, setPassword] = useState('taha123');
+
+  const onLoginUser = (email, password) => {
+    console.log('tıklandı');
+    dispatch(loginUserAction(email, password));
+  };
 
   return (
     <View style={styles.loginView}>
@@ -48,7 +57,10 @@ const index = (props) => {
             value={password}
             onChangeText={(value) => setPassword(value)}
           />
-          <Button text={'Giriş Yap'} />
+          <Button
+            text={'Giriş Yap'}
+            onPress={() => onLoginUser(email, password)}
+          />
         </View>
         <View style={styles.subInfos}>
           <View style={styles.checkBoxView}>

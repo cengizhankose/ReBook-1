@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1069998715452",
+    "firebase_url": "https://rebook-6d8b6.firebaseio.com",
+    "project_id": "rebook-6d8b6",
+    "storage_bucket": "rebook-6d8b6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1069998715452:android:7d4ec8fc84a121a6174939",
+        "android_client_info": {
+          "package_name": "com.rebook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1069998715452-11c7tkr6faint93dvih9m2ugucsnbgrr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9tphV-iOMcPJQ8mOpQO2jVpNHGd2aI9s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1069998715452-11c7tkr6faint93dvih9m2ugucsnbgrr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
