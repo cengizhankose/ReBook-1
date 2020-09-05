@@ -69,7 +69,7 @@ function MyTabBar({state, descriptors, navigation}) {
                 </TouchableOpacity>
               </View>
             )}
-            {label === 'Login' && (
+            {label === 'Wishlist' && (
               <View
                 key={index}
                 style={[styles.sohbet, isFocused && styles.chooseSohbet]}>
