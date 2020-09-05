@@ -9,6 +9,7 @@ import {NavigationContainer} from '@react-navigation/native';
 // Screens
 import Home from './screens/Home';
 import Search from './screens/Search';
+import Wishlist from './screens/Wishlist'
 import AuthStackScreens from './screens/Auth/AuthStackScreens';
 import Settings from './screens/Settings';
 import AddBook from './screens/AddBook';
@@ -41,18 +42,14 @@ const Router = (props) => {
   // Tab ekranları tanımlanıyor.
   const TabScreens = () => (
     <TabsStackScreens.Navigator
-      initialRouteName="Search"
-      tabBar={(props) => <MyTabbar {...props} />}
-      tabBarOptions={{
-        activeTintColor: 'tomato',
-        inactiveTintColor: 'gray',
-      }}>
+      initialRouteName="HomeScreen"
+      tabBar={(props) => <MyTabbar {...props} />}>
       <TabsStackScreens.Screen name="Search" component={Search} />
       <TabsStackScreens.Screen
         name="HomeScreen"
         component={HomeScreensNavigation}
       />
-      <TabsStackScreens.Screen name="Login" component={AuthStackScreens} options={{headerShown: false}}/>
+      <TabsStackScreens.Screen name="Wishlist" component={Wishlist} options={{headerShown: false}}/>
     </TabsStackScreens.Navigator>
   );
 
