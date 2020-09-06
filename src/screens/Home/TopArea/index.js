@@ -41,7 +41,7 @@ const index = () => {
                   alignContent: 'space-around',
                 }}>
                 <Image
-                  style={{width: 100, height: 100}}
+                  style={{width: 200, height: 200}}
                   source={{uri: item.img}}
                 />
                 <Text style={{margin: 5}}>{item.bookName}</Text>
