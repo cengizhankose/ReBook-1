@@ -8,6 +8,7 @@ import {
   StatusBar,
 } from 'react-native';
 import Router from './src/Router';
+import Home from './src/screens/Home/index';
 import {createStore, applyMiddleware} from 'redux';
 import ReduxThunk from 'redux-thunk';
 import reducers from './src/redux';

@@ -1,5 +1,8 @@
 import React, {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {View, Text, StyleSheet} from 'react-native';
+
+import {registerUserAction} from '../../../redux/auth/actions';
 
 import ReBookLogo from '../../../components/ReBookLogo/index';
 import Input from '../../../components/Input/index';
@@ -8,10 +11,16 @@ import Button from '../../../components/Button/index';
 import {styles} from './styles';
 
 const index = () => {
+  const dispatch = useDispatch();
+
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const onSubmitUser = (email, password) => {
+    dispatch(registerUserAction(email, password));
+  };
   return (
     <View style={styles.registerView}>
       <View style={styles.registerTopSide}></View>
@@ -47,7 +56,12 @@ const index = () => {
             value={password}
             onChangeText={(value) => setPassword(value)}
           />
-          <Button text={'Kayıt Ol'} />
+          <Button
+            text={'Kayıt Ol'}
+            onPress={() => {
+              onSubmitUser(email, password);
+            }}
+          />
         </View>
       </View>
       <View style={styles.registerBottom}></View>
