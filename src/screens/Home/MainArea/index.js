@@ -34,7 +34,9 @@ const index = () => {
             // Bu kısımda yeni eklenenler kitaplar listesinde kitap cardları listelenecek
 
             mockData.map((book) => (
-              <View style={{flexDirection: 'row'}}>
+              <View
+                style={{flexDirection: 'row'}}
+                key={Math.random() + book.bookName}>
                 <ImageBackground
                   style={{width: 300, height: 300, marginHorizontal: 10}}
                   source={{uri: book.img}}>

@@ -36,6 +36,7 @@ const index = () => {
             // TODO: Buraya fetch edilen kitap listesi arrayı her biri bookcard olacak şekilde yazdırırılacak.!
             mockData.map((item) => (
               <View
+                key={Math.random() + item.bookName}
                 style={{
                   flexDirection: 'row',
                   justifyContent: 'center',
