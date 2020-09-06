@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Linking} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
 import {createStackNavigator} from '@react-navigation/stack';
 import {connect} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
@@ -15,7 +15,8 @@ import AddBook from './screens/AddBook';
 
 //Components
 import MyTabbar from './components/MyTabbar/myTabbar';
-
+import DrawerLogOut from './components/CostomDrawer';
+import {Colors} from './constant/colors/colors';
 // Navigation fonksiyonlarının açılması.
 // @TODO: Bu sayfanın daha temiz olması için tekrar gözden geçirilebilir.
 
@@ -56,9 +57,26 @@ const Router = (props) => {
 
   // Drawer 'da çıkacak ekranlar tanımlanıyor.
   const DrawerScreens = () => (
-    <DrawerStackScreens.Navigator initialRouteName="Drawer">
-      <DrawerStackScreens.Screen name="Drawer" component={TabScreens} />
-      <DrawerStackScreens.Screen name="Settings" component={Settings} />
+    <DrawerStackScreens.Navigator
+      drawerContent={(props) => <DrawerLogOut {...props} />}
+      drawerContentOptions={{
+        contentContainerStyle: {
+          justifyContent: 'space-between',
+          flex: 1,
+        },
+        itemStyle: {
+          alignItems: 'center',
+          borderBottomColor: 'lightgray',
+          borderBottomWidth: 0.5,
+        },
+        labelStyle: {
+          color: '#000',
+          fontSize: 16,
+        },
+        activeTintColor: Colors.orange,
+      }}>
+      <DrawerStackScreens.Screen name="Mesajlar" component={TabScreens} />
+      <DrawerStackScreens.Screen name="Ayarlar" component={Settings} />
     </DrawerStackScreens.Navigator>
   );
   return (
