@@ -1,18 +1,21 @@
 import React from 'react';
-import {View, Text, ScrollView, Image} from 'react-native';
+import {View, Text, ScrollView, Image, ImageBackground} from 'react-native';
 import {styles} from './styles';
+
+const placeHolder =
+  'https://firebasestorage.googleapis.com/v0/b/rebook-6d8b6.appspot.com/o/mock%2FRectangle%202.png?alt=media&token=087f251f-b579-43ca-820e-22486e091130';
 const mockData = [
   {
-    bookName: 'Suç ve Ceza',
-    img: 'https://via.placeholder.com/300',
+    bookName: 'Steve Jobs',
+    img: placeHolder,
   },
   {
-    bookName: 'Suç ve Ceza',
-    img: 'https://via.placeholder.com/300',
+    bookName: 'Steve Jobs',
+    img: placeHolder,
   },
   {
-    bookName: 'Suç ve Ceza',
-    img: 'https://via.placeholder.com/300',
+    bookName: 'Steve Jobs',
+    img: placeHolder,
   },
 ];
 const index = () => {
@@ -32,11 +35,20 @@ const index = () => {
 
             mockData.map((book) => (
               <View style={{flexDirection: 'row'}}>
-                <Image
-                  style={{width: 300, height: 300}}
-                  source={{uri: book.img}}
-                />
-                <Text>{book.bookName}</Text>
+                <ImageBackground
+                  style={{width: 300, height: 300, marginHorizontal: 10}}
+                  source={{uri: book.img}}>
+                  <Text
+                    style={{
+                      textAlign: 'center',
+                      fontSize: 20,
+                      justifyContent: 'center',
+                      alignContent: 'center',
+                      marginTop: 5,
+                    }}>
+                    {book.bookName}
+                  </Text>
+                </ImageBackground>
               </View>
             ))
           }

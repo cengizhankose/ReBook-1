@@ -1,23 +1,24 @@
 import React from 'react';
-import {View, Text, ScrollView, Image} from 'react-native';
+import {View, Text, ScrollView, Image, ImageBackground} from 'react-native';
 import {styles} from './styles';
-
+const placeholder =
+  'https://firebasestorage.googleapis.com/v0/b/rebook-6d8b6.appspot.com/o/mock%2Fsuc.png?alt=media&token=8e84d044-e810-47ea-81f1-a3619015b3b6';
 const mockData = [
   {
     bookName: 'Suç ve Ceza',
-    img: 'https://via.placeholder.com/150',
+    img: placeholder,
   },
   {
     bookName: 'Suç ve Ceza 2 ',
-    img: 'https://via.placeholder.com/150',
+    img: placeholder,
   },
   {
     bookName: 'Suç ve Ceza 3',
-    img: 'https://via.placeholder.com/150',
+    img: placeholder,
   },
   {
     bookName: 'Suç ve Ceza 4',
-    img: 'https://via.placeholder.com/150',
+    img: placeholder,
   },
 ];
 const index = () => {
@@ -40,11 +41,13 @@ const index = () => {
                   justifyContent: 'center',
                   alignContent: 'space-around',
                 }}>
-                <Image
-                  style={{width: 200, height: 200}}
-                  source={{uri: item.img}}
-                />
-                <Text style={{margin: 5}}>{item.bookName}</Text>
+                <ImageBackground
+                  style={{width: 150, height: 150, marginHorizontal: 10}}
+                  source={{uri: item.img}}>
+                  <Text style={{margin: 5, textAlign: 'center', fontSize: 14}}>
+                    {item.bookName}
+                  </Text>
+                </ImageBackground>
               </View>
             ))
           }

@@ -9,6 +9,8 @@ import {
 } from './types';
 import {registerUser} from '../../../firebaseHelper';
 import auth from '@react-native-firebase/auth';
+import {Alert} from 'react-native';
+import firestore from '@react-native-firebase/firestore';
 
 export const changeUserStatus = (status) => {
   return (dispatch) => {
@@ -16,17 +18,31 @@ export const changeUserStatus = (status) => {
   };
 };
 
-export const registerUserAction = (email, password) => {
+export const registerUserAction = (params) => {
   return (dispatch) => {
     dispatch({type: REGİSTER_USER});
 
     auth()
-      .createUserWithEmailAndPassword(email, password)
+      .createUserWithEmailAndPassword(params.email, params.password)
       .then((res) => {
         dispatch({type: REGİSTER_USER_SUCCESS});
+        const uid = res.user._user.uid;
+        const setData = {
+          name: params.name,
+          surname: params.suername,
+          email: params.email,
+          favorites: [],
+          products: [],
+        };
+        firestore()
+          .collection('Users')
+          .doc(uid)
+          .set(setData)
+          .then(() => console.log('added'));
       })
       .catch((err) => {
         dispatch({type: REGİSTER_USER_FAIL});
+        Alert.alert('Hata Mesajı', err.message);
       });
   };
 };
