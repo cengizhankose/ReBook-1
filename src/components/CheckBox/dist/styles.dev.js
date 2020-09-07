@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
+Object.defineProperty(exports, '__esModule', {
+  value: true,
 });
 exports.styles = void 0;
 
-var _reactNative = require("react-native");
+var _reactNative = require('react-native');
 
 var styles = _reactNative.StyleSheet.create({
   checkView: {
@@ -16,13 +16,13 @@ var styles = _reactNative.StyleSheet.create({
     backgroundColor: 'transparent',
     borderWidth: 2,
     borderColor: 'pink',
-    marginRight: 10
+    marginRight: 10,
   },
   checkSubView: {
     width: 18,
     height: 18,
-    backgroundColor: '#fff'
-  }
+    backgroundColor: '#fff',
+  },
 });
 
 exports.styles = styles;

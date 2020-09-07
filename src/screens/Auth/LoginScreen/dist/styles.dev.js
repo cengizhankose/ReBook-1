@@ -1,21 +1,21 @@
-"use strict";
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
+Object.defineProperty(exports, '__esModule', {
+  value: true,
 });
 exports.styles = void 0;
 
-var _reactNative = require("react-native");
+var _reactNative = require('react-native');
 
-var _colors = require("../../../constant/colors/colors");
+var _colors = require('../../../constant/colors/colors');
 
 var _Dimensions$get = _reactNative.Dimensions.get('window'),
-    widht = _Dimensions$get.widht,
-    height = _Dimensions$get.height;
+  widht = _Dimensions$get.widht,
+  height = _Dimensions$get.height;
 
 var styles = _reactNative.StyleSheet.create({
   loginView: {
-    flex: 1
+    flex: 1,
   },
   image: {
     width: 350,
@@ -25,13 +25,13 @@ var styles = _reactNative.StyleSheet.create({
     left: 0,
     justifyContent: 'center',
     alignItems: 'center',
-    marginLeft: 20
+    marginLeft: 20,
   },
   logo: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: _colors.Colors.softPink
+    backgroundColor: _colors.Colors.softPink,
   },
   formArea: {
     flex: 4,
@@ -40,22 +40,22 @@ var styles = _reactNative.StyleSheet.create({
     borderBottomLeftRadius: 16,
     borderBottomRightRadius: 16,
     backgroundColor: _colors.Colors.softPink,
-    zIndex: 1
+    zIndex: 1,
   },
   textView: {
     width: '90%',
     height: '10%',
-    marginBottom: '8%'
+    marginBottom: '8%',
   },
   form: {
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   formText: {
     fontSize: 36,
     color: '#fff',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
   },
   subInfos: {
     width: '90%',
@@ -64,28 +64,28 @@ var styles = _reactNative.StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     marginTop: '4%',
-    marginBottom: '8%'
+    marginBottom: '8%',
   },
   checkBoxView: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   ınfoTextView: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   bottomView: {
     flex: 0.6,
     backgroundColor: _colors.Colors.orange,
     marginTop: -10,
     borderBottomLeftRadius: 16,
-    borderBottomRightRadius: 16
+    borderBottomRightRadius: 16,
   },
   bottomView2: {
-    flex: 0.3
-  }
+    flex: 0.3,
+  },
 });
 
 exports.styles = styles;

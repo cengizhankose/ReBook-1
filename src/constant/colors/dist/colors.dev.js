@@ -1,7 +1,7 @@
-"use strict";
+'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
+Object.defineProperty(exports, '__esModule', {
+  value: true,
 });
 exports.Colors = void 0;
 var Colors = {
@@ -9,6 +9,6 @@ var Colors = {
   softPink: '#FF928B',
   textColor: '#FFFFFF',
   authButton: '#CDEAC0',
-  placeholderColor: 'rgba(0, 0, 0, 0.25)'
+  placeholderColor: 'rgba(0, 0, 0, 0.25)',
 };
 exports.Colors = Colors;
