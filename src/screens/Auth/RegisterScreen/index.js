@@ -10,7 +10,7 @@ import Button from '../../../components/Button/index';
 
 import {styles} from './styles';
 
-const index = () => {
+const Index = () => {
   const dispatch = useDispatch();
 
   const [name, setName] = useState('');
@@ -69,4 +69,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

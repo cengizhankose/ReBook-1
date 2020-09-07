@@ -1,10 +1,19 @@
 import React from 'react';
 import {View, Text, Image, StyleSheet, ImageBackground} from 'react-native';
-import back from '../../constant/images/home.png';
 import Logo from '../../components/ReBookLogo/index';
-
+import TopArea from './TopArea';
+import MainArea from './MainArea';
 const index = () => {
-  return <ImageBackground source={back} style={{flex: 1}}></ImageBackground>;
+  return (
+    <>
+      <View>
+        <TopArea />
+      </View>
+      <View>
+        <MainArea />
+      </View>
+    </>
+  );
 };
 
 const styles = StyleSheet.create({

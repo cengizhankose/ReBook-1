@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {styles} from './styles';
 
 function MyTabBar({state, descriptors, navigation}) {
+  Icon.loadFont();
   const focusedOptions = descriptors[state.routes[state.index].key].options;
   if (focusedOptions.tabBarVisible === false) {
     return null;
