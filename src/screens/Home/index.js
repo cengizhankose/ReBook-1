@@ -20,50 +20,39 @@ const index = () => {
       </View>
       <View style={styles.body}>
         <Text
-          style={{
-            color: '#FFAC81',
-            fontSize: 18,
-            fontWeight: 'bold',
-          }}>
+          style={styles.textStart}>
           Po<Text style={{color: 'black'}}>püler </Text>
           <Text
-            style={{
-              color: '#FF928B',
-              fontSize: 18,
-              fontWeight: 'bold',
-            }}>
+            style={styles.textEnd}>
             Ki<Text style={{color: 'black'}}>taplar</Text>
           </Text>
         </Text>
-        <CardItemMini />
+        <CardItemMini
+          bookName="Suç ve Ceza"
+          bookAuthor="Fyodor DOSTOYEVSKİ"
+          bookPrice="25"
+          bookLocation="İstanbul" />
       </View>
       <View style={styles.footer}>
         <Text
-          style={{
-            color: '#FFAC81',
-            fontSize: 18,
-            fontWeight: 'bold',
-          }}>
+          style={styles.textStart}>
           Ye<Text style={{color: 'black'}}>ni </Text>
           <Text
-            style={{
-              color: '#FFAC81',
-              fontSize: 18,
-              fontWeight: 'bold',
-            }}>
+            style={styles.textStart}>
             Ek<Text style={{color: 'black'}}>lenen </Text>
           </Text>
           <Text
-            style={{
-              color: '#FF928B',
-              fontSize: 18,
-              fontWeight: 'bold',
-            }}>
+            style={styles.textEnd}>
             Ki<Text style={{color: 'black'}}>taplar</Text>
           </Text>
         </Text>
 
-        <CardItem/>
+        <CardItem
+          bookName="Steve Jobs"
+          bookAuthor="Walter ISAACSON"
+          bookPrice="30"
+          bookLocation="Ankara"
+        />
       </View>
     </SafeAreaView>
   );

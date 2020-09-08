@@ -18,9 +18,9 @@ const CardItemMini = (props) => (
         style={{flex: 1}}>
         <LinearGradient colors={colors} style={styles.LinearGradient}>
           <Text style={[styles.headerText, {fontSize: 16}]}>
-            Suç ve Ceza{' '}
+          {props.bookName}{' '}
             <Text style={[styles.headerText, {fontSize: 6}]}>
-              Fyodor DOSTOYEVSKİ
+            {props.bookAuthor}
             </Text>
           </Text>
         </LinearGradient>
@@ -28,9 +28,9 @@ const CardItemMini = (props) => (
     </View>
     <View style={styles.footer}>
       <Text style={styles.priceText}>
-        25{' '}
+      {props.bookPrice}{' '}
         <Text style={{color: 'black'}}>
-          ₺ <Text style={styles.locationText}>Ankara</Text>
+          ₺ <Text style={styles.locationText}>{props.bookLocation}</Text>
         </Text>
       </Text>
       <TouchableOpacity style={{marginRight: '10%'}}>
