@@ -9,6 +9,7 @@ import {NavigationContainer} from '@react-navigation/native';
 // Screens
 import Home from './screens/Home';
 import Search from './screens/Search';
+import Wishlist from './screens/Wishlist';
 import AuthStackScreens from './screens/Auth/AuthStackScreens';
 import Settings from './screens/Settings';
 import AddBook from './screens/AddBook';
@@ -30,7 +31,11 @@ const Router = (props) => {
     return (
       <HomeScreens.Navigator>
         {!props.isAuth ? (
-          <HomeScreens.Screen name="Home" component={Home} />
+          <HomeScreens.Screen
+            name="Home"
+            component={Home}
+            options={{headerShown: false}}
+          />
         ) : (
           <HomeScreens.Screen name="AddBook" component={AddBook} />
         )}
@@ -51,7 +56,15 @@ const Router = (props) => {
         name="HomeScreen"
         component={HomeScreensNavigation}
       />
-      <TabsStackScreens.Screen name="Login" component={AuthStackScreens} />
+      {props.isAuth ? (
+        <TabsStackScreens.Screen
+          name="Wishlist"
+          component={Wishlist}
+          options={{headerShown: false}}
+        />
+      ) : (
+        <TabsStackScreens.Screen name="Login" component={AuthStackScreens} />
+      )}
     </TabsStackScreens.Navigator>
   );
 
@@ -85,7 +98,7 @@ const Router = (props) => {
         <StackScreens.Screen
           name="Dashboard"
           component={DrawerScreens}
-          options={{title: 'ReBook'}}
+          options={{title: 'ReBook', headerShown: false}}
         />
       </StackScreens.Navigator>
     </NavigationContainer>
@@ -95,10 +108,4 @@ const mapStateToProps = ({auth}) => {
   const {isAuth} = auth;
   return {isAuth};
 };
-
-const styles = StyleSheet.create({
-  tabbar: {
-    backgroundColor: 'red',
-  },
-});
 export default connect(mapStateToProps, null)(Router);

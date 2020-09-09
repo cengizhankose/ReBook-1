@@ -4,12 +4,9 @@ export const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
   },
+  logoView:{flex: 1,alignItems:"center"},
   logo: {
-      marginTop:"4%"
-  },
-  input: {
-    marginTop:"10%"
+      marginTop:"4%",
   },
 });
