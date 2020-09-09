@@ -1,13 +1,27 @@
 import React from 'react';
-import {View, Text, ScrollView, Image, ImageBackground} from 'react-native';
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  ImageBackground,
+  TouchableOpacity,
+} from 'react-native';
 import {styles} from './styles';
-
+import {useNavigation} from '@react-navigation/native';
 const placeHolder =
   'https://firebasestorage.googleapis.com/v0/b/rebook-6d8b6.appspot.com/o/mock%2FRectangle%202.png?alt=media&token=087f251f-b579-43ca-820e-22486e091130';
 const mockData = [
   {
     bookName: 'Steve Jobs',
-    img: placeHolder,
+    img: [
+      'https://images-na.ssl-images-amazon.com/images/I/81VStYnDGrL.jpg',
+      'https://jameskennedymonash.files.wordpress.com/2011/11/dsc_0019.jpg',
+    ],
+    author: 'Walter Isaacson',
+    bookPrice: 30,
+    bookText:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mollis justo quis egestas porta. Duis mollis augue eget eleifend blandit. Sed et pulvinar nisi. Donec vulputate ex nec mauris consequat facilisis. Maecenas odio odio, facilisis placerat imperdiet eu, tempus non lorem. Praesent bibendum leo erat, a lacinia ligula venenatis in. Suspendisse eleifend felis sit amet ante porttitor, vitae condimentum justo molestie.',
   },
   {
     bookName: 'Steve Jobs',
@@ -19,6 +33,8 @@ const mockData = [
   },
 ];
 const index = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -34,12 +50,15 @@ const index = () => {
             // Bu kısımda yeni eklenenler kitaplar listesinde kitap cardları listelenecek
 
             mockData.map((book) => (
-              <View
+              <TouchableOpacity
+                onPress={() => navigation.navigate('BookDetail', {book})}
                 style={{flexDirection: 'row'}}
                 key={Math.random() + book.bookName}>
                 <ImageBackground
                   style={{width: 300, height: 300, marginHorizontal: 10}}
-                  source={{uri: book.img}}>
+                  source={{
+                    uri: Array.isArray(book.img) ? book.img[0] : book.img,
+                  }}>
                   <Text
                     style={{
                       textAlign: 'center',
@@ -51,7 +70,7 @@ const index = () => {
                     {book.bookName}
                   </Text>
                 </ImageBackground>
-              </View>
+              </TouchableOpacity>
             ))
           }
         </ScrollView>

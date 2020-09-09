@@ -12,6 +12,7 @@ import Search from './screens/Search';
 import AuthStackScreens from './screens/Auth/AuthStackScreens';
 import Settings from './screens/Settings';
 import AddBook from './screens/AddBook';
+import BookDetail from './screens/BookDetail';
 
 //Components
 import MyTabbar from './components/MyTabbar/myTabbar';
@@ -30,7 +31,10 @@ const Router = (props) => {
     return (
       <HomeScreens.Navigator>
         {!props.isAuth ? (
-          <HomeScreens.Screen name="Home" component={Home} />
+          <>
+            <HomeScreens.Screen name="Home" component={Home} />
+            <HomeScreens.Screen name="BookDetail" component={BookDetail} />
+          </>
         ) : (
           <HomeScreens.Screen name="AddBook" component={AddBook} />
         )}
@@ -75,6 +79,11 @@ const Router = (props) => {
         },
         activeTintColor: Colors.orange,
       }}>
+      <DrawerStackScreens.Screen
+        options={{title: 'Ana Sayfa'}}
+        name="AnaSayfa"
+        component={TabScreens}
+      />
       <DrawerStackScreens.Screen name="Mesajlar" component={TabScreens} />
       <DrawerStackScreens.Screen name="Ayarlar" component={Settings} />
     </DrawerStackScreens.Navigator>
@@ -96,9 +105,4 @@ const mapStateToProps = ({auth}) => {
   return {isAuth};
 };
 
-const styles = StyleSheet.create({
-  tabbar: {
-    backgroundColor: 'red',
-  },
-});
 export default connect(mapStateToProps, null)(Router);
