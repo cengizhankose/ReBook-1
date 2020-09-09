@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  Image,
-  useWindowDimensions,
-  ScrollView,
-  Alert,
-} from 'react-native';
+import {View, Text, ScrollView, Alert} from 'react-native';
 import {styles} from './styles';
 import {useRoute} from '@react-navigation/native';
 import BookCarousel from './Carousel';
@@ -14,7 +7,6 @@ import Button from '../../components/Button';
 const Index = () => {
   const route = useRoute();
   const {book} = route.params;
-  console.log(route.params.book);
 
   return (
     <View style={styles.pageContainer}>

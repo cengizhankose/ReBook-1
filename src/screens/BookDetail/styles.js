@@ -26,7 +26,6 @@ export const styles = StyleSheet.create({
   author: {
     fontSize: 14,
     color: '#C4C4C4',
-
   },
   pageContent: {
     flex: 1,
