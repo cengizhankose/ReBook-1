@@ -33,7 +33,6 @@ const Router = (props) => {
         {!props.isAuth ? (
           <>
             <HomeScreens.Screen name="Home" component={Home} />
-            <HomeScreens.Screen name="BookDetail" component={BookDetail} />
           </>
         ) : (
           <HomeScreens.Screen name="AddBook" component={AddBook} />
@@ -96,6 +95,7 @@ const Router = (props) => {
           component={DrawerScreens}
           options={{title: 'ReBook'}}
         />
+        <StackScreens.Screen name="BookDetail" component={BookDetail} />
       </StackScreens.Navigator>
     </NavigationContainer>
   );

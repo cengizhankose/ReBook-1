@@ -12,23 +12,14 @@ const BookCarousel = ({data}) => {
       <Pagination
         dotsLength={data.length}
         activeDotIndex={activeSlide}
-        containerStyle={{
-          backgroundColor: 'rgba(0, 0, 0, 0.75)',
-          maxHeight: 10,
-          justifyContent: 'center',
-          alignSelf: 'center',
-        }}
+        dotContainerStyle={{height: 10}}
         dotStyle={{
-          width: 10,
+          width: 15,
           height: 10,
           borderRadius: 5,
-          backgroundColor: 'rgba(255, 255, 255, 0.92)',
+          marginTop: -30,
+          paddingVertical: 5,
         }}
-        inactiveDotStyle={
-          {
-            // Define styles for inactive dots here
-          }
-        }
         inactiveDotOpacity={0.4}
         inactiveDotScale={0.6}
       />
@@ -49,6 +40,7 @@ const BookCarousel = ({data}) => {
         itemWidth={width}
         onSnapToItem={(index) => setActiveSlide(index)}
       />
+      {pagination()}
     </View>
   );
 };

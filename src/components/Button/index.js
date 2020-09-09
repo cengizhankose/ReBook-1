@@ -4,9 +4,11 @@ import {styles} from './styles';
 
 const index = (props) => {
   return (
-    <TouchableOpacity style={styles.buttonView} onPress={props.onPress}>
-      <Text style={styles.buttonText}>{props.text}</Text>
-    </TouchableOpacity>
+    <View style={props.style && props.style}>
+      <TouchableOpacity style={styles.buttonView} onPress={props.onPress}>
+        <Text style={styles.buttonText}>{props.text}</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 

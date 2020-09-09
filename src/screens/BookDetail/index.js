@@ -1,9 +1,16 @@
 import React from 'react';
-import {View, Text, Image, useWindowDimensions} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  useWindowDimensions,
+  ScrollView,
+  Alert,
+} from 'react-native';
 import {styles} from './styles';
 import {useRoute} from '@react-navigation/native';
 import BookCarousel from './Carousel';
-
+import Button from '../../components/Button';
 const Index = () => {
   const route = useRoute();
   const {book} = route.params;
@@ -17,15 +24,28 @@ const Index = () => {
       <View style={styles.pageHeader}>
         <View style={styles.title}>
           <Text style={styles.titleText}>{book.bookName}</Text>
-          <Text style={styles.priceText}>{book.bookPrice}</Text>
+          <Text style={styles.priceText}>
+            {book.bookPrice}
+            <Text style={{color: 'black'}}> ₺</Text>
+          </Text>
         </View>
-        <Text style={styles.author}>{book.author}</Text>
+        <View style={styles.title}>
+          <Text style={styles.author}>{book.author}</Text>
+          <Text style={styles.sellerText}>Satıcı: {book.seller}</Text>
+        </View>
       </View>
-      <View style={styles.pageContent}>
+      <ScrollView persistentScrollbar scrollEnabled style={styles.pageContent}>
         <Text>{book.bookText}</Text>
-      </View>
+      </ScrollView>
       <View style={styles.pageFooter}>
-        <Text>Add Chart</Text>
+        <View style={styles.btnContainer}>
+          <Button
+            onPress={() =>
+              Alert.alert('Eklendi', `${book.bookName} listenize eklendi.`)
+            }
+            text="Satıcıya yaz"
+          />
+        </View>
       </View>
     </View>
   );

@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {Colors} from '../../constant/colors/colors';
 
 export const styles = StyleSheet.create({
   pageContainer: {
@@ -6,16 +7,33 @@ export const styles = StyleSheet.create({
   },
   pageHeader: {
     flex: 0.5,
+    marginHorizontal: 20,
   },
-  title: {},
-  titleText: {},
-  priceText: {},
-  author: {},
+  title: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 5,
+  },
+
+  titleText: {
+    fontSize: 30,
+  },
+  priceText: {
+    fontSize: 30,
+    color: Colors.orange,
+    fontWeight: '600',
+  },
+  author: {
+    fontSize: 14,
+    color: '#C4C4C4',
+
+  },
   pageContent: {
     flex: 1,
+    marginHorizontal: 20,
   },
   pageFooter: {
-    flex: 0.3,
+    backgroundColor: Colors.softPink,
   },
   img: {
     width: '100%',
@@ -23,7 +41,16 @@ export const styles = StyleSheet.create({
     resizeMode: 'cover',
   },
   imgContainer: {
-    flex: 1,
+    flex: 1.5,
     marginBottom: 10,
+    paddingBottom: 20,
+  },
+  btnContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+  },
+  sellerText: {
+    color: Colors.softPink,
   },
 });
