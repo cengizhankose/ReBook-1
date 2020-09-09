@@ -52,9 +52,8 @@ export const styles = StyleSheet.create({
 });
 
 export const colors = [
-  '#FF928B',
-  '#FF928B',
-  '#FFFFFF00',
+  '#FFAC81',
+  '#FFAC81',
   '#FFFFFF00',
   '#FFFFFF00',
   '#FFFFFF00',
