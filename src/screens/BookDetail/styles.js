@@ -4,6 +4,7 @@ import {Colors} from '../../constant/colors/colors';
 export const styles = StyleSheet.create({
   pageContainer: {
     flex: 1,
+    backgroundColor: '#fff',
   },
   pageHeader: {
     flex: 0.5,
