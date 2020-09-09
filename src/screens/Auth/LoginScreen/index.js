@@ -2,17 +2,8 @@ import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {loginUserAction} from '../../../redux/auth/actions';
 
-import {
-  View,
-  Text,
-  ImageBackground,
-  StyleSheet,
-  Dimensions,
-} from 'react-native';
-import {
-  TouchableNativeFeedback,
-  TouchableHighlight,
-} from 'react-native-gesture-handler';
+import {View, Text} from 'react-native';
+
 import {connect} from 'react-redux';
 
 import {changeUserStatus} from '../../../redux/auth/actions';
@@ -26,8 +17,11 @@ import CheckBox from '../../../components/CheckBox/index';
 import {styles} from './styles';
 
 const index = (props) => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const dispatch = useDispatch();
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [email, setEmail] = useState('taha@gmail.com');
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [password, setPassword] = useState('taha123');
 
   const onLoginUser = (email, password) => {

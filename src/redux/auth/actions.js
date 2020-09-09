@@ -64,3 +64,7 @@ export const loginUserAction = (email, password) => {
       });
   };
 };
+
+export const getUser = (userId) => {
+  return firestore().collection('users').doc(userId);
+};

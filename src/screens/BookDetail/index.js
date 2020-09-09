@@ -1,12 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, ScrollView, Alert} from 'react-native';
 import {styles} from './styles';
 import {useRoute} from '@react-navigation/native';
-import BookCarousel from './Carousel';
+import BookCarousel from './BookCarousel';
 import Button from '../../components/Button';
+import {useDispatch} from 'react-redux';
+import {getUser} from '../../redux/auth/actions';
 const Index = () => {
   const route = useRoute();
   const {book} = route.params;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Kitabı satan user bilgileri çekilecek
+    //dispatch(getUser(book.sellerId));
+  }, [dispatch]);
 
   return (
     <View style={styles.pageContainer}>
