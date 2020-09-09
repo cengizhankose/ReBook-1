@@ -1,1 +1,9 @@
 export const CHANGE_USER_STATUS = '@CHANGE_USER_STATUS';
+
+export const REGİSTER_USER_SUCCESS = '@REGİSTER_USER_SUCCESS';
+export const REGİSTER_USER_FAIL = '@REGİSTER_USER_FAIL';
+export const REGİSTER_USER = '@REGİSTER_USER';
+
+export const LOGIN_USER_SUCCESS = '@LOGIN_USER_SUCCESS';
+export const LOGIN_USER_FAIL = '@LOGIN_USER_FAIL';
+export const LOGIN_USER = '@LOGIN_USER';
