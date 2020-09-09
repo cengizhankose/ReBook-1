@@ -10,12 +10,14 @@ const CardItem = (props) => (
   <TouchableOpacity style={styles.main}>
     <View style={{flex: 3}}>
       <ImageBackground
-        source={require('../../img/steve.jpg')}
+        source={{uri:props.img}}
         imageStyle={{
           borderTopRightRadius: 20,
           borderTopLeftRadius: 20,
         }}
-        style={{flex: 1}}>
+        style={{flex: 1}}
+        resizeMode="cover"
+        >
         <LinearGradient colors={colors} style={styles.LinearGradient}>
           <Text style={[styles.headerText, {fontSize: 18}]}>
             {props.bookName}{' '}

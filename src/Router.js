@@ -14,6 +14,8 @@ import AuthStackScreens from './screens/Auth/AuthStackScreens';
 import Settings from './screens/Settings';
 import AddBook from './screens/AddBook';
 import MyTabbar from './components/TabBar/index';
+import Messages from './screens/Message/Messages/index'
+import MessageDetail from './screens/Message/MessageDetail/index'
 
 // Navigation fonksiyonlarının açılması.
 // @TODO: Bu sayfanın daha temiz olması için tekrar gözden geçirilebilir.
@@ -58,6 +60,7 @@ const Router = (props) => {
     <DrawerStackScreens.Navigator initialRouteName="Drawer">
       <DrawerStackScreens.Screen name="Drawer" component={TabScreens} />
       <DrawerStackScreens.Screen name="Settings" component={Settings} />
+      <DrawerStackScreens.Screen name="Messages" component={MessageDetail} />
     </DrawerStackScreens.Navigator>
   );
   return (

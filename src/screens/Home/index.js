@@ -51,6 +51,7 @@ const index = () => {
           bookName="Steve Jobs"
           bookAuthor="Walter ISAACSON"
           bookPrice="30"
+          img="https://upload.wikimedia.org/wikipedia/tr/5/58/Fantastic_voyage_%28Kan_damarlar%C4%B1nda_yolculuk%29_TR_Kitap_kapa%C4%9F%C4%B1.jpg"
           bookLocation="Ankara"
         />
       </View>
