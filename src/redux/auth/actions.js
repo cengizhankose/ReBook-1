@@ -28,7 +28,7 @@ export const registerUserAction = (params) => {
         const uid = res.user._user.uid;
         const setData = {
           name: params.name,
-          surname: params.suername,
+          surname: params.surename,
           email: params.email,
           profile_img: params.profile_img
             ? params.profile_img
@@ -57,7 +57,7 @@ export const loginUserAction = (email, password) => {
     auth()
       .signInWithEmailAndPassword(email, password)
       .then(async (res) => {
-        const user = await (await getUserAction(res.user.uid)).get();
+        const user = await getUserAction(res.user.uid);
         dispatch({type: LOGIN_USER_SUCCESS, user: user.data()});
       })
       .catch((err) => {
@@ -69,7 +69,7 @@ export const loginUserAction = (email, password) => {
 
 export const getUserAction = async (userId) => {
   console.log('userid', userId);
-  let userInfo = await firestore().collection('Users').doc(userId);
+  let userInfo = await firestore().collection('Users').doc(userId).get();
   return userInfo;
 };
 
@@ -89,9 +89,7 @@ export const checkUserStatus = () => {
   console.log('users', user);
   return async (dispatch) => {
     if (user) {
-      console.log('check:', user.uid);
-      const userInfo = await (await getUserAction(user.uid)).get();
-      console.log('userinfo-----', userInfo._data);
+      const userInfo = await getUserAction(user.uid);
       dispatch({type: LOGIN_USER_SUCCESS, user: userInfo.data()});
     } else {
       dispatch({type: LOGIN_USER_FAIL});
