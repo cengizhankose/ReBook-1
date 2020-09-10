@@ -2,13 +2,12 @@ import React from 'react';
 import {View, Text, TouchableOpacity, Animated, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {styles} from './styles';
-import {connect} from 'react-redux';
+
 import SearchIcon from '../../svg/SearchWhiteSvg';
 import HomeIcon from '../../svg/LogoBookSvg';
 import WishlistIcon from '../../svg/WishlistSvg';
 
-function MyTabBar({state, descriptors, navigation, isAuth}) {
-  Icon.loadFont();
+function MyTabBar({state, descriptors, navigation}) {
   const focusedOptions = descriptors[state.routes[state.index].key].options;
   if (focusedOptions.tabBarVisible === false) {
     return null;
@@ -50,7 +49,7 @@ function MyTabBar({state, descriptors, navigation, isAuth}) {
                       styles.inlineView,
                       {backgroundColor: isFocused ? '#FFAC81' : '#FF928B'},
                     ]}>
-                    <HomeIcon style={styles.sameIcon} />
+                    <HomeIcon style={styles.sameIcon}/>
                   </View>
                 </TouchableOpacity>
               </View>
@@ -65,12 +64,12 @@ function MyTabBar({state, descriptors, navigation, isAuth}) {
                       styles.inlineView,
                       {backgroundColor: isFocused ? '#FFAC81' : '#FF928B'},
                     ]}>
-                    <SearchIcon style={styles.sameIcon} />
+                      <SearchIcon style={styles.sameIcon} />
                   </View>
                 </TouchableOpacity>
               </View>
             )}
-            {label === (isAuth ? 'Wishlist' : 'Login') && (
+            {label === 'Wishlist' && (
               <View
                 key={index}
                 style={[styles.sohbet, isFocused && styles.chooseSohbet]}>
@@ -80,16 +79,7 @@ function MyTabBar({state, descriptors, navigation, isAuth}) {
                       styles.inlineView,
                       {backgroundColor: isFocused ? '#FFAC81' : '#FF928B'},
                     ]}>
-                    {isAuth ? (
-                      <WishlistIcon style={styles.sameIcon} />
-                    ) : (
-                      <Icon
-                        style={styles.sameIcon}
-                        name={'user'}
-                        color={'#fff'}
-                        size={35}
-                      />
-                    )}
+                      <WishlistIcon style={styles.sameIcon}/>
                   </View>
                 </TouchableOpacity>
               </View>
@@ -100,8 +90,5 @@ function MyTabBar({state, descriptors, navigation, isAuth}) {
     </View>
   );
 }
-const mapStateToProps = ({auth}) => {
-  const {isAuth} = auth;
-  return {isAuth};
-};
-export default connect(mapStateToProps, null)(MyTabBar);
+
+export default MyTabBar;
