@@ -1,19 +1,21 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 import {Colors} from '../../../constant/colors/colors.js';
+
+const {height} = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   registerView: {
     flex: 1,
   },
   registerTopSide: {
-    flex: 0.8,
+    flex: height * 0.0005,
     backgroundColor: Colors.softPink,
     borderBottomLeftRadius: 16,
     borderBottomRightRadius: 16,
     zIndex: 3,
   },
   registeLogo: {
-    flex: 1,
+    flex: 0.8,
     backgroundColor: Colors.orange,
     alignItems: 'center',
     justifyContent: 'center',

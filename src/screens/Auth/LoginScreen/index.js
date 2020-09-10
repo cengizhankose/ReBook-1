@@ -31,8 +31,7 @@ const index = (props) => {
   const [password, setPassword] = useState('taha123');
 
   const onLoginUser = (email, password) => {
-    console.log('tıklandı');
-    dispatch(loginUserAction(email, password));
+    dispatch(loginUserAction({email, password}));
   };
 
   return (
@@ -53,6 +52,7 @@ const index = (props) => {
           />
           <Input
             style={{marginBottom: 15}}
+            secureTextEntry={true}
             placeholder={'Password'}
             value={password}
             onChangeText={(value) => setPassword(value)}

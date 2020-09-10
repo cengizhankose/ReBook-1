@@ -29,9 +29,9 @@ const Router = (props) => {
     return (
       <HomeScreens.Navigator>
         {!props.isAuth ? (
-          <HomeScreens.Screen name="Home" component={Home} />
-        ) : (
           <HomeScreens.Screen name="AddBook" component={AddBook} />
+        ) : (
+          <HomeScreens.Screen name="Home" component={Home} />
         )}
       </HomeScreens.Navigator>
     );

@@ -9,6 +9,8 @@ import {
 } from './types';
 import {registerUser} from '../../../firebaseHelper';
 import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import storage from '@react-native-firebase/storage';
 
 export const changeUserStatus = (status) => {
   return (dispatch) => {
@@ -16,35 +18,81 @@ export const changeUserStatus = (status) => {
   };
 };
 
-export const registerUserAction = (email, password) => {
+export const registerUserAction = (params) => {
+  console.log('register params', params);
   return (dispatch) => {
-    dispatch({type: REGİSTER_USER});
+    if (
+      params.email != '' &&
+      params.password != '' &&
+      params.name != '' &&
+      params.username != ''
+    ) {
+      if (validateEmail(params.email)) {
+        dispatch({type: REGİSTER_USER});
 
-    auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then((res) => {
-        dispatch({type: REGİSTER_USER_SUCCESS});
-      })
-      .catch((err) => {
-        dispatch({type: REGİSTER_USER_FAIL});
-      });
+        auth()
+          .createUserWithEmailAndPassword(params.email, params.password)
+          .then((data) => {
+            const uid = data.user._user.uid;
+            const setData = {
+              name: params.name,
+              username: params.username,
+              email: params.email,
+              products: [],
+              messages: [],
+              favorites: [],
+            };
+            firestore()
+              .collection('Users')
+              .doc(uid)
+              .set(setData)
+              .then((res) => {
+                console.log('User added!');
+              })
+              .catch(() => {
+                console.log('User Not Add!');
+              });
+          });
+      } else {
+        Alert.alert('UYARI', 'Lütfen geçerli bir email yazınız!');
+      }
+    } else {
+      Alert.alert('UYARI', 'Lütfen bütün alanları doldurunuz!');
+    }
   };
 };
 
-export const loginUserAction = (email, password) => {
-  console.log('geldi', email, password);
+export const loginUserAction = (params) => {
   return (dispatch) => {
-    dispatch({type: LOGIN_USER});
+    if (params.email != '' && params.password != '') {
+      if (validateEmail(params.email)) {
+        dispatch({type: LOGIN_USER});
+        auth()
+          .signInWithEmailAndPassword(params.email, params.password)
+          .then((data) => {
+            console.log('signed in!');
+            const uid = data.user._user.uid;
+            firestore()
+              .collection('Users')
+              .doc(uid)
+              .get()
+              .then((user) => {
+                console.log('Gelen Data:', user._data);
 
-    auth()
-      .signInWithEmailAndPassword(email, password)
-      .then((res) => {
-        console.log('Login edildi', res);
-        dispatch({type: LOGIN_USER_SUCCESS});
-      })
-      .catch((err) => {
-        console.log(err);
-        dispatch({type: LOGIN_USER_FAIL});
-      });
+                dispatch({type: 'userId', payload: uid});
+              })
+              .catch((err) => console.log(err));
+          });
+      } else {
+        Alert.alert('UYARI', 'Lütfen geçerli bir email yazınız!');
+      }
+    } else {
+      Alert.alert('UYARI', 'Lütfen bütün alanları doldurunuz!');
+    }
   };
 };
+
+function validateEmail(email) {
+  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}

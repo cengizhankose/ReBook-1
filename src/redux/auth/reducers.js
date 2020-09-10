@@ -11,6 +11,7 @@ import {
 const INITIAL_STATE = {
   isAuth: false,
   loading: false,
+  uid: '',
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -52,6 +53,12 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: false,
+      };
+    case 'userId':
+      console.log('reducerid', action.payload);
+      return {
+        ...state,
+        uid: action.payload,
       };
 
     default:

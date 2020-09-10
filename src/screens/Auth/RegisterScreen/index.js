@@ -13,17 +13,17 @@ import {styles} from './styles';
 const index = () => {
   const dispatch = useDispatch();
 
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState('taha');
+  const [username, setUsername] = useState('zeybek');
+  const [email, setEmail] = useState('taha@gmail.com');
+  const [password, setPassword] = useState('taha123');
 
   const onSubmitUser = (email, password) => {
     dispatch(registerUserAction(email, password));
   };
   return (
     <View style={styles.registerView}>
-      <View style={styles.registerTopSide}></View>
+      <View style={styles.registerTopSide} />
       <View style={styles.registeLogo}>
         <ReBookLogo color={'#fff'} />
       </View>
@@ -34,32 +34,37 @@ const index = () => {
         <View style={styles.form}>
           <Input
             style={{marginBottom: 15}}
-            placeholder={'Name'}
+            placeholder={'Adı Soyadı'}
             value={name}
             onChangeText={(value) => setName(value)}
           />
           <Input
             style={{marginBottom: 15}}
-            placeholder={'Surname'}
-            value={surname}
-            onChangeText={(value) => setSurname(value)}
+            placeholder={'Kullanıcı Adı'}
+            value={username}
+            onChangeText={(value) => setUsername(value)}
           />
           <Input
             style={{marginBottom: 15}}
-            placeholder={'Email'}
+            placeholder={'E-posta'}
             value={email}
             onChangeText={(value) => setEmail(value)}
           />
           <Input
-            style={{marginBottom: 15}}
-            placeholder={'Password'}
+            placeholder={'Şifre'}
+            secureTextEntry={true}
             value={password}
             onChangeText={(value) => setPassword(value)}
           />
           <Button
             text={'Kayıt Ol'}
             onPress={() => {
-              onSubmitUser(email, password);
+              onSubmitUser({
+                name,
+                username,
+                email,
+                password,
+              });
             }}
           />
         </View>
