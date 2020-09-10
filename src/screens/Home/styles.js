@@ -21,4 +21,17 @@ export const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
+  homeTop: {
+    flex: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  homeLogo: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  homeBottom: {
+    flex: 4,
+  },
 });

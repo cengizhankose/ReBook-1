@@ -5,7 +5,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     backgroundColor: '#fff',
-    fontFamily: 'Kanit',
   },
   sameIcon: {padding: 10, paddingRight: 40},
   searchSection: {

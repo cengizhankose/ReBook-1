@@ -19,11 +19,9 @@ const index = () => {
         <Logo />
       </View>
       <View style={styles.body}>
-        <Text
-          style={styles.textStart}>
+        <Text style={styles.textStart}>
           Po<Text style={{color: 'black'}}>püler </Text>
-          <Text
-            style={styles.textEnd}>
+          <Text style={styles.textEnd}>
             Ki<Text style={{color: 'black'}}>taplar</Text>
           </Text>
         </Text>
@@ -31,18 +29,16 @@ const index = () => {
           bookName="Suç ve Ceza"
           bookAuthor="Fyodor DOSTOYEVSKİ"
           bookPrice="25"
-          bookLocation="İstanbul" />
+          bookLocation="İstanbul"
+        />
       </View>
       <View style={styles.footer}>
-        <Text
-          style={styles.textStart}>
+        <Text style={styles.textStart}>
           Ye<Text style={{color: 'black'}}>ni </Text>
-          <Text
-            style={styles.textStart}>
+          <Text style={styles.textStart}>
             Ek<Text style={{color: 'black'}}>lenen </Text>
           </Text>
-          <Text
-            style={styles.textEnd}>
+          <Text style={styles.textEnd}>
             Ki<Text style={{color: 'black'}}>taplar</Text>
           </Text>
         </Text>
