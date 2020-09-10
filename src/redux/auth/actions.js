@@ -50,12 +50,11 @@ export const registerUserAction = (params) => {
 export const loginUserAction = (email, password) => {
   return (dispatch) => {
     dispatch({type: LOGIN_USER});
-
     auth()
       .signInWithEmailAndPassword(email, password)
       .then((res) => {
-        console.log('Login edildi', res);
-        dispatch({type: LOGIN_USER_SUCCESS});
+        let user = getUserAction(res.user.uid);
+        dispatch({type: LOGIN_USER_SUCCESS, user});
       })
       .catch((err) => {
         console.log(err);

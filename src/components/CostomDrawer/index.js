@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Alert, View, Image, Text, TouchableOpacity} from 'react-native';
 import {
   DrawerItem,
@@ -15,6 +15,7 @@ import {Colors} from '../../constant/colors/colors';
 const Index = (props) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+
   if (props.isAuth) {
     return (
       <DrawerContentScrollView {...props}>
@@ -29,10 +30,10 @@ const Index = (props) => {
             />
           </View>
           <View style={styles.itemContainer}>
-            <Text style={styles.name}>Cengizhan Köse</Text>
+            <Text style={styles.name}>{props.user.name}</Text>
           </View>
           <View style={styles.itemContainer}>
-            <Text style={styles.mail}>cengizhan@gmail.com</Text>
+            <Text style={styles.mail}>{props.user.email}</Text>
           </View>
         </View>
         <View>
