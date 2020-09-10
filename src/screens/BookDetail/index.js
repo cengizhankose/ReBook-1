@@ -9,7 +9,7 @@ import {getUser} from '../../redux/auth/actions';
 const Index = () => {
   const route = useRoute();
   const {book} = route.params;
-
+  console.log(book);
   const dispatch = useDispatch();
 
   useEffect(() => {

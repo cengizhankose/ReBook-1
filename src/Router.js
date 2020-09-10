@@ -115,8 +115,4 @@ const mapStateToProps = ({auth}) => {
   const {isAuth} = auth;
   return {isAuth};
 };
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 export default connect(mapStateToProps, null)(Router);

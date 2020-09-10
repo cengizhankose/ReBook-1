@@ -9,11 +9,13 @@ import {
 } from 'react-native';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
+import CardItem from '../../../components/CardItem/';
+
 const placeHolder =
   'https://firebasestorage.googleapis.com/v0/b/rebook-6d8b6.appspot.com/o/mock%2FRectangle%202.png?alt=media&token=087f251f-b579-43ca-820e-22486e091130';
 const mockData = [
   {
-    bookName: 'Steve Jobs',
+    bookName: 'Steve Jobs 2',
     img: [
       'https://images-na.ssl-images-amazon.com/images/I/81VStYnDGrL.jpg',
       'https://jameskennedymonash.files.wordpress.com/2011/11/dsc_0019.jpg',
@@ -23,18 +25,10 @@ const mockData = [
     bookText:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mollis justo quis egestas porta. Duis mollis augue eget eleifend blandit. Sed et pulvinar nisi. Donec vulputate ex nec mauris consequat facilisis. Maecenas odio odio, facilisis placerat imperdiet eu, tempus non lorem. Praesent bibendum leo erat, a lacinia ligula venenatis in. Suspendisse eleifend felis sit amet ante porttitor, vitae condimentum justo molestie.',
     seller: 'Oktay İbiş',
-  },
-  {
-    bookName: 'Steve Jobs',
-    img: placeHolder,
-  },
-  {
-    bookName: 'Steve Jobs',
-    img: placeHolder,
+    location: 'İstanbul',
   },
 ];
-const index = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+const Index = () => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
@@ -47,37 +41,21 @@ const index = () => {
       </View>
       <View style={styles.scroll}>
         <ScrollView horizontal>
-          {
-            // Bu kısımda yeni eklenenler kitaplar listesinde kitap cardları listelenecek
-
-            mockData.map((book) => (
-              <TouchableOpacity
-                onPress={() => navigation.navigate('BookDetail', {book})}
-                style={{flexDirection: 'row'}}
-                key={Math.random() + book.bookName}>
-                <ImageBackground
-                  style={{width: 300, height: 300, marginHorizontal: 10}}
-                  source={{
-                    uri: Array.isArray(book.img) ? book.img[0] : book.img,
-                  }}>
-                  <Text
-                    style={{
-                      textAlign: 'center',
-                      fontSize: 20,
-                      justifyContent: 'center',
-                      alignContent: 'center',
-                      marginTop: 5,
-                    }}>
-                    {book.bookName}
-                  </Text>
-                </ImageBackground>
-              </TouchableOpacity>
-            ))
-          }
+          {mockData.map((book) => (
+            <CardItem
+              book={book}
+              key={book.bookName + Math.random()}
+              img={Array.isArray(book.img) ? book.img[0] : book.img}
+              bookAuthor={book.author}
+              bookLocation={book.location}
+              bookPrice={book.bookPrice}
+              bookName={book.bookName}
+            />
+          ))}
         </ScrollView>
       </View>
     </View>
   );
 };
 
-export default index;
+export default Index;

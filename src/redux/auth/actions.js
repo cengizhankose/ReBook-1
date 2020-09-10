@@ -7,7 +7,6 @@ import {
   LOGIN_USER_FAIL,
   LOGIN_USER_SUCCESS,
 } from './types';
-import {registerUser} from '../../../firebaseHelper';
 import auth from '@react-native-firebase/auth';
 import {Alert} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
@@ -48,7 +47,7 @@ export const registerUserAction = (params) => {
 };
 
 export const loginUserAction = (email, password) => {
-  console.log('geldi', email, password);
+
   return (dispatch) => {
     dispatch({type: LOGIN_USER});
 
@@ -66,5 +65,5 @@ export const loginUserAction = (email, password) => {
 };
 
 export const getUser = (userId) => {
-  return firestore().collection('users').doc(userId);
+  return firestore().collection('Users').doc(userId).get();
 };

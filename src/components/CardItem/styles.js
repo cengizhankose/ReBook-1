@@ -2,11 +2,9 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   main: {
-    width: '70%',
-    height: '87%',
     marginTop: '1%',
     borderWidth: 0.1,
-    borderRadius:20,
+    borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -14,41 +12,42 @@ export const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
     elevation: 5,
   },
   LinearGradient: {
     position: 'absolute',
     width: '100%',
     height: '100%',
-    borderTopRightRadius:18,
-    borderTopLeftRadius:18,
+    borderTopRightRadius: 18,
+    borderTopLeftRadius: 18,
   },
   headerText: {
     marginLeft: '5%',
     marginTop: '5%',
     color: 'white',
   },
-  footer:{
+  footer: {
     flex: 1,
     flexDirection: 'row',
     backgroundColor: 'white',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderBottomRightRadius:20,
-    borderBottomLeftRadius:20,
+    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
   },
-  priceText:{
+  priceText: {
     fontSize: 23,
     fontWeight: 'bold',
     marginLeft: '10%',
     color: '#FFAC81',
   },
-  locationText:{
+  locationText: {
     fontSize: 14,
     color: 'black',
     fontWeight: 'normal',
-  }
+  },
 });
 
 export const colors = [

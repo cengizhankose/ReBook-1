@@ -6,7 +6,6 @@ import {View, Text} from 'react-native';
 
 import {connect} from 'react-redux';
 
-import {changeUserStatus} from '../../../redux/auth/actions';
 import {Colors} from '../../../constant/colors/colors';
 import Button from '../../../components/Button/index';
 
@@ -25,7 +24,7 @@ const index = (props) => {
   const [password, setPassword] = useState('taha123');
 
   const onLoginUser = (email, password) => {
-    console.log('tıklandı');
+
     dispatch(loginUserAction(email, password));
   };
 
@@ -80,4 +79,4 @@ const mapStateToProps = ({auth}) => {
   return {isAuth};
 };
 
-export default connect(mapStateToProps, {changeUserStatus})(index);
+export default connect(mapStateToProps, {})(index);
