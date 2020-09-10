@@ -56,6 +56,8 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: false,
+        user: null,
+        isAuth: false,
       };
     case USER_LOG_OUT:
       return {

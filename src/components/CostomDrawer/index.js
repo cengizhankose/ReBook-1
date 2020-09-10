@@ -15,8 +15,8 @@ import {Colors} from '../../constant/colors/colors';
 const Index = (props) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-
-  if (props.isAuth) {
+//  console.log('drawer user', props.user);
+  if (props.user) {
     return (
       <DrawerContentScrollView {...props}>
         <View style={{alignItems: 'center'}}>

@@ -18,8 +18,8 @@ const Index = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const onSubmitUser = (email, password) => {
-    dispatch(registerUserAction(email, password));
+  const onSubmitUser = (params) => {
+    dispatch(registerUserAction(params));
   };
   return (
     <View style={styles.registerView}>
@@ -59,7 +59,7 @@ const Index = () => {
           <Button
             text={'Kayıt Ol'}
             onPress={() => {
-              onSubmitUser(email, password);
+              onSubmitUser({email, password, name, surname});
             }}
           />
         </View>
