@@ -47,7 +47,6 @@ export const registerUserAction = (params) => {
 };
 
 export const loginUserAction = (email, password) => {
-
   return (dispatch) => {
     dispatch({type: LOGIN_USER});
 
@@ -66,4 +65,14 @@ export const loginUserAction = (email, password) => {
 
 export const getUser = (userId) => {
   return firestore().collection('Users').doc(userId).get();
+};
+
+export const checkUserStatus = () => {
+  const user = auth().currentUser;
+  const userInfo = getUser(user.uid);
+  return (dispatch) => {
+    if (user) {
+      dispatch({type: LOGIN_USER_SUCCESS, user: userInfo});
+    }
+  };
 };

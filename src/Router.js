@@ -19,6 +19,7 @@ import BookDetail from './screens/BookDetail';
 import MyTabbar from './components/MyTabbar/myTabbar';
 import DrawerLogOut from './components/CostomDrawer';
 import {Colors} from './constant/colors/colors';
+import FirstScreen from './screens/FirstScreen';
 // Navigation fonksiyonlarının açılması.
 // @TODO: Bu sayfanın daha temiz olması için tekrar gözden geçirilebilir.
 
@@ -100,13 +101,14 @@ const Router = (props) => {
   );
   return (
     <NavigationContainer>
-      <StackScreens.Navigator>
+      <StackScreens.Navigator initialRouteName="FirstScreen">
         <StackScreens.Screen
           name="Dashboard"
           component={DrawerScreens}
-          options={{title: 'ReBook', headerShown: false}}
+          options={{title: 'ReBook', headerShown: false, headerLeft: null}}
         />
         <StackScreens.Screen name="BookDetail" component={BookDetail} />
+        <StackScreens.Screen name="FirstScreen" component={FirstScreen} />
       </StackScreens.Navigator>
     </NavigationContainer>
   );
