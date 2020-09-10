@@ -39,7 +39,11 @@ const Router = (props) => {
             options={{headerShown: false}}
           />
         ) : (
-          <HomeScreens.Screen name="AddBook" component={AddBook} />
+          <HomeScreens.Screen
+            props={props}
+            name="AddBook"
+            component={AddBook}
+          />
         )}
       </HomeScreens.Navigator>
     );

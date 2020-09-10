@@ -28,7 +28,7 @@ export const registerUserAction = (params) => {
         const uid = res.user._user.uid;
         const setData = {
           name: params.name,
-          surname: params.suername,
+          username: params.username,
           email: params.email,
           profile_img: params.profile_img
             ? params.profile_img
@@ -41,7 +41,7 @@ export const registerUserAction = (params) => {
           .doc(uid)
           .set(setData)
           .then((res) => {
-            dispatch({type: REGİSTER_USER_SUCCESS, user: setData});
+            dispatch({type: REGİSTER_USER_SUCCESS, user: setData, uid});
           });
       })
       .catch((err) => {
@@ -92,7 +92,11 @@ export const checkUserStatus = () => {
       console.log('check:', user.uid);
       const userInfo = await (await getUserAction(user.uid)).get();
       console.log('userinfo-----', userInfo._data);
-      dispatch({type: LOGIN_USER_SUCCESS, user: userInfo.data()});
+      dispatch({
+        type: LOGIN_USER_SUCCESS,
+        user: userInfo.data(),
+        uid: user.uid,
+      });
     } else {
       dispatch({type: LOGIN_USER_FAIL});
     }

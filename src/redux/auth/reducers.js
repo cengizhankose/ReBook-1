@@ -13,6 +13,7 @@ const INITIAL_STATE = {
   isAuth: false,
   loading: false,
   user: null,
+  uid: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -33,6 +34,7 @@ export default (state = INITIAL_STATE, action) => {
         loading: false,
         isAuth: true,
         user: action.user,
+        uid: action.uid,
       };
     case REGİSTER_USER_FAIL:
       return {
@@ -51,6 +53,7 @@ export default (state = INITIAL_STATE, action) => {
         loading: false,
         isAuth: true,
         user: action.user,
+        uid: action.uid,
       };
     case LOGIN_USER_FAIL:
       return {

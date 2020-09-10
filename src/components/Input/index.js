@@ -5,11 +5,13 @@ import {styles} from './style';
 const index = (props) => {
   return (
     <TextInput
-      style={[styles.textInput, props.style]}
+      style={[styles.textInput, props.style, {height: 'auto'}]}
       placeholder={props.placeholder}
       keyboardType={props.keyboardType}
       value={props.value}
       onChangeText={(value) => props.onChangeText(value)}
+      multiline={props.multiline}
+      numberOfLines={props.numberOfLines}
     />
   );
 };
