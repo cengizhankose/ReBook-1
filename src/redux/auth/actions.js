@@ -6,6 +6,7 @@ import {
   LOGIN_USER,
   LOGIN_USER_FAIL,
   LOGIN_USER_SUCCESS,
+  USER_LOG_OUT,
 } from './types';
 import auth from '@react-native-firebase/auth';
 import {Alert} from 'react-native';
@@ -24,12 +25,14 @@ export const registerUserAction = (params) => {
     auth()
       .createUserWithEmailAndPassword(params.email, params.password)
       .then((res) => {
-        dispatch({type: REGİSTER_USER_SUCCESS});
         const uid = res.user._user.uid;
         const setData = {
           name: params.name,
           surname: params.suername,
           email: params.email,
+          profile_img: params.profile_img
+            ? params.profile_img
+            : "https://journeypurebowlinggreen.com/wp-content/uploads/2018/05/placeholder-person.jpg'",
           favorites: [],
           products: [],
         };
@@ -37,7 +40,9 @@ export const registerUserAction = (params) => {
           .collection('Users')
           .doc(uid)
           .set(setData)
-          .then(() => console.log('added'));
+          .then((res) => {
+            dispatch({type: REGİSTER_USER_SUCCESS, user: setData});
+          });
       })
       .catch((err) => {
         dispatch({type: REGİSTER_USER_FAIL});
@@ -47,15 +52,13 @@ export const registerUserAction = (params) => {
 };
 
 export const loginUserAction = (email, password) => {
-
   return (dispatch) => {
     dispatch({type: LOGIN_USER});
-
     auth()
       .signInWithEmailAndPassword(email, password)
-      .then((res) => {
-        console.log('Login edildi', res);
-        dispatch({type: LOGIN_USER_SUCCESS});
+      .then(async (res) => {
+        const user = await (await getUserAction(res.user.uid)).get();
+        dispatch({type: LOGIN_USER_SUCCESS, user: user.data()});
       })
       .catch((err) => {
         console.log(err);
@@ -64,6 +67,34 @@ export const loginUserAction = (email, password) => {
   };
 };
 
-export const getUser = (userId) => {
-  return firestore().collection('Users').doc(userId).get();
+export const getUserAction = async (userId) => {
+  console.log('userid', userId);
+  let userInfo = await firestore().collection('Users').doc(userId);
+  return userInfo;
+};
+
+export const logOutAction = () => {
+  return (dispatch) => {
+    auth()
+      .signOut()
+      .then((res) => {
+        dispatch({type: USER_LOG_OUT});
+      })
+      .catch((error) => Alert.alert('Hata', error.message));
+  };
+};
+
+export const checkUserStatus = () => {
+  const user = auth().currentUser;
+  console.log('users', user);
+  return async (dispatch) => {
+    if (user) {
+      console.log('check:', user.uid);
+      const userInfo = await (await getUserAction(user.uid)).get();
+      console.log('userinfo-----', userInfo._data);
+      dispatch({type: LOGIN_USER_SUCCESS, user: userInfo.data()});
+    } else {
+      dispatch({type: LOGIN_USER_FAIL});
+    }
+  };
 };
