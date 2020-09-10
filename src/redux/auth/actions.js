@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   CHANGE_USER_STATUS,
   REGİSTER_USER,
@@ -11,7 +12,9 @@ import {
 import auth from '@react-native-firebase/auth';
 import {Alert} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
+import {useNavigation} from '@react-navigation/core';
 
+// Sabit değişkenler
 export const changeUserStatus = (status) => {
   return (dispatch) => {
     dispatch({type: CHANGE_USER_STATUS, payload: status});
@@ -106,4 +109,21 @@ export const checkUserStatus = () => {
       dispatch({type: LOGIN_USER_FAIL});
     }
   };
+};
+
+export const changePassword = async (newPassword, navigation) => {
+  const user = auth().currentUser;
+
+  await user.updatePassword(newPassword).catch((err) => {
+    Alert.alert(
+      'Şifre Hatası',
+      `Şifre değişikliğinde hata oluştu. \nHata kodu: ${err.message}`,
+    );
+  });
+  Alert.alert('Başarılı', 'Şifreniz değişti.', [
+    {
+      text: 'Tamam',
+      onPress: navigation,
+    },
+  ]);
 };
