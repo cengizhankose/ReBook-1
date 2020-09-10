@@ -6,6 +6,7 @@ import {
   LOGIN_USER,
   LOGIN_USER_FAIL,
   LOGIN_USER_SUCCESS,
+  USER_LOG_OUT,
 } from './types';
 import auth from '@react-native-firebase/auth';
 import {Alert} from 'react-native';
@@ -63,15 +64,23 @@ export const loginUserAction = (email, password) => {
   };
 };
 
-export const getUser = (userId) => {
+export const getUserAction = (userId) => {
   return firestore().collection('Users').doc(userId).get();
+};
+
+export const logOutAction = () => {
+  return (dispatch) => {
+    auth().signOut();
+    dispatch({type: USER_LOG_OUT});
+  };
 };
 
 export const checkUserStatus = () => {
   const user = auth().currentUser;
-  const userInfo = getUser(user.uid);
+
   return (dispatch) => {
     if (user) {
+      const userInfo = getUserAction(user.uid);
       dispatch({type: LOGIN_USER_SUCCESS, user: userInfo});
     }
   };

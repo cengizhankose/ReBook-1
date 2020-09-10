@@ -6,6 +6,7 @@ import {
   LOGIN_USER,
   LOGIN_USER_FAIL,
   LOGIN_USER_SUCCESS,
+  USER_LOG_OUT,
 } from './types';
 
 const INITIAL_STATE = {
@@ -55,6 +56,12 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         loading: false,
+      };
+    case USER_LOG_OUT:
+      return {
+        ...state,
+        user: null,
+        isAuth: false,
       };
 
     default:
