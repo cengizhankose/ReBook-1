@@ -46,7 +46,10 @@ export const registerUserAction = (params) => {
       })
       .catch((err) => {
         dispatch({type: REGİSTER_USER_FAIL});
-        Alert.alert('Hata Mesajı', err.message);
+        Alert.alert(
+          'Kayıt Başarısız',
+          `Üyelik oluşturma sırasında hatası oluştu. \nHata kodu: ${err.message}`,
+        );
       });
   };
 };
@@ -61,7 +64,10 @@ export const loginUserAction = (email, password) => {
         dispatch({type: LOGIN_USER_SUCCESS, user: user.data()});
       })
       .catch((err) => {
-        console.log(err);
+        Alert.alert(
+          'Giriş Başarısız',
+          `Giriş yapılırken hata oluştu. \nHata kodu: ${err.message}`,
+        );
         dispatch({type: LOGIN_USER_FAIL});
       });
   };
@@ -80,7 +86,12 @@ export const logOutAction = () => {
       .then((res) => {
         dispatch({type: USER_LOG_OUT});
       })
-      .catch((error) => Alert.alert('Hata', error.message));
+      .catch((error) =>
+        Alert.alert(
+          'Çıkış Başarısız',
+          `Çıkış yapılırken hata oluştu. \nHata kodu: ${error.message}`,
+        ),
+      );
   };
 };
 
