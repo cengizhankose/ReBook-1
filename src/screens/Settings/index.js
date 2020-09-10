@@ -12,9 +12,9 @@ const Index = () => {
 
   const handleChangePassword = async () => {
     await changePassword(newPassword, () => {
+      setNewPassword('');
       navigation.navigate('AnaSayfa');
     });
-    setNewPassword('');
   };
   return (
     <View style={styles.pageContainer}>
@@ -22,7 +22,10 @@ const Index = () => {
         <Text style={styles.text}>Lütfen yeni şifrenizi yazınız</Text>
       </View>
       <View style={styles.inputContainer}>
-        <Input onChangeText={(text) => setNewPassword(text)} />
+        <Input
+          onChangeText={(text) => setNewPassword(text)}
+          value={newPassword}
+        />
       </View>
       <View style={styles.btnContainer}>
         <Button
