@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   CHANGE_USER_STATUS,
   REGİSTER_USER,
@@ -11,7 +12,9 @@ import {
 import auth from '@react-native-firebase/auth';
 import {Alert} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
+import {useNavigation} from '@react-navigation/core';
 
+// Sabit değişkenler
 export const changeUserStatus = (status) => {
   return (dispatch) => {
     dispatch({type: CHANGE_USER_STATUS, payload: status});
@@ -28,7 +31,7 @@ export const registerUserAction = (params) => {
         const uid = res.user._user.uid;
         const setData = {
           name: params.name,
-          surname: params.suername,
+          surname: params.surename,
           email: params.email,
           profile_img: params.profile_img
             ? params.profile_img
@@ -46,7 +49,10 @@ export const registerUserAction = (params) => {
       })
       .catch((err) => {
         dispatch({type: REGİSTER_USER_FAIL});
-        Alert.alert('Hata Mesajı', err.message);
+        Alert.alert(
+          'Kayıt Başarısız',
+          `Üyelik oluşturma sırasında hatası oluştu. \nHata kodu: ${err.message}`,
+        );
       });
   };
 };
@@ -57,11 +63,14 @@ export const loginUserAction = (email, password) => {
     auth()
       .signInWithEmailAndPassword(email, password)
       .then(async (res) => {
-        const user = await (await getUserAction(res.user.uid)).get();
+        const user = await getUserAction(res.user.uid);
         dispatch({type: LOGIN_USER_SUCCESS, user: user.data()});
       })
       .catch((err) => {
-        console.log(err);
+        Alert.alert(
+          'Giriş Başarısız',
+          `Giriş yapılırken hata oluştu. \nHata kodu: ${err.message}`,
+        );
         dispatch({type: LOGIN_USER_FAIL});
       });
   };
@@ -69,7 +78,7 @@ export const loginUserAction = (email, password) => {
 
 export const getUserAction = async (userId) => {
   console.log('userid', userId);
-  let userInfo = await firestore().collection('Users').doc(userId);
+  let userInfo = await firestore().collection('Users').doc(userId).get();
   return userInfo;
 };
 
@@ -80,7 +89,12 @@ export const logOutAction = () => {
       .then((res) => {
         dispatch({type: USER_LOG_OUT});
       })
-      .catch((error) => Alert.alert('Hata', error.message));
+      .catch((error) =>
+        Alert.alert(
+          'Çıkış Başarısız',
+          `Çıkış yapılırken hata oluştu. \nHata kodu: ${error.message}`,
+        ),
+      );
   };
 };
 
@@ -89,12 +103,27 @@ export const checkUserStatus = () => {
   console.log('users', user);
   return async (dispatch) => {
     if (user) {
-      console.log('check:', user.uid);
-      const userInfo = await (await getUserAction(user.uid)).get();
-      console.log('userinfo-----', userInfo._data);
+      const userInfo = await getUserAction(user.uid);
       dispatch({type: LOGIN_USER_SUCCESS, user: userInfo.data()});
     } else {
       dispatch({type: LOGIN_USER_FAIL});
     }
   };
+};
+
+export const changePassword = async (newPassword, navigation) => {
+  const user = auth().currentUser;
+
+  await user.updatePassword(newPassword).catch((err) => {
+    Alert.alert(
+      'Şifre Hatası',
+      `Şifre değişikliğinde hata oluştu. \nHata kodu: ${err.message}`,
+    );
+  });
+  Alert.alert('Başarılı', 'Şifreniz değişti.', [
+    {
+      text: 'Tamam',
+      onPress: navigation,
+    },
+  ]);
 };
