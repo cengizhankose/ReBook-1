@@ -11,8 +11,6 @@ import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 import CardItem from '../../../components/CardItem/';
 
-const placeHolder =
-  'https://firebasestorage.googleapis.com/v0/b/rebook-6d8b6.appspot.com/o/mock%2FRectangle%202.png?alt=media&token=087f251f-b579-43ca-820e-22486e091130';
 const mockData = [
   {
     bookName: 'Steve Jobs 2',
