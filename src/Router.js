@@ -13,12 +13,8 @@ import Wishlist from './screens/Wishlist';
 import AuthStackScreens from './screens/Auth/AuthStackScreens';
 import Settings from './screens/Settings';
 import AddBook from './screens/AddBook';
-<<<<<<< HEAD
-import MyTabbar from './components/TabBar/index';
 import Messages from './screens/Message/Messages/index'
 import MessageDetail from './screens/Message/MessageDetail/index'
-=======
->>>>>>> master
 
 //Components
 import MyTabbar from './components/MyTabbar/myTabbar';
@@ -76,12 +72,6 @@ const Router = (props) => {
 
   // Drawer 'da çıkacak ekranlar tanımlanıyor.
   const DrawerScreens = () => (
-<<<<<<< HEAD
-    <DrawerStackScreens.Navigator initialRouteName="Drawer">
-      <DrawerStackScreens.Screen name="Drawer" component={TabScreens} />
-      <DrawerStackScreens.Screen name="Settings" component={Settings} />
-      <DrawerStackScreens.Screen name="Messages" component={MessageDetail} />
-=======
     <DrawerStackScreens.Navigator
       drawerContent={(props) => <DrawerLogOut {...props} />}
       drawerContentOptions={{
@@ -102,7 +92,6 @@ const Router = (props) => {
       }}>
       <DrawerStackScreens.Screen name="Mesajlar" component={TabScreens} />
       <DrawerStackScreens.Screen name="Ayarlar" component={Settings} />
->>>>>>> master
     </DrawerStackScreens.Navigator>
   );
   return (
