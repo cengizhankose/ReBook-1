@@ -62,14 +62,25 @@ export const addBookAction = (params, callback) => {
 };
 
 export const getBook = () => {
+  let allBooks = [];
   return (dispatch) => {
-    dispatch({type: GET_BOOK});
+    //  dispatch({type: GET_BOOK});
 
-    firestore()
-      .collection('Products')
-      .onSnapshot((books) => {
-        //console.log('products', products._docs);
-        dispatch({type: GET_BOOK_SUCCESS, payload: books._docs});
-      });
+    try {
+      firestore()
+        .collection('Products')
+        .onSnapshot((books) => {
+          books.forEach((book) => {
+            let data = book.data();
+            console.log('foreach data', data);
+            allBooks.push(data);
+          });
+          dispatch({type: GET_BOOK_SUCCESS, payload: allBooks});
+        });
+      console.log('liste:', allBooks);
+    } catch (error) {
+      //dispatch({type: GET_BOOK_FAILD});
+      Alert.alert('Hata', `Hata Alındı. \nHata Kodu: ${error.message}`);
+    }
   };
 };

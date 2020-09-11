@@ -5,21 +5,26 @@ import {useRoute} from '@react-navigation/native';
 import BookCarousel from './BookCarousel';
 import Button from '../../components/Button';
 import {useDispatch} from 'react-redux';
-import {getUser} from '../../redux/auth/actions';
+import {getUserAction} from '../../redux/auth/actions';
 const Index = () => {
+  const [sellerUser, setsellerUser] = React.useState({});
   const route = useRoute();
   const {book} = route.params;
   const dispatch = useDispatch();
-
+  console.log(book);
+  console.log('seller user', sellerUser);
   useEffect(() => {
-    // Kitabı satan user bilgileri çekilecek
-    //dispatch(getUser(book.sellerId));
-  }, [dispatch]);
+    const fetch = async () => {
+      const user = await getUserAction(book.seller_id);
+      setsellerUser(user);
+    };
+    fetch();
+  }, []);
 
   return (
     <View style={styles.pageContainer}>
       <View style={styles.imgContainer}>
-        <BookCarousel data={[]} />
+        <BookCarousel data={book.image ? book.image : null} />
       </View>
       <View style={styles.pageHeader}>
         <View style={styles.title}>
@@ -31,11 +36,13 @@ const Index = () => {
         </View>
         <View style={styles.title}>
           <Text style={styles.author}>{book.author}</Text>
-          <Text style={styles.sellerText}>Satıcı: {book.author}</Text>
+          <Text style={styles.sellerText}>
+            Satıcı: {sellerUser && sellerUser.name}
+          </Text>
         </View>
       </View>
       <ScrollView persistentScrollbar scrollEnabled style={styles.content}>
-        <Text>{book.title}</Text>
+        <Text>{book.content}</Text>
       </ScrollView>
       <View style={styles.pageFooter}>
         <View style={styles.btnContainer}>

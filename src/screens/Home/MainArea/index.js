@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   Text,
@@ -7,9 +7,12 @@ import {
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
+import {connect} from 'react-redux';
 import {styles} from './styles';
 import {useNavigation} from '@react-navigation/native';
 import CardItem from '../../../components/CardItem/';
+import {getBook} from '../../../redux/addBook/actions';
+const placeHolder = 'https://reactjs.org/logo-og.png';
 
 const mockData = [
   {
@@ -28,6 +31,13 @@ const mockData = [
 ];
 const Index = (props) => {
   const navigation = useNavigation();
+  console.log('Books in main', props.books);
+  useEffect(() => {
+    const fetch = async () => {
+      await props.getBook();
+    };
+    fetch();
+  }, []);
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -39,11 +49,26 @@ const Index = (props) => {
       </View>
       <View style={styles.scroll}>
         <ScrollView horizontal>
-          <CardItem />
+          {props.books &&
+            props.books.map((book) => (
+              <CardItem
+                key={book.title + Math.random()}
+                title={book.title}
+                author={book.author}
+                image={book.image ? book.image[0] : placeHolder}
+                price={book.price}
+                seller_id={book.seller_id}
+                book={book}
+              />
+            ))}
         </ScrollView>
       </View>
     </View>
   );
 };
-
-export default Index;
+const mapFromStateToProps = ({auth, addBook}) => {
+  const {user} = auth;
+  const {books} = addBook;
+  return {user, books};
+};
+export default connect(mapFromStateToProps, {getBook})(Index);
