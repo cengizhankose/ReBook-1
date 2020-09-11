@@ -1,10 +1,15 @@
-import {ADD_BOOK, ADD_BOOK_FAILD, ADD_BOOK_SUCCESS} from './types';
+import {
+  ADD_BOOK,
+  ADD_BOOK_FAILD,
+  ADD_BOOK_SUCCESS,
+  ADD_ONE_BOOK,
+} from './types';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import {Alert} from 'react-native';
 
-export const addBook = (params) => {
-  console.log('gelen params', params);
+export const addBookAction = (params, callback) => {
+  let counter = 0;
   return (dispatch) => {
     dispatch({type: ADD_BOOK});
 
@@ -12,11 +17,10 @@ export const addBook = (params) => {
       .collection('Products')
       .add(params)
       .catch((err) => {
-        console.log(err);
+        Alert.alert('Hata', 'Tekrar deneyiniz.\nHata Kodu:' + err.message);
       })
       .then((res) => {
         const reference = storage().ref(`/products/${res.id + Math.random()}`);
-        console.log('in action image:', params.image);
         params.image.map((imageUri) => {
           reference.putFile(imageUri).then(() => {
             reference.getDownloadURL().then((imageURL) => {
@@ -25,14 +29,20 @@ export const addBook = (params) => {
                 .doc(res.id)
                 .update({image: firestore.FieldValue.arrayUnion(imageURL)})
                 .then(() => {
-                  //dispatch({type:ADD_BOOK_SUCCESS, book: })
-                  console.log('başarılı');
-                  Alert.alert('Başarılı', 'Kitabınız Başarıyla Eklendi');
-                  dispatch({
-                    type: ADD_BOOK_SUCCESS,
-                    book: {...params, image: imageURL},
-                  });
-                  //RootNavigation.pop()
+                  dispatch({type: ADD_ONE_BOOK, book: imageURL});
+                  counter++;
+                  console.log('Kitap eklendi', counter);
+                  if (counter === params.image.length) {
+                    Alert.alert('Başarılı', 'Kitabınız Başarıyla Eklendi', [
+                      {
+                        text: 'Tamam',
+                        onPress: callback,
+                      },
+                    ]);
+                    dispatch({
+                      type: ADD_BOOK_SUCCESS,
+                    });
+                  }
                 })
                 .catch(
                   (error) =>

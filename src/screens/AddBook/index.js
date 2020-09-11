@@ -4,7 +4,7 @@ import {Spinner, Fab} from 'native-base';
 import ImagePicker from 'react-native-image-picker';
 import Input from '../../components/Input/';
 import Button from '../../components/Button/';
-import {addBook} from '../../redux/addBook/actions';
+import {addBookAction} from '../../redux/addBook/actions';
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -22,7 +22,7 @@ class index extends Component {
   };
 
   addBookHandler = async (params) => {
-    await this.props.addBook(params);
+    await this.props.addBookAction(params, () => this.props.navigation.pop());
     this.setState({
       title: '',
       content: '',
@@ -30,7 +30,6 @@ class index extends Component {
       author: '',
       images: [],
     });
-    // this.props.navigation.navigate('Search');
   };
 
   chooseBook = () => {
@@ -139,4 +138,4 @@ const mapStateToProps = ({auth, addBook}) => {
   return {uid, bookUploading};
 };
 
-export default connect(mapStateToProps, {addBook})(index);
+export default connect(mapStateToProps, {addBookAction})(index);

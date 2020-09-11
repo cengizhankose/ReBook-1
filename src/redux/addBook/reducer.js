@@ -1,4 +1,9 @@
-import {ADD_BOOK, ADD_BOOK_FAILD, ADD_BOOK_SUCCESS} from './types';
+import {
+  ADD_BOOK,
+  ADD_BOOK_FAILD,
+  ADD_BOOK_SUCCESS,
+  ADD_ONE_BOOK,
+} from './types';
 
 const initialState = {
   bookUploading: false,
@@ -16,12 +21,17 @@ export default (state = initialState, action) => {
       return {
         ...state,
         bookUploading: false,
-        addedBook: action.book,
       };
     case ADD_BOOK_FAILD:
       return {
         ...state,
         bookUploading: false,
+      };
+    case ADD_ONE_BOOK:
+      return {
+        ...state,
+        addedBook: action.book,
+        bookUploading: true,
       };
     default:
       return state;
