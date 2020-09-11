@@ -5,8 +5,8 @@ export const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  logoView:{flex: 1,alignItems:"center"},
+  logoView: {flex: 1, alignItems: 'center'},
   logo: {
-      marginTop:"4%",
+    marginTop: '4%',
   },
 });

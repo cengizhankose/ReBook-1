@@ -49,7 +49,7 @@ function MyTabBar({state, descriptors, navigation}) {
                       styles.inlineView,
                       {backgroundColor: isFocused ? '#FFAC81' : '#FF928B'},
                     ]}>
-                    <HomeIcon style={styles.sameIcon}/>
+                    <HomeIcon style={styles.sameIcon} />
                   </View>
                 </TouchableOpacity>
               </View>
@@ -64,7 +64,7 @@ function MyTabBar({state, descriptors, navigation}) {
                       styles.inlineView,
                       {backgroundColor: isFocused ? '#FFAC81' : '#FF928B'},
                     ]}>
-                      <SearchIcon style={styles.sameIcon} />
+                    <SearchIcon style={styles.sameIcon} />
                   </View>
                 </TouchableOpacity>
               </View>
@@ -79,7 +79,7 @@ function MyTabBar({state, descriptors, navigation}) {
                       styles.inlineView,
                       {backgroundColor: isFocused ? '#FFAC81' : '#FF928B'},
                     ]}>
-                      <WishlistIcon style={styles.sameIcon}/>
+                    <WishlistIcon style={styles.sameIcon} />
                   </View>
                 </TouchableOpacity>
               </View>

@@ -34,7 +34,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 20,
- 
   },
   priceText: {
     fontSize: 16,
