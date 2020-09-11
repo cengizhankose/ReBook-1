@@ -7,9 +7,9 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
   },
   logo: {
-      marginTop:"4%"
+    marginTop: '4%',
   },
   input: {
-    marginTop:"10%"
+    marginTop: '10%',
   },
 });

@@ -24,7 +24,6 @@ const index = (props) => {
   const [password, setPassword] = useState('taha123');
 
   const onLoginUser = (email, password) => {
-
     dispatch(loginUserAction(email, password));
   };
 
