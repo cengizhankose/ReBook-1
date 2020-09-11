@@ -8,7 +8,7 @@ import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import {Alert} from 'react-native';
 
-export const addBookAction = (params, callback) => {
+export const addBookAction = (params, images, callback) => {
   let counter = 0;
   return (dispatch) => {
     dispatch({type: ADD_BOOK});
@@ -21,7 +21,7 @@ export const addBookAction = (params, callback) => {
       })
       .then((res) => {
         const reference = storage().ref(`/products/${res.id + Math.random()}`);
-        params.image.map((imageUri) => {
+        images.map((imageUri) => {
           reference.putFile(imageUri).then(() => {
             reference.getDownloadURL().then((imageURL) => {
               firestore()
@@ -32,7 +32,7 @@ export const addBookAction = (params, callback) => {
                   dispatch({type: ADD_ONE_BOOK, book: imageURL});
                   counter++;
                   console.log('Kitap eklendi', counter);
-                  if (counter === params.image.length) {
+                  if (counter === images.length) {
                     Alert.alert('Başarılı', 'Kitabınız Başarıyla Eklendi', [
                       {
                         text: 'Tamam',

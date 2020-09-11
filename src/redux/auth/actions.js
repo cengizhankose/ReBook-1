@@ -105,7 +105,7 @@ export const checkUserStatus = () => {
     if (user) {
       console.log('check:', user.uid);
       const userInfo = await getUserAction(user.uid);
-      console.log('userinfo-----', userInfo._data);
+      console.log('userinfo-----', userInfo.data());
       dispatch({
         type: LOGIN_USER_SUCCESS,
         user: userInfo.data(),

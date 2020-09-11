@@ -21,8 +21,8 @@ class index extends Component {
     images: [],
   };
 
-  addBookHandler = async (params) => {
-    await this.props.addBookAction(params, () => this.props.navigation.pop());
+  addBookHandler = async (params, image) => {
+    await this.props.addBookAction(params, image, () => this.props.navigation.pop());
     this.setState({
       title: '',
       content: '',
@@ -119,10 +119,9 @@ class index extends Component {
               content,
               price,
               author,
-              image: this.state.images,
-              uid: this.props.uid,
+              seller_id: this.props.uid,
             };
-            this.addBookHandler(params);
+            this.addBookHandler(params, this.state.images);
           }}
           style={{backgroundColor: Colors.orange}}>
           <Icon name="save" />
