@@ -7,6 +7,7 @@ import {
   Dimensions,
   Image,
 } from 'react-native';
+import {Spinner} from 'native-base';
 import ImagePicker from 'react-native-image-picker';
 import Input from '../../components/Input/index';
 import Button from '../../components/Button/index';
@@ -21,18 +22,17 @@ class index extends Component {
     content: 'deneme1',
     price: '40',
     author: 'George Orwell',
-    avatarSource: null,
+    images: null,
   };
 
   addBookHandler = async (params) => {
     await this.props.addBook(params);
-    this.props.navigation.navigate('Search');
+    // this.props.navigation.navigate('Search');
   };
 
   chooseBook = () => {
     const options = {
-      title: 'Select Avatar',
-      customButtons: [{name: 'fb', title: 'Choose Photo from Facebook'}],
+      title: 'Resimlerinizi seçin',
       storageOptions: {
         skipBackup: true,
         path: 'images',
@@ -44,31 +44,26 @@ class index extends Component {
         console.log('User cancelled image picker');
       } else if (response.error) {
         console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
       } else {
-        const source = {uri: response.uri};
-
         this.setState({
-          avatarSource: source,
+          images: response.uri,
         });
       }
     });
   };
 
-  uploadImage = () => {};
-
   render() {
     const {title, content, price, author} = this.state;
 
-    console.log('gelen user', this.props.avatarSource);
     return (
       <View style={styles.addBookView}>
         <Text style={styles.addBookTitle}>Kitap Ekle</Text>
-        <Image
-          style={{width: 30, height: 30}}
-          source={this.state.avatarSource}
-        />
+        {this.state.images && (
+          <Image
+            style={{width: 30, height: 30}}
+            source={{uri: this.state.images}}
+          />
+        )}
         <Input
           style={{marginBottom: 20, borderColor: '#818081', borderWidth: 1}}
           placeholder={'Kitap İsmi'}
@@ -96,26 +91,32 @@ class index extends Component {
           onChangeText={(value) => this.setState({author: value})}
         />
 
-        <Button
-          text="Kitap Ekle"
-          onPress={() => {
-            const params = {
-              title,
-              content,
-              price,
-              author,
-              image: this.state.avatarSource,
-              uid: this.props.uid,
-            };
-            this.addBookHandler(params);
-          }}
-        />
-        <Button
-          text="resim Ekle"
-          onPress={() => {
-            this.chooseBook();
-          }}
-        />
+        {this.props.bookUploading ? (
+          <Spinner color="blue" />
+        ) : (
+          <>
+            <Button
+              text="Resim Ekle"
+              onPress={() => {
+                this.chooseBook();
+              }}
+            />
+            <Button
+              text="Kitap Ekle"
+              onPress={() => {
+                const params = {
+                  title,
+                  content,
+                  price,
+                  author,
+                  image: this.state.images,
+                  uid: this.props.uid,
+                };
+                this.addBookHandler(params);
+              }}
+            />
+          </>
+        )}
       </View>
     );
   }
@@ -134,9 +135,10 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = ({auth}) => {
+const mapStateToProps = ({auth, addBook}) => {
   const {uid} = auth;
-  return {uid};
+  const {bookUploading} = addBook;
+  return {uid, bookUploading};
 };
 
 export default connect(mapStateToProps, {addBook})(index);

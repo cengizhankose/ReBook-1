@@ -15,24 +15,32 @@ export const addBook = (params) => {
         console.log(err);
       })
       .then((res) => {
-        const reference = storage().ref(`/products/${res.id}`);
-        console.log('referancer', reference);
-        console.log('image uri....', params.image.uri);
-
-        reference.putFile(params.image.uri).then(() => {
-          console.log('birinci giriş');
+        const reference = storage().ref(`/products/${res.id + Math.random()}`);
+        console.log('in action image:', params.image);
+        reference.putFile(params.image).then(() => {
           reference.getDownloadURL().then((imageURL) => {
-            console.log('asdurllll', imageURL);
-
             firestore()
               .collection('Products')
               .doc(res.id)
-              .update(params)
-              .then((res) => {
-                console.log(res);
-                //dispatch({ type: ADD_TWEET_SUCCESS, payload: params })
+              .update({image: imageURL})
+              .then(() => {
+                //dispatch({type:ADD_BOOK_SUCCESS, book: })
+                console.log('başarılı');
+                Alert.alert('Başarılı', 'Kitabınız Başarıyla Eklendi');
+                dispatch({
+                  type: ADD_BOOK_SUCCESS,
+                  book: {...params, image: imageURL},
+                });
                 //RootNavigation.pop()
-              });
+              })
+              .catch(
+                (error) =>
+                  Alert.alert(
+                    'Hata',
+                    `Kitap eklenme sırasında hata oluştu. \nHata:${error.message}`,
+                  ),
+                dispatch({type: ADD_BOOK_FAILD}),
+              );
           });
         });
       });
