@@ -5,7 +5,7 @@ import {styles} from './style';
 const index = (props) => {
   return (
     <TextInput
-      style={[styles.textInput, props.style, {height: 'auto'}]}
+      style={[styles.textInput, props.style]}
       placeholder={props.placeholder}
       keyboardType={props.keyboardType}
       value={props.value}

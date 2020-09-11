@@ -15,7 +15,7 @@ import {Colors} from '../../constant/colors/colors';
 const Index = (props) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-//  console.log('drawer user', props.user);
+  // console.log('drawer user', props.user.profile_img);
   if (props.user) {
     return (
       <DrawerContentScrollView {...props}>
@@ -24,8 +24,7 @@ const Index = (props) => {
             <Image
               style={{width: 100, height: 100, borderRadius: 50}}
               source={{
-                uri:
-                  'https://journeypurebowlinggreen.com/wp-content/uploads/2018/05/placeholder-person.jpg',
+                uri: props.user.profile_img,
               }}
             />
           </View>
@@ -42,7 +41,12 @@ const Index = (props) => {
           }
           <DrawerItemList {...props} />
         </View>
-
+        <DrawerItem
+          style={styles.kitap}
+          labelStyle={styles.kitapEkle}
+          label="Kitap Ekle"
+          onPress={() => navigation.navigate('KitapEkle')}
+        />
         <DrawerItem
           style={styles.logOut}
           labelStyle={styles.label}

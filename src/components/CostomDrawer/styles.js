@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
   label: {
     fontSize: 22,
     color: Colors.softPink,
+    marginLeft: 20,
   },
   mail: {
     color: '#9A9A9A',
@@ -23,5 +24,16 @@ export const styles = StyleSheet.create({
   },
   imgContainer: {
     marginTop: 10,
+  },
+  kitap: {
+    backgroundColor: Colors.orange,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  kitapEkle: {
+    color: 'white',
+    fontSize: 22,
+    alignSelf: 'center',
+    marginLeft: 20,
   },
 });
