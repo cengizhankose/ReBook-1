@@ -1,20 +1,16 @@
-import React, {useState, Component} from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  Dimensions,
-  Image,
-} from 'react-native';
-import {Spinner} from 'native-base';
+import React, {Component} from 'react';
+import {View, Text, Image, Alert} from 'react-native';
+import {Spinner, Fab} from 'native-base';
 import ImagePicker from 'react-native-image-picker';
-import Input from '../../components/Input/index';
-import Button from '../../components/Button/index';
+import Input from '../../components/Input/';
+import Button from '../../components/Button/';
 import {addBook} from '../../redux/addBook/actions';
 import {connect} from 'react-redux';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-const {width, height} = Dimensions.get('window');
+import {styles} from './styles';
+import {Colors} from '../../constant/colors/colors';
+import {ScrollView} from 'react-native-gesture-handler';
 
 class index extends Component {
   state = {
@@ -22,11 +18,18 @@ class index extends Component {
     content: 'deneme1',
     price: '40',
     author: 'George Orwell',
-    images: null,
+    images: [],
   };
 
   addBookHandler = async (params) => {
     await this.props.addBook(params);
+    this.setState({
+      title: '',
+      content: '',
+      price: '',
+      author: '',
+      images: [],
+    });
     // this.props.navigation.navigate('Search');
   };
 
@@ -43,97 +46,92 @@ class index extends Component {
       if (response.didCancel) {
         console.log('User cancelled image picker');
       } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
+        Alert.alert(
+          'Hata',
+          'Yükleme esnasında hata oluştu. \nTekrar Deneyiniz.',
+        );
       } else {
         this.setState({
-          images: response.uri,
+          images: [response.uri, ...this.state.images],
         });
       }
     });
   };
 
   render() {
-    const {title, content, price, author} = this.state;
+    const {title, content, price, author, images} = this.state;
 
     return (
       <View style={styles.addBookView}>
-        <Text style={styles.addBookTitle}>Kitap Ekle</Text>
-        {this.state.images && (
-          <Image
-            style={{width: 30, height: 30}}
-            source={{uri: this.state.images}}
+        <View style={styles.imagesContainer}>
+          {images.length !== 0 && (
+            <ScrollView horizontal style={styles.scrollStyle}>
+              {images.map((image) => (
+                <Image key={image} source={{uri: image}} style={styles.image} />
+              ))}
+            </ScrollView>
+          )}
+        </View>
+        <View style={styles.main}>
+          <Input
+            style={styles.input}
+            placeholder={'Kitap İsmi'}
+            value={title}
+            onChangeText={(value) => this.setState({title: value})}
           />
-        )}
-        <Input
-          style={{marginBottom: 20, borderColor: '#818081', borderWidth: 1}}
-          placeholder={'Kitap İsmi'}
-          value={title}
-          onChangeText={(value) => this.setState({title: value})}
-        />
-        <Input
-          multiline={true}
-          numberOfLines={6}
-          placeholder={'Kitabın Durumu ve Açıklama'}
-          style={{marginBottom: 20, borderColor: '#818081', borderWidth: 1}}
-          value={content}
-          onChangeText={(value) => this.setState({content: value})}
-        />
-        <Input
-          placeholder={'Fiyat'}
-          style={{marginBottom: 20, borderColor: '#818081', borderWidth: 1}}
-          value={price}
-          onChangeText={(value) => this.setState({price: value})}
-        />
-        <Input
-          style={{marginBottom: 20, borderColor: '#818081', borderWidth: 1}}
-          placeholder={'Yazar'}
-          value={author}
-          onChangeText={(value) => this.setState({author: value})}
-        />
+          <Input
+            multiline={true}
+            numberOfLines={6}
+            placeholder={'Kitabın Durumu ve Açıklama'}
+            style={styles.input}
+            value={content}
+            onChangeText={(value) => this.setState({content: value})}
+          />
+          <Input
+            placeholder={'Fiyat'}
+            style={styles.input}
+            value={price}
+            onChangeText={(value) => this.setState({price: value})}
+          />
+          <Input
+            style={styles.input}
+            placeholder={'Yazar'}
+            value={author}
+            onChangeText={(value) => this.setState({author: value})}
+          />
 
-        {this.props.bookUploading ? (
-          <Spinner color="blue" />
-        ) : (
-          <>
-            <Button
-              text="Resim Ekle"
-              onPress={() => {
-                this.chooseBook();
-              }}
-            />
-            <Button
-              text="Kitap Ekle"
-              onPress={() => {
-                const params = {
-                  title,
-                  content,
-                  price,
-                  author,
-                  image: this.state.images,
-                  uid: this.props.uid,
-                };
-                this.addBookHandler(params);
-              }}
-            />
-          </>
-        )}
+          {this.props.bookUploading ? (
+            <Spinner color="blue" />
+          ) : (
+            <Icon.Button
+              onPress={() => this.chooseBook()}
+              name="plus"
+              color={'white'}
+              style={styles.addBtn}>
+              <Text style={styles.btnText}>Resim Ekle</Text>
+            </Icon.Button>
+          )}
+        </View>
+
+        <Fab
+          onPress={() => {
+            const params = {
+              title,
+              content,
+              price,
+              author,
+              image: this.state.images,
+              uid: this.props.uid,
+            };
+            this.addBookHandler(params);
+          }}
+          style={{backgroundColor: Colors.orange}}>
+          <Icon name="save" />
+        </Fab>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  addBookView: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-  },
-  addBookTitle: {
-    fontSize: 26,
-    marginBottom: height * 0.04,
-  },
-});
 
 const mapStateToProps = ({auth, addBook}) => {
   const {uid} = auth;

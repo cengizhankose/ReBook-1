@@ -32,19 +32,12 @@ const Router = (props) => {
   const HomeScreensNavigation = () => {
     return (
       <HomeScreens.Navigator>
-        {!props.isAuth ? (
-          <HomeScreens.Screen
-            name="Home"
-            component={Home}
-            options={{headerShown: false}}
-          />
-        ) : (
-          <HomeScreens.Screen
-            props={props}
-            name="AddBook"
-            component={AddBook}
-          />
-        )}
+        <HomeScreens.Screen
+          props={props}
+          name="Home"
+          component={Home}
+          options={{title: 'ReBook'}}
+        />
       </HomeScreens.Navigator>
     );
   };
@@ -99,8 +92,14 @@ const Router = (props) => {
         name="AnaSayfa"
         component={TabScreens}
       />
-      <DrawerStackScreens.Screen name="Mesajlar" component={TabScreens} />
+      <DrawerStackScreens.Screen
+        name="KitapEkle"
+        component={AddBook}
+        options={{title: 'Kitap Ekle'}}
+      />
       <DrawerStackScreens.Screen name="Ayarlar" component={Settings} />
+
+      <DrawerStackScreens.Screen name="Mesajlar" component={TabScreens} />
     </DrawerStackScreens.Navigator>
   );
   return (
