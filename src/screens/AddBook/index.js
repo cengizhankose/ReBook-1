@@ -21,8 +21,8 @@ class index extends Component {
     images: [],
   };
 
-  addBookHandler = async (params) => {
-    await this.props.addBookAction(params, () => this.props.navigation.pop());
+  addBookHandler = (params, image) => {
+    this.props.addBookAction(params, image, () => this.props.navigation.pop());
     this.setState({
       title: '',
       content: '',
@@ -39,17 +39,19 @@ class index extends Component {
         skipBackup: true,
         path: 'images',
       },
+      quality: 0.4,
+      allowsEditing: true,
     };
     ImagePicker.showImagePicker(options, (response) => {
       if (response.didCancel) {
       } else if (response.error) {
         Alert.alert(
           'Hata',
-          'Yükleme esnasında hata oluştu. \nTekrar Deneyiniz.',
+          'Yükleme esnasında hata oluştu. \nTekrar Deneyiniz.' + response.error,
         );
       } else {
         this.setState({
-          images: [response.uri, ...this.state.images],
+          images: [...this.state.images, response.uri],
         });
       }
     });
@@ -117,10 +119,9 @@ class index extends Component {
               content,
               price,
               author,
-              image: this.state.images,
-              uid: this.props.uid,
+              seller_id: this.props.uid,
             };
-            this.addBookHandler(params);
+            this.addBookHandler(params, images);
           }}
           style={{backgroundColor: Colors.orange}}>
           <Icon name="save" />

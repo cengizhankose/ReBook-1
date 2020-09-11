@@ -20,7 +20,7 @@ const Index = () => {
     };
     fetch();
   }, []);
-
+  console.log('book image', book.image);
   return (
     <View style={styles.pageContainer}>
       <View style={styles.imgContainer}>
