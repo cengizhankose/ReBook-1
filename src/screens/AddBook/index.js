@@ -49,7 +49,7 @@ class index extends Component {
       } else if (response.error) {
         Alert.alert(
           'Hata',
-          'Yükleme esnasında hata oluştu. \nTekrar Deneyiniz.',
+          'Yükleme esnasında hata oluştu. \nTekrar Deneyiniz.' + response.error,
         );
       } else {
         this.setState({
