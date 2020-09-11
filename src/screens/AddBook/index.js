@@ -22,7 +22,9 @@ class index extends Component {
   };
 
   addBookHandler = async (params, image) => {
-    await this.props.addBookAction(params, image, () => this.props.navigation.pop());
+    await this.props.addBookAction(params, image, () =>
+      this.props.navigation.pop(),
+    );
     this.setState({
       title: '',
       content: '',
