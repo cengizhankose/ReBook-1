@@ -5,44 +5,50 @@ import {useRoute} from '@react-navigation/native';
 import BookCarousel from './BookCarousel';
 import Button from '../../components/Button';
 import {useDispatch} from 'react-redux';
-import {getUser} from '../../redux/auth/actions';
+import {getUserAction} from '../../redux/auth/actions';
 const Index = () => {
+  const [sellerUser, setsellerUser] = React.useState({});
   const route = useRoute();
   const {book} = route.params;
-  console.log(book);
   const dispatch = useDispatch();
-
+  console.log(book);
+  console.log('seller user', sellerUser);
   useEffect(() => {
-    // Kitabı satan user bilgileri çekilecek
-    //dispatch(getUser(book.sellerId));
-  }, [dispatch]);
-
+    const fetch = async () => {
+      const user = await getUserAction(book.seller_id);
+      setsellerUser(user);
+    };
+    fetch();
+  }, []);
+  console.log('book image', book.image);
   return (
     <View style={styles.pageContainer}>
       <View style={styles.imgContainer}>
-        <BookCarousel data={book.img} />
+        <BookCarousel data={book.image ? book.image : null} />
       </View>
       <View style={styles.pageHeader}>
         <View style={styles.title}>
-          <Text style={styles.titleText}>{book.bookName}</Text>
+          <Text style={styles.titleText}>{book.title}</Text>
           <Text style={styles.priceText}>
-            {book.bookPrice}
+            {book.price}
             <Text style={{color: 'black'}}> ₺</Text>
           </Text>
         </View>
         <View style={styles.title}>
           <Text style={styles.author}>{book.author}</Text>
-          <Text style={styles.sellerText}>Satıcı: {book.seller}</Text>
+          <Text style={styles.sellerText}>
+            Satıcı: {sellerUser && sellerUser.name}
+          </Text>
         </View>
       </View>
-      <ScrollView persistentScrollbar scrollEnabled style={styles.pageContent}>
-        <Text>{book.bookText}</Text>
+      <ScrollView persistentScrollbar scrollEnabled style={styles.content}>
+        <Text>{book.content}</Text>
       </ScrollView>
       <View style={styles.pageFooter}>
         <View style={styles.btnContainer}>
           <Button
             onPress={() =>
-              Alert.alert('Eklendi', `${book.bookName} listenize eklendi.`)
+              Alert.alert('Eklendi', `${book.title} listenize eklendi.`)
             }
             text="Satıcıya yaz"
           />

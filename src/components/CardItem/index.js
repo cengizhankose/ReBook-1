@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   View,
   Text,
@@ -9,24 +9,26 @@ import {
 import {styles, colors} from './styles';
 import LinearGradient from 'react-native-linear-gradient';
 import Heart from '../../svg/HeartFilledSvg';
-import {connect} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 
 const CardItem = (props) => {
   const navigation = useNavigation();
-
   //TODO: Add favori fonksiyonu yazılacak
   const addFav = (favId) => {
     Alert.alert('Eklendi,', 'Bu kitabı favorilerinize eklendiniz.');
   };
-  const {img, bookAuthor, bookLocation, bookPrice, bookName} = props;
+
+  const {title, image, author, content, seller_id, price, book} = props;
+  console.log("card item");
   return (
-    <View style={styles.main}>
+    <View style={styles.main} key={title}>
       <TouchableOpacity
-        onPress={() => navigation.navigate('BookDetail', {book: props.book})}>
-        <View style={{flex: 3}}>
+        onPress={() => {
+          navigation.navigate('BookDetail', {book});
+        }}>
+        <View style={{flex: 3}} key={seller_id}>
           <ImageBackground
-            source={{uri: img}}
+            source={{uri: image}}
             imageStyle={{
               borderTopRightRadius: 20,
               borderTopLeftRadius: 20,
@@ -34,9 +36,9 @@ const CardItem = (props) => {
             style={{flex: 1, width: 200, height: 220}}>
             <LinearGradient colors={colors} style={styles.LinearGradient}>
               <Text style={[styles.headerText, {fontSize: 18}]}>
-                {bookName}{' '}
+                {title}{' '}
                 <Text style={[styles.headerText, {fontSize: 10}]}>
-                  {bookAuthor}
+                  {author}
                 </Text>
               </Text>
             </LinearGradient>
@@ -46,9 +48,9 @@ const CardItem = (props) => {
       <View style={styles.footer}>
         <View>
           <Text style={styles.priceText}>
-            {bookPrice}
+            {price}
             <Text style={{color: 'black'}}>
-              ₺ <Text style={styles.locationText}>{bookLocation}</Text>
+              ₺ <Text style={styles.locationText}>Istanbul</Text>
             </Text>
           </Text>
         </View>
@@ -61,8 +63,5 @@ const CardItem = (props) => {
     </View>
   );
 };
-const mapFromStateToProps = ({auth}) => {
-  const {user} = auth;
-  return {user};
-};
-export default connect(mapFromStateToProps, null)(CardItem);
+
+export default CardItem;

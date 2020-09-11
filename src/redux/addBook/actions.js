@@ -3,6 +3,9 @@ import {
   ADD_BOOK_FAILD,
   ADD_BOOK_SUCCESS,
   ADD_ONE_BOOK,
+  GET_BOOK,
+  GET_BOOK_FAILD,
+  GET_BOOK_SUCCESS,
 } from './types';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
@@ -20,8 +23,10 @@ export const addBookAction = (params, images, callback) => {
         Alert.alert('Hata', 'Tekrar deneyiniz.\nHata Kodu:' + err.message);
       })
       .then((res) => {
-        const reference = storage().ref(`/products/${res.id + Math.random()}`);
         images.map((imageUri) => {
+          const reference = storage().ref(
+            `/products/${res.id + Math.random()}`,
+          );
           reference.putFile(imageUri).then(() => {
             reference.getDownloadURL().then((imageURL) => {
               firestore()
@@ -56,5 +61,29 @@ export const addBookAction = (params, images, callback) => {
           });
         });
       });
+  };
+};
+
+export const getBook = () => {
+  let allBooks = [];
+  return (dispatch) => {
+    //  dispatch({type: GET_BOOK});
+
+    try {
+      firestore()
+        .collection('Products')
+        .onSnapshot((books) => {
+          books.forEach((book) => {
+            let data = book.data();
+            console.log('foreach data', data);
+            allBooks.push(data);
+          });
+          dispatch({type: GET_BOOK_SUCCESS, payload: allBooks});
+        });
+      console.log('liste:', allBooks);
+    } catch (error) {
+      //dispatch({type: GET_BOOK_FAILD});
+      Alert.alert('Hata', `Hata Alındı. \nHata Kodu: ${error.message}`);
+    }
   };
 };

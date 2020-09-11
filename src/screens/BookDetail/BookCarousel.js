@@ -27,7 +27,6 @@ const BookCarousel = ({data}) => {
   };
 
   const _renderItem = ({item, index}) => {
-    console.log('item', item);
     return <Image style={styles.img} source={{uri: item}} />;
   };
   return (

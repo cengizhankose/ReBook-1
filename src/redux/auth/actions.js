@@ -64,7 +64,7 @@ export const loginUserAction = (email, password) => {
       .signInWithEmailAndPassword(email, password)
       .then(async (res) => {
         const user = await getUserAction(res.user.uid);
-        dispatch({type: LOGIN_USER_SUCCESS, user: user.data()});
+        dispatch({type: LOGIN_USER_SUCCESS, user: user});
       })
       .catch((err) => {
         Alert.alert(
@@ -77,9 +77,9 @@ export const loginUserAction = (email, password) => {
 };
 
 export const getUserAction = async (userId) => {
-  console.log('userid', userId);
   let userInfo = await firestore().collection('Users').doc(userId).get();
-  return userInfo;
+  console.log('getuser, ', userInfo.data());
+  return userInfo.data();
 };
 
 export const logOutAction = () => {
@@ -100,15 +100,12 @@ export const logOutAction = () => {
 
 export const checkUserStatus = () => {
   const user = auth().currentUser;
-  console.log('users', user);
   return async (dispatch) => {
     if (user) {
-      console.log('check:', user.uid);
       const userInfo = await getUserAction(user.uid);
-      console.log('userinfo-----', userInfo.data());
       dispatch({
         type: LOGIN_USER_SUCCESS,
-        user: userInfo.data(),
+        user: userInfo,
         uid: user.uid,
       });
     } else {
