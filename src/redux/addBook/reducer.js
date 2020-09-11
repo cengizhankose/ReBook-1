@@ -3,11 +3,13 @@ import {
   ADD_BOOK_FAILD,
   ADD_BOOK_SUCCESS,
   ADD_ONE_BOOK,
+  GET_BOOK_SUCCESS,
 } from './types';
 
 const initialState = {
   bookUploading: false,
   addedBook: null,
+  books: [],
 };
 
 export default (state = initialState, action) => {
@@ -32,6 +34,11 @@ export default (state = initialState, action) => {
         ...state,
         addedBook: action.book,
         bookUploading: true,
+      };
+    case GET_BOOK_SUCCESS:
+      return {
+        ...state,
+        books: action.payload,
       };
     default:
       return state;

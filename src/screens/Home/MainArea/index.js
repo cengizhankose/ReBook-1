@@ -26,7 +26,7 @@ const mockData = [
     location: 'İstanbul',
   },
 ];
-const Index = () => {
+const Index = (props) => {
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
@@ -39,17 +39,7 @@ const Index = () => {
       </View>
       <View style={styles.scroll}>
         <ScrollView horizontal>
-          {mockData.map((book) => (
-            <CardItem
-              book={book}
-              key={book.bookName + Math.random()}
-              img={Array.isArray(book.img) ? book.img[0] : book.img}
-              bookAuthor={book.author}
-              bookLocation={book.location}
-              bookPrice={book.bookPrice}
-              bookName={book.bookName}
-            />
-          ))}
+          <CardItem />
         </ScrollView>
       </View>
     </View>

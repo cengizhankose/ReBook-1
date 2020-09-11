@@ -3,6 +3,9 @@ import {
   ADD_BOOK_FAILD,
   ADD_BOOK_SUCCESS,
   ADD_ONE_BOOK,
+  GET_BOOK,
+  GET_BOOK_FAILD,
+  GET_BOOK_SUCCESS,
 } from './types';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
@@ -31,7 +34,6 @@ export const addBookAction = (params, callback) => {
                 .then(() => {
                   dispatch({type: ADD_ONE_BOOK, book: imageURL});
                   counter++;
-                  console.log('Kitap eklendi', counter);
                   if (counter === params.image.length) {
                     Alert.alert('Başarılı', 'Kitabınız Başarıyla Eklendi', [
                       {
@@ -55,6 +57,19 @@ export const addBookAction = (params, callback) => {
             });
           });
         });
+      });
+  };
+};
+
+export const getBook = () => {
+  return (dispatch) => {
+    dispatch({type: GET_BOOK});
+
+    firestore()
+      .collection('Products')
+      .onSnapshot((books) => {
+        //console.log('products', products._docs);
+        dispatch({type: GET_BOOK_SUCCESS, payload: books._docs});
       });
   };
 };

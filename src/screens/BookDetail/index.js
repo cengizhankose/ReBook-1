@@ -9,7 +9,6 @@ import {getUser} from '../../redux/auth/actions';
 const Index = () => {
   const route = useRoute();
   const {book} = route.params;
-  console.log(book);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,29 +19,29 @@ const Index = () => {
   return (
     <View style={styles.pageContainer}>
       <View style={styles.imgContainer}>
-        <BookCarousel data={book.img} />
+        <BookCarousel data={[]} />
       </View>
       <View style={styles.pageHeader}>
         <View style={styles.title}>
-          <Text style={styles.titleText}>{book.bookName}</Text>
+          <Text style={styles.titleText}>{book.title}</Text>
           <Text style={styles.priceText}>
-            {book.bookPrice}
+            {book.price}
             <Text style={{color: 'black'}}> ₺</Text>
           </Text>
         </View>
         <View style={styles.title}>
           <Text style={styles.author}>{book.author}</Text>
-          <Text style={styles.sellerText}>Satıcı: {book.seller}</Text>
+          <Text style={styles.sellerText}>Satıcı: {book.author}</Text>
         </View>
       </View>
-      <ScrollView persistentScrollbar scrollEnabled style={styles.pageContent}>
-        <Text>{book.bookText}</Text>
+      <ScrollView persistentScrollbar scrollEnabled style={styles.content}>
+        <Text>{book.title}</Text>
       </ScrollView>
       <View style={styles.pageFooter}>
         <View style={styles.btnContainer}>
           <Button
             onPress={() =>
-              Alert.alert('Eklendi', `${book.bookName} listenize eklendi.`)
+              Alert.alert('Eklendi', `${book.title} listenize eklendi.`)
             }
             text="Satıcıya yaz"
           />

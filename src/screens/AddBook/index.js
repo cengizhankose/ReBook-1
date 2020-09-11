@@ -41,9 +41,7 @@ class index extends Component {
       },
     };
     ImagePicker.showImagePicker(options, (response) => {
-      console.log('Response = ', response.uri);
       if (response.didCancel) {
-        console.log('User cancelled image picker');
       } else if (response.error) {
         Alert.alert(
           'Hata',

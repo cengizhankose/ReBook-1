@@ -77,7 +77,6 @@ export const loginUserAction = (email, password) => {
 };
 
 export const getUserAction = async (userId) => {
-  console.log('userid', userId);
   let userInfo = await firestore().collection('Users').doc(userId).get();
   return userInfo;
 };
@@ -100,12 +99,9 @@ export const logOutAction = () => {
 
 export const checkUserStatus = () => {
   const user = auth().currentUser;
-  console.log('users', user);
   return async (dispatch) => {
     if (user) {
-      console.log('check:', user.uid);
       const userInfo = await getUserAction(user.uid);
-      console.log('userinfo-----', userInfo._data);
       dispatch({
         type: LOGIN_USER_SUCCESS,
         user: userInfo.data(),
