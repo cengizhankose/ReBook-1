@@ -15,11 +15,13 @@ import Settings from './screens/Settings';
 import AddBook from './screens/AddBook';
 import Messages from './screens/Message/Messages/index'
 import MessageDetail from './screens/Message/MessageDetail/index'
+import BookDetail from './screens/BookDetail';
 
 //Components
 import MyTabbar from './components/MyTabbar/myTabbar';
 import DrawerLogOut from './components/CostomDrawer';
 import {Colors} from './constant/colors/colors';
+import FirstScreen from './screens/FirstScreen';
 // Navigation fonksiyonlarının açılması.
 // @TODO: Bu sayfanın daha temiz olması için tekrar gözden geçirilebilir.
 
@@ -32,15 +34,11 @@ const Router = (props) => {
   const HomeScreensNavigation = () => {
     return (
       <HomeScreens.Navigator>
-        {!props.isAuth ? (
           <HomeScreens.Screen
             name="Home"
             component={Home}
             options={{headerShown: false}}
           />
-        ) : (
-          <HomeScreens.Screen name="AddBook" component={AddBook} />
-        )}
       </HomeScreens.Navigator>
     );
   };
@@ -90,18 +88,25 @@ const Router = (props) => {
         },
         activeTintColor: Colors.orange,
       }}>
-      <DrawerStackScreens.Screen name="Mesajlar" component={TabScreens} />
+      <DrawerStackScreens.Screen
+        options={{title: 'Ana Sayfa'}}
+        name="AnaSayfa"
+        component={TabScreens}
+      />
+      <DrawerStackScreens.Screen name="Mesajlar" component={Messages} />
       <DrawerStackScreens.Screen name="Ayarlar" component={Settings} />
     </DrawerStackScreens.Navigator>
   );
   return (
     <NavigationContainer>
-      <StackScreens.Navigator>
+      <StackScreens.Navigator initialRouteName="FirstScreen">
         <StackScreens.Screen
           name="Dashboard"
           component={DrawerScreens}
-          options={{title: 'ReBook', headerShown: false}}
+          options={{title: 'ReBook', headerShown: false, headerLeft: null}}
         />
+        <StackScreens.Screen name="BookDetail" component={BookDetail} />
+        <StackScreens.Screen name="FirstScreen" component={FirstScreen} />
       </StackScreens.Navigator>
     </NavigationContainer>
   );

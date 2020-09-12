@@ -6,11 +6,13 @@ import {
   LOGIN_USER,
   LOGIN_USER_FAIL,
   LOGIN_USER_SUCCESS,
+  USER_LOG_OUT,
 } from './types';
 
 const INITIAL_STATE = {
   isAuth: false,
   loading: false,
+  user: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -30,6 +32,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         isAuth: true,
+        user: action.user,
       };
     case REGİSTER_USER_FAIL:
       return {
@@ -47,11 +50,20 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         isAuth: true,
+        user: action.user,
       };
     case LOGIN_USER_FAIL:
       return {
         ...state,
         loading: false,
+        user: null,
+        isAuth: false,
+      };
+    case USER_LOG_OUT:
+      return {
+        ...state,
+        user: null,
+        isAuth: false,
       };
 
     default:

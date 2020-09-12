@@ -1,46 +1,86 @@
-import React from 'react';
-import {Alert, View, Image, Text} from 'react-native';
+import React, {useEffect} from 'react';
+import {Alert, View, Image, Text, TouchableOpacity} from 'react-native';
 import {
   DrawerItem,
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
-import {styles} from './styles';
-const index = (props) => {
-  return (
-    <DrawerContentScrollView {...props}>
-      <View style={{alignItems: 'center'}}>
-        <View style={styles.imgContainer}>
-          <Image
-            style={{width: 100, height: 100, borderRadius: 50}}
-            source={{
-              uri:
-                'https://journeypurebowlinggreen.com/wp-content/uploads/2018/05/placeholder-person.jpg',
-            }}
-          />
-        </View>
-        <View style={styles.itemContainer}>
-          <Text style={styles.name}>Cengizhan Köse</Text>
-        </View>
-        <View style={styles.itemContainer}>
-          <Text style={styles.mail}>cengizhan@gmail.com</Text>
-        </View>
-      </View>
-      <View>
-        {
-          // DrawerItemList Screenleri listelemektedir.
-        }
-        <DrawerItemList {...props} />
-      </View>
+import {useNavigation} from '@react-navigation/core';
+import {connect, useDispatch} from 'react-redux';
 
-      <DrawerItem
-        style={styles.logOut}
-        labelStyle={styles.label}
-        label="Oturumu Kapat"
-        onPress={() => Alert.alert('Emin misiniz?', 'Oturum kapanacak!')}
-      />
-    </DrawerContentScrollView>
-  );
+import {styles} from './styles';
+import {logOutAction} from '../../redux/auth/actions';
+import {Colors} from '../../constant/colors/colors';
+
+const Index = (props) => {
+  const navigation = useNavigation();
+  const dispatch = useDispatch();
+//  console.log('drawer user', props.user);
+  if (props.user) {
+    return (
+      <DrawerContentScrollView {...props}>
+        <View style={{alignItems: 'center'}}>
+          <View style={styles.imgContainer}>
+            <Image
+              style={{width: 100, height: 100, borderRadius: 50}}
+              source={{
+                uri:
+                  'https://journeypurebowlinggreen.com/wp-content/uploads/2018/05/placeholder-person.jpg',
+              }}
+            />
+          </View>
+          <View style={styles.itemContainer}>
+            <Text style={styles.name}>{props.user.name}</Text>
+          </View>
+          <View style={styles.itemContainer}>
+            <Text style={styles.mail}>{props.user.email}</Text>
+          </View>
+        </View>
+        <View>
+          {
+            // DrawerItemList Screenleri listelemektedir.
+          }
+          <DrawerItemList {...props} />
+        </View>
+
+        <DrawerItem
+          style={styles.logOut}
+          labelStyle={styles.label}
+          label="Oturumu Kapat"
+          onPress={() =>
+            Alert.alert(
+              'Emin misin?',
+              'Oturumu kapatmak istediğinize emin misiniz?',
+              [
+                {
+                  text: 'Evet',
+                  onPress: () => dispatch(logOutAction()),
+                },
+                {
+                  text: 'Vazgeç',
+                },
+              ],
+            )
+          }
+        />
+      </DrawerContentScrollView>
+    );
+  } else {
+    return (
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Login')}
+        style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+        <Text style={{fontSize: 20, color: Colors.orange}}>
+          Lütfen giriş yapın.
+        </Text>
+      </TouchableOpacity>
+    );
+  }
 };
 
-export default index;
+const mapStateToProps = ({auth}) => {
+  const {user, isAuth} = auth;
+  return {user, isAuth};
+};
+
+export default connect(mapStateToProps, null)(Index);

@@ -1,14 +1,11 @@
 import React from 'react';
-import {View, Image, Text, ImageBackground} from 'react-native';
+import {View, Image, Text, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import LinearGradient from 'react-native-linear-gradient';
-
 import Logo from '../../svg/LogoSvg';
-import CardItem from '../../components/CardItem/index';
-import CardItemMini from '../../components/CardItemMini/index';
-import {styles} from './styles';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 
+import {styles} from './styles';
+import TopArea from './TopArea';
+import MainArea from './MainArea';
 const index = () => {
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
@@ -19,37 +16,10 @@ const index = () => {
         <Logo />
       </View>
       <View style={styles.body}>
-        <Text style={styles.textStart}>
-          Po<Text style={{color: 'black'}}>püler </Text>
-          <Text style={styles.textEnd}>
-            Ki<Text style={{color: 'black'}}>taplar</Text>
-          </Text>
-        </Text>
-        <CardItemMini
-          bookName="Suç ve Ceza"
-          bookAuthor="Fyodor DOSTOYEVSKİ"
-          bookPrice="25"
-          bookLocation="İstanbul"
-        />
+        <TopArea />
       </View>
       <View style={styles.footer}>
-        <Text style={styles.textStart}>
-          Ye<Text style={{color: 'black'}}>ni </Text>
-          <Text style={styles.textStart}>
-            Ek<Text style={{color: 'black'}}>lenen </Text>
-          </Text>
-          <Text style={styles.textEnd}>
-            Ki<Text style={{color: 'black'}}>taplar</Text>
-          </Text>
-        </Text>
-
-        <CardItem
-          bookName="Steve Jobs"
-          bookAuthor="Walter ISAACSON"
-          bookPrice="30"
-          img="https://upload.wikimedia.org/wikipedia/tr/5/58/Fantastic_voyage_%28Kan_damarlar%C4%B1nda_yolculuk%29_TR_Kitap_kapa%C4%9F%C4%B1.jpg"
-          bookLocation="Ankara"
-        />
+        <MainArea />
       </View>
     </SafeAreaView>
   );
