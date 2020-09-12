@@ -12,6 +12,8 @@ import {styles} from './styles';
 const BookCarousel = ({data}) => {
   const [activeSlide, setActiveSlide] = React.useState(0);
   const {width, height} = useWindowDimensions();
+  const carouselRef = React.useRef();
+
   const pagination = () => {
     return (
       <Pagination
@@ -47,6 +49,7 @@ const BookCarousel = ({data}) => {
   return (
     <View>
       <Carousel
+        ref={carouselRef}
         autoplay
         data={data}
         renderItem={_renderItem}

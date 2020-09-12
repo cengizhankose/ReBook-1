@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     height: 50,
   },
   sohbet: {
-    padding: 5,
+    padding: 4,
     backgroundColor: '#FF928B',
   },
   inlineView: {
@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
   },
   chooseSohbet: {
     borderRadius: 50,
-    marginTop: -40,
+    marginTop: -20,
     backgroundColor: '#fff',
   },
   sohbetView: {

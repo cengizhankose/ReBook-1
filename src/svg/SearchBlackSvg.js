@@ -3,7 +3,7 @@ import Svg, {Path} from 'react-native-svg';
 
 function SvgComponent(props) {
   return (
-    <Svg width={20} height={20} viewBox="0 0 20 20" fill="none" {...props}>
+    <Svg width={24} height={24} viewBox="0 0 20 20" fill="none" {...props}>
       <Path
         d="M8.808 0C3.95 0 0 3.951 0 8.808c0 4.856 3.951 8.807 8.808 8.807 4.856 0 8.807-3.95 8.807-8.807S13.665 0 8.808 0zm0 15.99c-3.96 0-7.182-3.223-7.182-7.182 0-3.96 3.222-7.182 7.182-7.182 3.96 0 7.181 3.222 7.181 7.182 0 3.96-3.222 7.181-7.181 7.181z"
         fill="#000"
