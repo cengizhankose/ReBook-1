@@ -13,8 +13,8 @@ const Index = () => {
   const handleChangePassword = async () => {
     await changePassword(newPassword, () => {
       setNewPassword('');
+      navigation.navigate('AnaSayfa');
     });
-    navigation.navigate('AnaSayfa');
   };
   return (
     <View style={styles.pageContainer}>
@@ -32,9 +32,6 @@ const Index = () => {
           onPress={() => handleChangePassword()}
           text="Yeni Şifreyi Kaydet"
         />
-      </View>
-      <View style={styles.cancelContainer}>
-        <Button onPress={() => navigation.navigate('AnaSayfa')} text="İptal" />
       </View>
     </View>
   );

@@ -1,18 +1,11 @@
-import React, {useState} from 'react';
-import Carousel, {Pagination, ParallaxImage} from 'react-native-snap-carousel';
-import {
-  View,
-  Text,
-  Image,
-  useWindowDimensions,
-  ActivityIndicator,
-} from 'react-native';
+import React from 'react';
+import Carousel, {Pagination} from 'react-native-snap-carousel';
+import {View, Text, Image, useWindowDimensions} from 'react-native';
 import {styles} from './styles';
 
 const BookCarousel = ({data}) => {
   const [activeSlide, setActiveSlide] = React.useState(0);
   const {width, height} = useWindowDimensions();
-  const carouselRef = React.useRef();
 
   const pagination = () => {
     return (
@@ -33,30 +26,18 @@ const BookCarousel = ({data}) => {
     );
   };
 
-  const _renderItem = ({item, index}, parallaxProps) => {
-    return (
-      <View style={styles.item}>
-        <ParallaxImage
-          containerStyle={styles.imageContainer}
-          style={styles.image}
-          parallaxFactor={0.4}
-          source={{uri: item}}
-          {...parallaxProps}
-        />
-      </View>
-    );
+  const _renderItem = ({item, index}) => {
+    return <Image style={styles.img} source={{uri: item}} />;
   };
   return (
     <View>
       <Carousel
-        ref={carouselRef}
         autoplay
         data={data}
         renderItem={_renderItem}
         sliderWidth={width}
         itemWidth={width}
         onSnapToItem={(index) => setActiveSlide(index)}
-        hasParallaxImages
       />
       {pagination()}
     </View>

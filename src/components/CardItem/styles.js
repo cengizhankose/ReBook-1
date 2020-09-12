@@ -3,7 +3,6 @@ import {StyleSheet} from 'react-native';
 export const styles = StyleSheet.create({
   main: {
     marginTop: '0.4%',
-    margin: 10,
     borderWidth: 0.1,
     borderRadius: 20,
     shadowColor: '#000',
@@ -37,7 +36,6 @@ export const styles = StyleSheet.create({
     borderBottomLeftRadius: 20,
     paddingHorizontal: 10,
     paddingVertical: 5,
-    width: 200,
   },
   priceText: {
     fontSize: 23,

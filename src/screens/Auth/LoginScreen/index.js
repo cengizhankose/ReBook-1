@@ -19,9 +19,9 @@ const index = (props) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const dispatch = useDispatch();
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [email, setEmail] = useState('test@gmail.com');
+  const [email, setEmail] = useState('taha@gmail.com');
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [password, setPassword] = useState('test123');
+  const [password, setPassword] = useState('taha123');
 
   const onLoginUser = (email, password) => {
     dispatch(loginUserAction(email, password));

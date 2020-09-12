@@ -3,7 +3,7 @@ import Svg, {Path} from 'react-native-svg';
 
 function SvgComponent(props) {
   return (
-    <Svg width={35} height={24} viewBox="0 0 40 29" fill="none" {...props}>
+    <Svg width={40} height={29} viewBox="0 0 40 29" fill="none" {...props}>
       <Path
         fillRule="evenodd"
         clipRule="evenodd"

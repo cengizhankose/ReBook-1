@@ -12,25 +12,23 @@ import storage from '@react-native-firebase/storage';
 import {Alert} from 'react-native';
 
 export const addBookAction = (params, images, callback) => {
-  let counter = 0; // Birden fazla resim yüklemenmesi durumunda kaçıncı resmin yüklendiğini takip edecek
+  let counter = 0;
   return (dispatch) => {
     dispatch({type: ADD_BOOK});
 
     firestore()
-      .collection('Products') // firebase de products collection altına ekliyoruz. sonrasında resimleri upload edeceğiz.
+      .collection('Products')
       .add(params)
       .catch((err) => {
         Alert.alert('Hata', 'Tekrar deneyiniz.\nHata Kodu:' + err.message);
       })
       .then((res) => {
-        // localda yüklediğimiz resimlerin local pathlarını topladığım dizini loop içerisine alıp her resmi upload ediyoruz.
         images.map((imageUri) => {
           const reference = storage().ref(
             `/products/${res.id + Math.random()}`,
           );
           reference.putFile(imageUri).then(() => {
             reference.getDownloadURL().then((imageURL) => {
-              // Resim yüklendikten sonra yüklendiği url alıp, product içerisindeki objemize ekliyoruz.
               firestore()
                 .collection('Products')
                 .doc(res.id)
@@ -69,7 +67,7 @@ export const addBookAction = (params, images, callback) => {
 export const getBook = () => {
   let allBooks = [];
   return (dispatch) => {
-    dispatch({type: GET_BOOK});
+    //  dispatch({type: GET_BOOK});
 
     try {
       firestore()
@@ -84,7 +82,7 @@ export const getBook = () => {
         });
       console.log('liste:', allBooks);
     } catch (error) {
-      dispatch({type: GET_BOOK_FAILD});
+      //dispatch({type: GET_BOOK_FAILD});
       Alert.alert('Hata', `Hata Alındı. \nHata Kodu: ${error.message}`);
     }
   };
