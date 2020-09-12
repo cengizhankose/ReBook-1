@@ -33,6 +33,9 @@ const Index = () => {
           text="Yeni Şifreyi Kaydet"
         />
       </View>
+      <View style={styles.cancelContainer}>
+        <Button onPress={() => navigation.navigate('AnaSayfa')} text="İptal" />
+      </View>
     </View>
   );
 };
