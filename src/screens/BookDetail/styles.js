@@ -1,6 +1,7 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions, Platform} from 'react-native';
 import {Colors} from '../../constant/colors/colors';
 
+const {width: screenWidth} = Dimensions.get('window');
 export const styles = StyleSheet.create({
   pageContainer: {
     flex: 1,
@@ -53,4 +54,21 @@ export const styles = StyleSheet.create({
   sellerText: {
     color: Colors.softPink,
   },
+  item: {
+    width: screenWidth,
+    height: screenWidth,
+  },
+  imageContainer: {
+    flex: 1,
+    marginBottom: Platform.select({ios: 0, android: 1}), // Prevent a random Android rendering issue
+    backgroundColor: 'white',
+    borderRadius: 8,
+  },
+  image: {
+    ...StyleSheet.absoluteFillObject,
+    resizeMode: 'cover',
+  },
+  content: {
+    
+  }
 });

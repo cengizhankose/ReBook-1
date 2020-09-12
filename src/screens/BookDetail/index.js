@@ -41,7 +41,7 @@ const Index = () => {
           </Text>
         </View>
       </View>
-      <ScrollView persistentScrollbar scrollEnabled style={styles.content}>
+      <ScrollView persistentScrollbar scrollEnabled style={styles.pageContent}>
         <Text>{book.content}</Text>
       </ScrollView>
       <View style={styles.pageFooter}>
