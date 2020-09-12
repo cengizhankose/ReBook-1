@@ -12,8 +12,6 @@ import {styles} from './styles';
 const BookCarousel = ({data}) => {
   const [activeSlide, setActiveSlide] = React.useState(0);
   const {width, height} = useWindowDimensions();
-
-  const [imageLoading, setImageLoading] = useState(true);
   const pagination = () => {
     return (
       <Pagination
