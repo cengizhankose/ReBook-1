@@ -13,8 +13,8 @@ const Index = () => {
   const handleChangePassword = async () => {
     await changePassword(newPassword, () => {
       setNewPassword('');
-      navigation.navigate('AnaSayfa');
     });
+    navigation.navigate('AnaSayfa');
   };
   return (
     <View style={styles.pageContainer}>
