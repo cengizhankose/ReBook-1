@@ -22,7 +22,9 @@ class index extends Component {
   };
 
   addBookHandler = (params, image) => {
-    this.props.addBookAction(params, image, () => this.props.navigation.pop());
+    this.props.addBookAction(params, image, () =>
+      this.props.navigation.replace('Dashboard'),
+    );
     this.setState({
       title: '',
       content: '',

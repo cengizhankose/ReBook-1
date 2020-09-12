@@ -30,4 +30,7 @@ export const styles = StyleSheet.create({
   btnContainer: {
     marginTop: 30,
   },
+  cancelContainer: {
+    alignItems: 'center',
+  },
 });
