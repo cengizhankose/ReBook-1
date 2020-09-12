@@ -13,10 +13,10 @@ import {styles} from './styles';
 const Index = () => {
   const dispatch = useDispatch();
 
-  const [name, setName] = useState('');
-  const [surname, setSurname] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState('test');
+  const [username, setUsername] = useState('test');
+  const [email, setEmail] = useState('test@gmail.com');
+  const [password, setPassword] = useState('test123');
 
   const onSubmitUser = (params) => {
     dispatch(registerUserAction(params));
@@ -34,15 +34,15 @@ const Index = () => {
         <View style={styles.form}>
           <Input
             style={{marginBottom: 15}}
-            placeholder={'Name'}
+            placeholder={'Name Surname'}
             value={name}
             onChangeText={(value) => setName(value)}
           />
           <Input
             style={{marginBottom: 15}}
-            placeholder={'Surname'}
-            value={surname}
-            onChangeText={(value) => setSurname(value)}
+            placeholder={'Username'}
+            value={username}
+            onChangeText={(value) => setUsername(value)}
           />
           <Input
             style={{marginBottom: 15}}
@@ -59,7 +59,7 @@ const Index = () => {
           <Button
             text={'Kayıt Ol'}
             onPress={() => {
-              onSubmitUser({email, password, name, surname});
+              onSubmitUser({email, password, name, username});
             }}
           />
         </View>

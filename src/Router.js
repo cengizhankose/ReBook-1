@@ -93,8 +93,9 @@ const Router = (props) => {
         name="AnaSayfa"
         component={TabScreens}
       />
-      <DrawerStackScreens.Screen name="Mesajlar" component={Messages} />
       <DrawerStackScreens.Screen name="Ayarlar" component={Settings} />
+
+      <DrawerStackScreens.Screen name="Mesajlar" component={Messages} />
     </DrawerStackScreens.Navigator>
   );
   return (
@@ -107,6 +108,11 @@ const Router = (props) => {
         />
         <StackScreens.Screen name="BookDetail" component={BookDetail} />
         <StackScreens.Screen name="FirstScreen" component={FirstScreen} />
+        <DrawerStackScreens.Screen
+          name="KitapEkle"
+          component={AddBook}
+          options={{title: 'Kitap Ekle'}}
+        />
       </StackScreens.Navigator>
     </NavigationContainer>
   );

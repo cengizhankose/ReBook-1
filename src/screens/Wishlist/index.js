@@ -11,7 +11,13 @@ const index = () => {
         <Logo style={styles.logo} />
       </View>
       <View style={{flex: 8}}>
-        <Text style={{color: '#FFAC81', fontSize:18, fontWeight:"bold",marginLeft:"5%"}}>
+        <Text
+          style={{
+            color: '#FFAC81',
+            fontSize: 18,
+            fontWeight: 'bold',
+            marginLeft: '5%',
+          }}>
           Wi<Text style={{color: 'black'}}>shlist</Text>
         </Text>
       </View>

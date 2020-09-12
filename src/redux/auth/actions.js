@@ -31,11 +31,11 @@ export const registerUserAction = (params) => {
         const uid = res.user._user.uid;
         const setData = {
           name: params.name,
-          surname: params.surename,
+          username: params.username,
           email: params.email,
           profile_img: params.profile_img
             ? params.profile_img
-            : "https://journeypurebowlinggreen.com/wp-content/uploads/2018/05/placeholder-person.jpg'",
+            : 'https://journeypurebowlinggreen.com/wp-content/uploads/2018/05/placeholder-person.jpg',
           favorites: [],
           products: [],
         };
@@ -44,7 +44,7 @@ export const registerUserAction = (params) => {
           .doc(uid)
           .set(setData)
           .then((res) => {
-            dispatch({type: REGİSTER_USER_SUCCESS, user: setData});
+            dispatch({type: REGİSTER_USER_SUCCESS, user: setData, uid});
           });
       })
       .catch((err) => {
@@ -64,7 +64,7 @@ export const loginUserAction = (email, password) => {
       .signInWithEmailAndPassword(email, password)
       .then(async (res) => {
         const user = await getUserAction(res.user.uid);
-        dispatch({type: LOGIN_USER_SUCCESS, user: user.data()});
+        dispatch({type: LOGIN_USER_SUCCESS, user: user});
       })
       .catch((err) => {
         Alert.alert(
@@ -77,9 +77,9 @@ export const loginUserAction = (email, password) => {
 };
 
 export const getUserAction = async (userId) => {
-  console.log('userid', userId);
   let userInfo = await firestore().collection('Users').doc(userId).get();
-  return userInfo;
+  console.log('getuser, ', userInfo.data());
+  return userInfo.data();
 };
 
 export const logOutAction = () => {
@@ -100,11 +100,14 @@ export const logOutAction = () => {
 
 export const checkUserStatus = () => {
   const user = auth().currentUser;
-  console.log('users', user);
   return async (dispatch) => {
     if (user) {
       const userInfo = await getUserAction(user.uid);
-      dispatch({type: LOGIN_USER_SUCCESS, user: userInfo.data()});
+      dispatch({
+        type: LOGIN_USER_SUCCESS,
+        user: userInfo,
+        uid: user.uid,
+      });
     } else {
       dispatch({type: LOGIN_USER_FAIL});
     }
