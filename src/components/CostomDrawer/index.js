@@ -15,7 +15,6 @@ import {Colors} from '../../constant/colors/colors';
 const Index = (props) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  // console.log('drawer user', props.user.profile_img);
   if (props.user) {
     return (
       <DrawerContentScrollView {...props}>
