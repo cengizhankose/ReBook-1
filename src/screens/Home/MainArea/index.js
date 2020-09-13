@@ -33,16 +33,7 @@ const Index = (props) => {
             <Spinner color={Colors.orange} />
           ) : (
             props.books.map((book) => (
-              <CardItem
-                key={book.title + Math.random()}
-                title={book.title}
-                author={book.author}
-                image={book.image ? book.image[0] : placeHolder}
-                price={book.price}
-                seller_id={book.seller_id}
-                book={book}
-                isFav={book.isFav}
-              />
+              <CardItem key={book.title + Math.random()} book={book} />
             ))
           )}
         </ScrollView>

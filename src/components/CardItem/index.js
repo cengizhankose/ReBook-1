@@ -26,16 +26,16 @@ const CardItem = (props) => {
     await props.add_to_favorite({favoriBook, isFavori, uid});
   };
 
-  const {title, image, author, content, seller_id, price, book, isFav} = props;
+  const {title, image, author, content, seller_id, price, isFav} = props.book;
   return (
     <View style={styles.main} key={title}>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate('BookDetail', {book});
+          navigation.navigate('BookDetail', {book: props.book});
         }}>
         <View style={{flex: 3}} key={seller_id}>
           <ImageBackground
-            source={{uri: image}}
+            source={{uri: image[0]}}
             imageStyle={{
               borderTopRightRadius: 20,
               borderTopLeftRadius: 20,

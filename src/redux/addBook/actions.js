@@ -76,7 +76,13 @@ export const getBook = () => {
         .onSnapshot((books) => {
           books.forEach((book) => {
             let data = book.data();
-            allBooks.push(data);
+            let id = book.id;
+            let dataWithID = {
+              ...data,
+              id,
+            };
+
+            allBooks.push(dataWithID);
           });
           dispatch({type: GET_BOOK_SUCCESS, payload: allBooks});
         });
