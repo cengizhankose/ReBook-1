@@ -8,7 +8,7 @@ import Logo from '../../svg/LogoSvg';
 
 const placeHolder = 'https://reactjs.org/logo-og.png';
 
-const index = (props) => {
+const Index = (props) => {
   useEffect(() => {
     const func = async () => {
       const uid = props.uid;
@@ -65,4 +65,4 @@ const mapStateToProps = ({Favorites, auth}) => {
   return {favorites, uid};
 };
 
-export default connect(mapStateToProps, {getFavoriteBooks})(index);
+export default connect(mapStateToProps, {getFavoriteBooks})(Index);

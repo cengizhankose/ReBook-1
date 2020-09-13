@@ -26,16 +26,15 @@ const CardItemMini = (props) => {
       setIsFavori(true);
     }
   };
-
-  useEffect(() => {
-    //checkIsFav();
-  }, []);
-
   const checkIsFav = () => {
     props.user.favorites.map((item) => {
       item.id === props.book.id && setIsFavori(true);
     });
   };
+  useEffect(() => {
+    checkIsFav();
+  }, []);
+
   console.log(props.user);
   const {
     bookAuthor,
