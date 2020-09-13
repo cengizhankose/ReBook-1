@@ -5,7 +5,6 @@ export const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
   },
   logo: {
     marginTop: '4%',
@@ -23,5 +22,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 40,
+  },
+  flatlist: {
+    marginTop: 20,
   },
 });

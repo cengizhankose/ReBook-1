@@ -35,14 +35,13 @@ export const add_to_favorite = (params) => {
         Alert.alert('Ürününüz başarıyla favorilere eklendi');
         dispatch({type: ADD_FAVORI_SUCCESS, payload: favoriItem});
       })
-      .catch(
-        (error) =>
-          Alert.alert(
-            'Hata',
-            `Favorilere eklenme sırasında hata oluştu. \nHata:${error.message}`,
-          ),
-        dispatch({type: ADD_FAVORI_FAILD}),
-      );
+      .catch((error) => {
+        Alert.alert(
+          'Hata',
+          `Favorilere eklenme sırasında hata oluştu. \nHata:${error.message}`,
+        );
+        dispatch({type: ADD_FAVORI_FAILD});
+      });
   };
 };
 
@@ -58,6 +57,7 @@ export const removeFromFavori = (params) => {
   };
   return (dispatch) => {
     dispatch({type: REMOVE_FAVORI});
+    
     firestore()
       .collection('Users')
       .doc(params.uid)
@@ -68,14 +68,13 @@ export const removeFromFavori = (params) => {
         Alert.alert('Ürünün Favorilerden Çıkarıldı');
         dispatch({type: REMOVE_FAVORI_SUCCESS, payload: id});
       })
-      .catch(
-        (error) =>
-          Alert.alert(
-            'Hata',
-            `Favorilere eklenme sırasında hata oluştu. \nHata:${error.message}`,
-          ),
-        dispatch({type: REMOVE_FAVORI_FAILD}),
-      );
+      .catch((error) => {
+        Alert.alert(
+          'Hata',
+          `Favorilere eklenme sırasında hata oluştu. \nHata:${error.message}`,
+        );
+        dispatch({type: REMOVE_FAVORI_FAILD});
+      });
   };
 };
 

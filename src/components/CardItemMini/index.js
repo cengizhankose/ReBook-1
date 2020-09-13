@@ -14,8 +14,7 @@ const {height, width} = Dimensions.get('window');
 const CardItemMini = (props) => {
   const navigation = useNavigation();
   const [isFavori, setIsFavori] = useState(false);
-  //TODO: Add favori fonksiyonu yazılacak
-  const addFav = async (favId) => {
+  const addFav = async () => {
     const favoriBook = props.book;
     const uid = props.uid;
     if (isFavori) {
@@ -32,19 +31,25 @@ const CardItemMini = (props) => {
     });
   };
   useEffect(() => {
-    checkIsFav();
+    const getCheck = async () => {
+      await checkIsFav();
+    };
+    getCheck();
   }, []);
 
   console.log(props.user);
+  const {widthP, heightP} = props;
+
   const {
-    bookAuthor,
-    bookName,
-    bookLocation,
-    bookPrice,
-    img,
-    widthP,
-    heightP,
-  } = props;
+    title,
+    image,
+    author,
+    content,
+    seller_id,
+    price,
+    location = location ? location : 'Istanbul',
+  } = props.book;
+  console.log(image);
   return (
     <View style={styles.main}>
       <TouchableOpacity
@@ -57,7 +62,7 @@ const CardItemMini = (props) => {
           },
         ]}>
         <ImageBackground
-          source={{uri: img}}
+          source={{uri: Array.isArray(image) ? image[0] : image}}
           imageStyle={{
             borderTopRightRadius: 20,
             borderTopLeftRadius: 20,
@@ -65,10 +70,8 @@ const CardItemMini = (props) => {
           style={{width: '100%', height: '100%'}}>
           <LinearGradient colors={colors} style={styles.LinearGradient}>
             <Text style={[styles.headerText, {fontSize: 16}]}>
-              {bookName}{' '}
-              <Text style={[styles.headerText, {fontSize: 6}]}>
-                {bookAuthor}
-              </Text>
+              {title}{' '}
+              <Text style={[styles.headerText, {fontSize: 6}]}>{author}</Text>
             </Text>
           </LinearGradient>
         </ImageBackground>
@@ -76,9 +79,9 @@ const CardItemMini = (props) => {
       <View style={styles.footer}>
         <View>
           <Text style={styles.priceText}>
-            {bookPrice}
+            {price}
             <Text style={{color: 'black'}}>
-              ₺ <Text style={styles.locationText}>{bookLocation}</Text>
+              ₺ <Text style={styles.locationText}>{location}</Text>
             </Text>
           </Text>
         </View>
