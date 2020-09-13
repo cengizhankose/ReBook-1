@@ -9,8 +9,8 @@ export const styles = StyleSheet.create({
     margin: '5%',
     marginBottom: '3%',
   },
-  body: {flex: 3, marginLeft: '5%'},
-  footer: {flex: 5, marginLeft: '5%'},
+  body: {flex: 1, marginLeft: '5%'},
+  footer: {flex: 2, marginLeft: '5%'},
   textStart: {
     color: '#FFAC81',
     fontSize: 18,

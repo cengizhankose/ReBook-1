@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -8,18 +8,25 @@ import {
 } from 'react-native';
 import {styles, colors} from './styles';
 import LinearGradient from 'react-native-linear-gradient';
-import Heart from '../../svg/HeartFilledSvg';
+import {Spinner} from 'native-base';
+import Heart from '../../svg/HeartSvg';
+import {connect} from 'react-redux';
+import {add_to_favorite} from '../../redux/wishList/actions';
 import {useNavigation} from '@react-navigation/native';
 
 const CardItem = (props) => {
   const navigation = useNavigation();
+  const [isFavori, setIsFavori] = useState(true);
   //TODO: Add favori fonksiyonu yazılacak
-  const addFav = (favId) => {
-    Alert.alert('Eklendi,', 'Bu kitabı favorilerinize eklendiniz.');
+  const addFav = async (favId) => {
+    const favoriBook = props.book;
+    const uid = props.uid;
+    await setIsFavori(!isFavori);
+
+    await props.add_to_favorite({favoriBook, isFavori, uid});
   };
 
-  const {title, image, author, content, seller_id, price, book} = props;
-  console.log("card item");
+  const {title, image, author, content, seller_id, price, book, isFav} = props;
   return (
     <View style={styles.main} key={title}>
       <TouchableOpacity
@@ -54,14 +61,23 @@ const CardItem = (props) => {
             </Text>
           </Text>
         </View>
-        <View>
-          <TouchableOpacity onPress={addFav}>
-            <Heart />
-          </TouchableOpacity>
-        </View>
+
+        <TouchableOpacity onPress={addFav}>
+          {props.favoriLoading ? (
+            <Spinner color="blue" />
+          ) : (
+            <Heart stroke={!isFav ? '#fff' : 'red'} />
+          )}
+        </TouchableOpacity>
       </View>
     </View>
   );
 };
 
-export default CardItem;
+const mapFromStateToProps = ({Favorites, auth}) => {
+  const {favorites, favoriLoading} = Favorites;
+  const {uid} = auth;
+  return {favorites, favoriLoading, uid};
+};
+
+export default connect(mapFromStateToProps, {add_to_favorite})(CardItem);

@@ -1,0 +1,7 @@
+export const ADD_FAVORI = '@ADD_FAVORI';
+export const ADD_FAVORI_SUCCESS = '@ADD_FAVORI_SUCCESS';
+export const ADD_FAVORI_FAILD = '@ADD_FAVORI_FAILD';
+
+export const GET_FAVORI = '@GET_FAVORI';
+export const GET_FAVORI_SUCCESS = '@GET_FAVORI_SUCCESS';
+export const GET_FAVORI_FAILD = '@GET_FAVORI_FAILD';

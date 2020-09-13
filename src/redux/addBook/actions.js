@@ -38,7 +38,6 @@ export const addBookAction = (params, images, callback) => {
                 .then(() => {
                   dispatch({type: ADD_ONE_BOOK, book: imageURL});
                   counter++;
-                  console.log('Kitap eklendi', counter);
                   if (counter === images.length) {
                     Alert.alert('Başarılı', 'Kitabınız Başarıyla Eklendi', [
                       {
@@ -77,12 +76,10 @@ export const getBook = () => {
         .onSnapshot((books) => {
           books.forEach((book) => {
             let data = book.data();
-            console.log('foreach data', data);
             allBooks.push(data);
           });
           dispatch({type: GET_BOOK_SUCCESS, payload: allBooks});
         });
-      console.log('liste:', allBooks);
     } catch (error) {
       dispatch({type: GET_BOOK_FAILD});
       Alert.alert('Hata', `Hata Alındı. \nHata Kodu: ${error.message}`);

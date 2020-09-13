@@ -11,8 +11,6 @@ const Index = () => {
   const route = useRoute();
   const {book} = route.params;
   const dispatch = useDispatch();
-  console.log(book);
-  console.log('seller user', sellerUser);
   useEffect(() => {
     const fetch = async () => {
       const user = await getUserAction(book.seller_id);
@@ -20,7 +18,6 @@ const Index = () => {
     };
     fetch();
   }, []);
-  console.log('book image', book.image);
   return (
     <View style={styles.pageContainer}>
       <View style={styles.imgContainer}>

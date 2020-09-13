@@ -10,9 +10,10 @@ export const styles = StyleSheet.create({
   },
   textStyle: {
     fontSize: 18,
+    marginLeft: '5%',
   },
   titleContainer: {
-    padding: 20,
+    marginTop: 5,
   },
   scroll: {},
   container: {

@@ -12,7 +12,6 @@ const placeHolder = 'https://reactjs.org/logo-og.png';
 
 const Index = (props) => {
   const navigation = useNavigation();
-  console.log('Books in main', props.books);
   useEffect(() => {
     const fetch = async () => {
       await props.getBook();
@@ -42,6 +41,7 @@ const Index = (props) => {
                 price={book.price}
                 seller_id={book.seller_id}
                 book={book}
+                isFav={book.isFav}
               />
             ))
           )}
