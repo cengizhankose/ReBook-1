@@ -12,7 +12,6 @@ const placeHolder = 'https://reactjs.org/logo-og.png';
 
 const Index = (props) => {
   const navigation = useNavigation();
-  console.log('Books in main', props.books);
   useEffect(() => {
     const fetch = async () => {
       await props.getBook();
@@ -34,15 +33,7 @@ const Index = (props) => {
             <Spinner color={Colors.orange} />
           ) : (
             props.books.map((book) => (
-              <CardItem
-                key={book.title + Math.random()}
-                title={book.title}
-                author={book.author}
-                image={book.image ? book.image[0] : placeHolder}
-                price={book.price}
-                seller_id={book.seller_id}
-                book={book}
-              />
+              <CardItem key={book.title + Math.random()} book={book} />
             ))
           )}
         </ScrollView>
