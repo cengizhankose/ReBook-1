@@ -19,7 +19,7 @@ const CardItem = (props) => {
   const navigation = useNavigation();
   const [isFavori, setIsFavori] = useState(false);
   //TODO: Add favori fonksiyonu yazılacak
-  const addFav = async (favId) => {
+  const addFav = async () => {
     const favoriBook = props.book;
     const uid = props.uid;
     if (isFavori) {

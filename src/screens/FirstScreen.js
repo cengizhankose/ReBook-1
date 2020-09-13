@@ -9,9 +9,12 @@ const FirstScreen = () => {
   // @User login durumu burada kontrol edilir, sonrasında yönlendirme yapılır!
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(checkUserStatus());
-    navigation.replace('Dashboard');
-  }, [dispatch]);
+    const getUser = async () => {
+      await dispatch(checkUserStatus());
+      navigation.replace('Dashboard');
+    };
+    getUser();
+  }, []);
   return <ImageBackground source={back} style={{flex: 1}}></ImageBackground>;
 };
 
