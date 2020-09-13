@@ -78,7 +78,6 @@ export const loginUserAction = (email, password) => {
 
 export const getUserAction = async (userId) => {
   let userInfo = await firestore().collection('Users').doc(userId).get();
-  console.log('getuser, ', userInfo.data());
   return userInfo.data();
 };
 

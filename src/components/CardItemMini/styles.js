@@ -1,9 +1,11 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
+
+const {width, height} = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   main: {
-    marginTop: '1%',
-    borderWidth: 0.1,
+    marginTop: '2%',
+    marginLeft: 15,
     borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: {
@@ -29,11 +31,14 @@ export const styles = StyleSheet.create({
   footer: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: 'white',
+    backgroundColor: '#fff',
     justifyContent: 'space-between',
     alignItems: 'center',
+    height: 'auto',
+    width: width * 0.4,
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 20,
+    padding: 5,
   },
   priceText: {
     fontSize: 16,
@@ -45,6 +50,11 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     color: 'black',
     fontWeight: 'normal',
+  },
+  touchableArea: {
+    flex: 1,
+    height: height * 0.2,
+    width: width * 0.2,
   },
 });
 

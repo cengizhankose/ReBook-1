@@ -38,7 +38,6 @@ export const addBookAction = (params, images, callback) => {
                 .then(() => {
                   dispatch({type: ADD_ONE_BOOK, book: imageURL});
                   counter++;
-                  console.log('Kitap eklendi', counter);
                   if (counter === images.length) {
                     Alert.alert('Başarılı', 'Kitabınız Başarıyla Eklendi', [
                       {

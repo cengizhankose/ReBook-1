@@ -12,17 +12,6 @@ const Index = (props) => {
   const navigation = useNavigation();
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
-          {props.user && (
-            <Image
-              style={{width: 48, height: 48, borderRadius: 50, padding: 5}}
-              source={{uri: props.user.profile_img}}
-            />
-          )}
-        </TouchableOpacity>
-        <Logo />
-      </View>
       <View style={styles.body}>
         <TopArea />
       </View>
@@ -31,6 +20,12 @@ const Index = (props) => {
       </View>
     </SafeAreaView>
   );
+};
+
+Index.navigationOptions = (data) => {
+  return {
+    headerTitle: 'Zeybek',
+  };
 };
 
 const mapStateToProps = ({auth}) => {

@@ -122,6 +122,7 @@ class index extends Component {
               price,
               author,
               seller_id: this.props.uid,
+              isFav: false,
             };
             this.addBookHandler(params, images);
           }}

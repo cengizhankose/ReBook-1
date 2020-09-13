@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, Linking} from 'react-native';
+import {View, Text, StyleSheet, Linking, TouchableOpacity} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -20,6 +20,7 @@ import MyTabbar from './components/MyTabbar/myTabbar';
 import DrawerLogOut from './components/CostomDrawer';
 import {Colors} from './constant/colors/colors';
 import FirstScreen from './screens/FirstScreen';
+
 // Navigation fonksiyonlarının açılması.
 // @TODO: Bu sayfanın daha temiz olması için tekrar gözden geçirilebilir.
 
@@ -36,7 +37,9 @@ const Router = (props) => {
           props={props}
           name="Home"
           component={Home}
-          options={{title: 'ReBook'}}
+          options={{
+            title: 'Home',
+          }}
         />
       </HomeScreens.Navigator>
     );
@@ -121,4 +124,5 @@ const mapStateToProps = ({auth}) => {
   const {isAuth} = auth;
   return {isAuth};
 };
+
 export default connect(mapStateToProps, null)(Router);
