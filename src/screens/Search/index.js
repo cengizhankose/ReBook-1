@@ -6,6 +6,7 @@ import Input from '../../components/Input/SearchInput/index';
 import {styles} from './styles';
 import Logo from '../../svg/LogoSvg';
 import CardItem from '../../components/CardItem';
+import CardItemMini from '../../components/CardItemMini';
 
 const Index = (props) => {
   const [searchText, setSearchText] = useState('');
@@ -17,11 +18,11 @@ const Index = (props) => {
         return book;
       }
     });
-    console.log('search list', searchedList);
     setfilteredBooks(searchedList);
   };
-  //const {title, image, author, content, seller_id, price, book} = props
-  const renderBook = ({item}) => <CardItem book={item} />;
+
+  const renderBook = ({item}) => <CardItemMini book={item} />;
+
   return (
     <View style={styles.mainContainer}>
       <View>
@@ -30,7 +31,7 @@ const Index = (props) => {
           placeholder="Aradığınız kitabın adını yazın..."
           style={styles.input}
           value={searchText}
-          onPress={() => handleSearch()}
+          onPress={handleSearch}
           onSearchPress={handleSearch}
           onChangeText={(text) => setSearchText(text)}
         />
