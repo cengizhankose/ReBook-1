@@ -4,7 +4,7 @@ const {width, height} = Dimensions.get('window');
 
 export const styles = StyleSheet.create({
   main: {
-    marginTop: '4%',
+    marginTop: '2%',
     marginLeft: 15,
     borderRadius: 20,
     shadowColor: '#000',
@@ -14,6 +14,7 @@ export const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
+    elevation: 5,
   },
   LinearGradient: {
     position: 'absolute',
@@ -30,13 +31,14 @@ export const styles = StyleSheet.create({
   footer: {
     flex: 1,
     flexDirection: 'row',
-    backgroundColor: 'transparent',
+    backgroundColor: '#fff',
     justifyContent: 'space-between',
     alignItems: 'center',
     height: 'auto',
     width: width * 0.4,
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 20,
+    padding: 5,
   },
   priceText: {
     fontSize: 16,

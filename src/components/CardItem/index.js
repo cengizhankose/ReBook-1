@@ -9,21 +9,36 @@ import {
 import {styles, colors} from './styles';
 import LinearGradient from 'react-native-linear-gradient';
 import {Spinner} from 'native-base';
+import RedHeart from '../../svg/HeartFilledSvg';
 import Heart from '../../svg/HeartSvg';
 import {connect} from 'react-redux';
-import {add_to_favorite} from '../../redux/wishList/actions';
+import {add_to_favorite, removeFromFavori} from '../../redux/wishList/actions';
 import {useNavigation} from '@react-navigation/native';
 
 const CardItem = (props) => {
   const navigation = useNavigation();
-  const [isFavori, setIsFavori] = useState(true);
+  const [isFavori, setIsFavori] = useState(false);
   //TODO: Add favori fonksiyonu yazılacak
   const addFav = async (favId) => {
     const favoriBook = props.book;
     const uid = props.uid;
-    await setIsFavori(!isFavori);
+    if (isFavori) {
+      await props.removeFromFavori({favoriBook, isFavori, uid});
+      setIsFavori(false);
+    } else {
+      await props.add_to_favorite({favoriBook, isFavori, uid});
+      setIsFavori(true);
+    }
+  };
 
-    await props.add_to_favorite({favoriBook, isFavori, uid});
+  useEffect(() => {
+    checkIsFav();
+  }, []);
+
+  const checkIsFav = () => {
+    props.user.favorites.map((item) => {
+      item.id === props.book.id && setIsFavori(true);
+    });
   };
 
   const {title, image, author, content, seller_id, price, isFav} = props.book;
@@ -63,11 +78,7 @@ const CardItem = (props) => {
         </View>
 
         <TouchableOpacity onPress={addFav}>
-          {props.favoriLoading ? (
-            <Spinner color="blue" />
-          ) : (
-            <Heart stroke={!isFav ? '#fff' : 'red'} />
-          )}
+          {isFavori ? <RedHeart /> : <Heart />}
         </TouchableOpacity>
       </View>
     </View>
@@ -76,8 +87,11 @@ const CardItem = (props) => {
 
 const mapFromStateToProps = ({Favorites, auth}) => {
   const {favorites, favoriLoading} = Favorites;
-  const {uid} = auth;
-  return {favorites, favoriLoading, uid};
+  const {uid, user} = auth;
+  return {favorites, favoriLoading, uid, user};
 };
 
-export default connect(mapFromStateToProps, {add_to_favorite})(CardItem);
+export default connect(mapFromStateToProps, {
+  add_to_favorite,
+  removeFromFavori,
+})(CardItem);

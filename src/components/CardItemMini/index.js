@@ -1,15 +1,42 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, Image, ImageBackground, Dimensions} from 'react-native';
 import {styles, colors} from './styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
+import {connect} from 'react-redux';
+import {add_to_favorite, removeFromFavori} from '../../redux/wishList/actions';
 
+import RedHeart from '../../svg/HeartFilledSvg';
 import Heart from '../../svg/HeartSvg';
-
 const {height, width} = Dimensions.get('window');
 
 const CardItemMini = (props) => {
+  const navigation = useNavigation();
+  const [isFavori, setIsFavori] = useState(false);
+  //TODO: Add favori fonksiyonu yazılacak
+  const addFav = async (favId) => {
+    const favoriBook = props.book;
+    const uid = props.uid;
+    if (isFavori) {
+      await props.removeFromFavori({favoriBook, isFavori, uid});
+      setIsFavori(false);
+    } else {
+      await props.add_to_favorite({favoriBook, isFavori, uid});
+      setIsFavori(true);
+    }
+  };
+
+  useEffect(() => {
+    //checkIsFav();
+  }, []);
+
+  const checkIsFav = () => {
+    props.user.favorites.map((item) => {
+      item.id === props.book.id && setIsFavori(true);
+    });
+  };
+  console.log(props.user);
   const {
     bookAuthor,
     bookName,
@@ -19,7 +46,6 @@ const CardItemMini = (props) => {
     widthP,
     heightP,
   } = props;
-  const navigation = useNavigation();
   return (
     <View style={styles.main}>
       <TouchableOpacity
@@ -58,8 +84,8 @@ const CardItemMini = (props) => {
           </Text>
         </View>
         <View>
-          <TouchableOpacity>
-            <Heart stroke="red" />
+          <TouchableOpacity onPress={addFav}>
+            {isFavori ? <RedHeart /> : <Heart />}
           </TouchableOpacity>
         </View>
       </View>
@@ -67,4 +93,13 @@ const CardItemMini = (props) => {
   );
 };
 
-export default CardItemMini;
+const mapFromStateToProps = ({Favorites, auth}) => {
+  const {favorites, favoriLoading} = Favorites;
+  const {uid, user} = auth;
+  return {favorites, favoriLoading, uid, user};
+};
+
+export default connect(mapFromStateToProps, {
+  add_to_favorite,
+  removeFromFavori,
+})(CardItemMini);

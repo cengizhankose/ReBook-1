@@ -5,13 +5,15 @@ import {
   GET_FAVORI,
   GET_FAVORI_SUCCESS,
   GET_FAVORI_FAILD,
+  REMOVE_FAVORI,
+  REMOVE_FAVORI_SUCCESS,
+  REMOVE_FAVORI_FAILD,
 } from './types';
 
 const initialState = {
   favoriLoading: false,
   getFavoriLoading: false,
   favorites: [],
-  isFavori: false,
 };
 
 export default (state = initialState, action) => {
@@ -22,12 +24,33 @@ export default (state = initialState, action) => {
         favoriLoading: true,
       };
     case ADD_FAVORI_SUCCESS:
+      let newList = [...state.favorites, action.payload];
       return {
         ...state,
         favoriLoading: false,
-        isFavori: !state.isFavori,
+        favorites: newList,
       };
     case ADD_FAVORI_FAILD:
+      return {
+        ...state,
+        favoriLoading: false,
+      };
+
+    case REMOVE_FAVORI:
+      return {
+        ...state,
+        favoriLoading: true,
+      };
+    case REMOVE_FAVORI_SUCCESS:
+      const removeList = state.favorites.filter(
+        (item) => item.id !== action.payload,
+      );
+      return {
+        ...state,
+        favoriLoading: false,
+        favorites: removeList,
+      };
+    case REMOVE_FAVORI_FAILD:
       return {
         ...state,
         favoriLoading: false,
