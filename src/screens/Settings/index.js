@@ -4,23 +4,30 @@ import {useNavigation} from '@react-navigation/native';
 import {changePassword} from '../../redux/auth/actions';
 import {useDispatch, useSelector} from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import ButtonText from '../../components/ButtonText';
 import {styles} from './styles';
 import {Colors} from '../../constant/colors/colors';
+import {Spinner} from 'native-base';
 const Index = () => {
-  const [newPassword, setNewPassword] = useState('');
-  const [newImage, setNewImage] = useState('');
-  const navigation = useNavigation();
-  const {user, uid} = useSelector((state) => state.auth);
+  const {user, uid, changeLoading} = useSelector((state) => state.auth);
 
-  const handleChangePassword = async () => {
-    await changePassword({newPassword, newImage, uid}, () => {
-      setNewPassword('');
-    });
-    navigation.navigate('AnaSayfa');
+  const dispatch = useDispatch();
+  const [newPassword, setNewPassword] = useState('');
+  const [newImage, setNewImage] = useState(null);
+  const navigation = useNavigation();
+
+  const handleChangePassword = async (params) => {
+    await dispatch(
+      changePassword(params, () => {
+        setNewPassword('');
+        setNewImage('');
+        navigation.navigate('AnaSayfa');
+      }),
+    );
   };
 
   const chooseImg = () => {
@@ -65,33 +72,47 @@ const Index = () => {
               borderRadius: 100,
               alignSelf: 'center',
             }}
-            source={{uri: user.profile_img}}
+            source={{
+              uri: user ? (newImage ? newImage : user.profile_img) : null,
+            }}
           />
           <View style={{marginVertical: 20, alignItems: 'center'}}>
             <ButtonText onPress={chooseImg} text="Resim değiştir" />
           </View>
         </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>Lütfen yeni şifrenizi yazınız</Text>
-        </View>
+
         <View style={styles.inputContainer}>
           <Input
             onChangeText={(text) => setNewPassword(text)}
             value={newPassword}
+            placeholder="Yeni şifrenizi giriniz"
           />
         </View>
-        <View style={styles.btnContainer}>
-          <Button
-            onPress={() => handleChangePassword()}
-            text="Yeni Şifreyi Kaydet"
-          />
-        </View>
-        <View style={styles.cancelContainer}>
-          <Button
-            onPress={() => navigation.navigate('AnaSayfa')}
-            text="İptal"
-          />
-        </View>
+        {changeLoading ? (
+          <Spinner color={Colors.orange} />
+        ) : (
+          <>
+            <View style={styles.btnContainer}>
+              <Button
+                onPress={async () =>
+                  handleChangePassword({newPassword, newImage, uid})
+                }
+                text="Değişiklikler Kaydet"
+              />
+            </View>
+            <View style={styles.cancelContainer}>
+              <Icon.Button
+                name="close"
+                size={30}
+                backgroundColor={'red'}
+                onPress={() => navigation.navigate('AnaSayfa')}>
+                <Text style={{fontSize: 20, color: 'white', fontWeight: '600'}}>
+                  İptal
+                </Text>
+              </Icon.Button>
+            </View>
+          </>
+        )}
       </View>
     </View>
   );

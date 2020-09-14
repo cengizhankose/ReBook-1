@@ -50,7 +50,6 @@ export const registerUserAction = (params) => {
             );
             ref.putFile(params.profileImage).then(() => {
               ref.getDownloadURL().then((imageURL) => {
-                console.log('imageurl', imageURL);
                 firestore()
                   .collection('Users')
                   .doc(uid)
@@ -133,45 +132,73 @@ export const checkUserStatus = () => {
   };
 };
 
-export const changePassword = async (params, navigation) => {
+export const changePassword = (params, navigation) => {
   const user = auth().currentUser;
 
   return async (dispatch) => {
     dispatch({type: USER_CHANGE_PROFILE_IMG});
-    await user
-      .updatePassword(params.newPassword)
-      .then(() => {
-        const ref = storage().ref(
-          '/usersProfile/' + `${params.name}_${params.uid}_${Math.random()}`,
-        );
-        ref.putFile(params.newImage).then(() => {
-          ref.getDownloadURL().then((imageURL) => {
-            console.log('imageurl', imageURL);
-            firestore()
-              .collection('Users')
-              .doc(params.uid)
-              .update({profile_img: imageURL})
-              .then(() => {
-                dispatch({
-                  type: USER_CHANGE_SUCCESS,
-                  imageURL,
-                });
-                Alert.alert('Başarılı', 'Şifreniz değişti.', [
-                  {
-                    text: 'Tamam',
-                    onPress: navigation,
-                  },
-                ]);
+    if (params.newPassword !== '') {
+      user
+        .updatePassword(params.newPassword)
+        .then(() => {
+          if (params.newImage !== null) {
+            changeProfile(params).then((imageURL) => {
+              dispatch({
+                type: USER_CHANGE_SUCCESS,
+                imageURL,
               });
-          });
+              Alert.alert('Değişiklikler kaydedildi', null, [
+                {
+                  text: 'Tamam',
+                  onPress: navigation,
+                },
+              ]);
+            });
+          } else {
+            dispatch({type: USER_CHANGE_SUCCESS, imageURL: null});
+            Alert.alert('Şifre değiştirildi', null, [
+              {
+                text: 'Tamam',
+                onPress: navigation,
+              },
+            ]);
+          }
+        })
+        .catch((err) => {
+          dispatch({type: USER_CHANGE_FAIL});
+          Alert.alert(
+            'Şifre Hatası',
+            `Şifre değişikliğinde hata oluştu. \nHata kodu: ${err.message}`,
+          );
         });
-      })
-      .catch((err) => {
-        dispatch({type: USER_CHANGE_FAIL});
-        Alert.alert(
-          'Şifre Hatası',
-          `Şifre değişikliğinde hata oluştu. \nHata kodu: ${err.message}`,
-        );
-      });
+    } else {
+      if (params.newImage !== '') {
+        const imageURL = await changeProfile(params);
+        dispatch({type: USER_CHANGE_SUCCESS, imageURL});
+        Alert.alert('Başarılı', 'Değişiklikler kaydedildi.', [
+          {
+            text: 'Tamam',
+            onPress: navigation,
+          },
+        ]);
+      }
+    }
   };
+};
+
+export const changeProfile = async (params) => {
+  let image = '';
+  const ref = storage().ref(
+    '/usersProfile/' + `${params.name}_${params.uid}_${Math.random()}`,
+  );
+  await ref.putFile(params.newImage).then(async () => {
+    await ref.getDownloadURL().then((imageURL) => {
+      image = imageURL;
+      firestore()
+        .collection('Users')
+        .doc(params.uid)
+        .update({profile_img: imageURL});
+    });
+  });
+  return image;
 };

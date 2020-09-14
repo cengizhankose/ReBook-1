@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
   textContainer: {
     backgroundColor: Colors.softPink,
     fontSize: 22,
-    alignItems: 'center',
+    alignSelf: 'center',
     borderRadius: 10,
     width: width * 0.5,
     height: height * 0.03,
@@ -21,6 +21,7 @@ export const styles = StyleSheet.create({
   text: {
     color: Colors.textColor,
     fontWeight: '600',
+    textAlign: 'center',
   },
   inputContainer: {
     alignItems: 'center',
@@ -32,6 +33,7 @@ export const styles = StyleSheet.create({
   },
   cancelContainer: {
     alignItems: 'center',
+    marginTop: 20,
   },
   top: {
     flex: 1,
