@@ -8,7 +8,6 @@ import {useDispatch, connect} from 'react-redux';
 import {getUserAction} from '../../redux/auth/actions';
 const Index = (props) => {
   const [sellerUser, setsellerUser] = React.useState({});
-  const [isMyBook, setIsMyBook] = React.useState(false);
   const route = useRoute();
   const {book} = route.params;
   const dispatch = useDispatch();
@@ -19,12 +18,8 @@ const Index = (props) => {
     };
 
     fetch();
-    if (props.uid === book.seller_id) {
-      setIsMyBook(true);
-    }
   }, []);
 
-  console.log('uid', props.uid);
   return (
     <View style={styles.pageContainer}>
       <View style={styles.imgContainer}>
@@ -52,11 +47,13 @@ const Index = (props) => {
         <View style={styles.btnContainer}>
           <Button
             onPress={() =>
-              isMyBook
+              props.uid === book.seller_id
                 ? props.navigation.navigate('BookEdit', book)
                 : Alert.alert('mesaj yolla sayfası')
             }
-            text={isMyBook ? 'Kitabı düzenle' : 'Satıcıya yaz'}
+            text={
+              props.uid === book.seller_id ? 'Kitabı düzenle' : 'Satıcıya yaz'
+            }
           />
         </View>
       </View>
