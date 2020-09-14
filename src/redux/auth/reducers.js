@@ -67,6 +67,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         user: null,
         isAuth: false,
+        uid: null,
       };
 
     default:
