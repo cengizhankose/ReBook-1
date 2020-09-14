@@ -14,6 +14,7 @@ import Input from '../../../components/Input/index';
 import CheckBox from '../../../components/CheckBox/index';
 
 import {styles} from './styles';
+import {Spinner} from 'native-base';
 
 const index = (props) => {
   // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -49,10 +50,14 @@ const index = (props) => {
             value={password}
             onChangeText={(value) => setPassword(value)}
           />
-          <Button
-            text={'Giriş Yap'}
-            onPress={() => onLoginUser(email, password)}
-          />
+          {props.loading ? (
+            <Spinner color={'white'} />
+          ) : (
+            <Button
+              text={'Giriş Yap'}
+              onPress={() => onLoginUser(email, password)}
+            />
+          )}
         </View>
         <View style={styles.subInfos}>
           <View style={styles.checkBoxView}>
@@ -74,8 +79,8 @@ const index = (props) => {
 };
 
 const mapStateToProps = ({auth}) => {
-  const {isAuth} = auth;
-  return {isAuth};
+  const {isAuth, loading} = auth;
+  return {isAuth, loading};
 };
 
 export default connect(mapStateToProps, {})(index);
