@@ -98,13 +98,9 @@ const Router = (props) => {
         component={TabScreens}
       />
 
-      {props.isAuth && (
-        <>
-          <DrawerStackScreens.Screen name="Ayarlar" component={Settings} />
-          <DrawerStackScreens.Screen name="Kitaplarım" component={MyBooks} />
-          <DrawerStackScreens.Screen name="Mesajlar" component={TabScreens} />
-        </>
-      )}
+      <DrawerStackScreens.Screen name="Ayarlar" component={Settings} />
+      <DrawerStackScreens.Screen name="Kitaplarım" component={MyBooks} />
+      <DrawerStackScreens.Screen name="Mesajlar" component={TabScreens} />
     </DrawerStackScreens.Navigator>
   );
   return (
@@ -125,20 +121,17 @@ const Router = (props) => {
           name="FirstScreen"
           component={FirstScreen}
         />
-        {props.isAuth && (
-          <>
-            <StackScreens.Screen
-              options={{title: 'Kitap Düzenle'}}
-              name="BookEdit"
-              component={BookEdit}
-            />
-            <DrawerStackScreens.Screen
-              name="KitapEkle"
-              component={AddBook}
-              options={{title: 'Kitap Ekle'}}
-            />
-          </>
-        )}
+
+        <StackScreens.Screen
+          options={{title: 'Kitap Düzenle'}}
+          name="BookEdit"
+          component={BookEdit}
+        />
+        <DrawerStackScreens.Screen
+          name="KitapEkle"
+          component={AddBook}
+          options={{title: 'Kitap Ekle'}}
+        />
       </StackScreens.Navigator>
     </NavigationContainer>
   );
