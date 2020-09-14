@@ -78,15 +78,16 @@ export const removeFromFavori = (params) => {
 };
 
 export const getFavoriteBooks = (incomingUid) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch({type: GET_FAVORI});
     try {
-      firestore()
+      await firestore()
         .collection('Users')
         .doc(incomingUid)
         .get()
         .then((res) => {
-          const userBooks = res._data.favorites;
+          let userBooks = [];
+          res._data.favorites.forEach((book) => userBooks.push(book));
           dispatch({type: GET_FAVORI_SUCCESS, payload: userBooks});
         });
     } catch (err) {

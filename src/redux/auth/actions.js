@@ -12,7 +12,7 @@ import {
 import auth from '@react-native-firebase/auth';
 import {Alert} from 'react-native';
 import firestore from '@react-native-firebase/firestore';
-import {useNavigation} from '@react-navigation/core';
+import storage from '@react-native-firebase/storage';
 
 // Sabit değişkenler
 export const changeUserStatus = (status) => {
@@ -22,10 +22,10 @@ export const changeUserStatus = (status) => {
 };
 
 export const registerUserAction = (params) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch({type: REGİSTER_USER});
 
-    auth()
+    await auth()
       .createUserWithEmailAndPassword(params.email, params.password)
       .then((res) => {
         const uid = res.user._user.uid;
@@ -33,18 +33,34 @@ export const registerUserAction = (params) => {
           name: params.name,
           username: params.username,
           email: params.email,
-          profile_img: params.profile_img
-            ? params.profile_img
-            : 'https://journeypurebowlinggreen.com/wp-content/uploads/2018/05/placeholder-person.jpg',
           favorites: [],
           products: [],
+          profile_img: null,
         };
         firestore()
           .collection('Users')
           .doc(uid)
           .set(setData)
-          .then((res) => {
-            dispatch({type: REGİSTER_USER_SUCCESS, user: setData, uid});
+          .then(() => {
+            const ref = storage().ref(
+              '/usersProfile/' + `${params.name}_${uid}_${Math.random()}`,
+            );
+            ref.putFile(params.profileImage).then(() => {
+              ref.getDownloadURL().then((imageURL) => {
+                console.log('imageurl', imageURL);
+                firestore()
+                  .collection('Users')
+                  .doc(uid)
+                  .update({profile_img: imageURL})
+                  .then(() => {
+                    dispatch({
+                      type: REGİSTER_USER_SUCCESS,
+                      user: {...setData, profile_img: imageURL},
+                      uid,
+                    });
+                  });
+              });
+            });
           });
       })
       .catch((err) => {

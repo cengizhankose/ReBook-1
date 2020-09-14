@@ -8,30 +8,24 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   registerTopSide: {
-    flex: height * 0.001,
+    flex: height * 0.0005,
     backgroundColor: Colors.softPink,
-    borderBottomLeftRadius: 16,
-    borderBottomRightRadius: 16,
-    zIndex: 3,
+    justifyContent: 'center',
   },
   registeLogo: {
-    flex: 0.6,
-    backgroundColor: Colors.orange,
+    backgroundColor: Colors.softPink,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: -10,
   },
   registerForm: {
     flex: 4,
     backgroundColor: Colors.orange,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
     alignItems: 'center',
-    borderBottomLeftRadius: 16,
-    borderBottomRightRadius: 16,
+    marginTop: 5,
+    padding: 5,
   },
   registerBottom: {
-    flex: 0.4,
+    flex: 0.5,
     backgroundColor: '#fff',
   },
   textView: {
@@ -44,5 +38,21 @@ export const styles = StyleSheet.create({
     fontSize: 36,
     color: '#fff',
     justifyContent: 'flex-start',
+  },
+  addBtn: {
+    backgroundColor: 'white',
+    alignSelf: 'center',
+    marginVertical: '2%',
+  },
+  btnText: {
+    color: Colors.orange,
+  },
+  profileImg: {
+    width: 70,
+    height: 70,
+    resizeMode: 'cover',
+    alignSelf: 'center',
+    borderRadius: 50,
+    justifyContent: 'center',
   },
 });

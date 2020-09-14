@@ -18,16 +18,32 @@ import {useNavigation} from '@react-navigation/native';
 const CardItem = (props) => {
   const navigation = useNavigation();
   const [isFavori, setIsFavori] = useState(false);
-  //TODO: Add favori fonksiyonu yazılacak
+
   const addFav = async () => {
-    const favoriBook = props.book;
-    const uid = props.uid;
-    if (isFavori) {
-      await props.removeFromFavori({favoriBook, uid});
-      setIsFavori(false);
+    if (props.user) {
+      const favoriBook = props.book;
+      const uid = props.uid;
+      if (isFavori) {
+        await props.removeFromFavori({favoriBook, uid});
+        setIsFavori(false);
+      } else {
+        await props.add_to_favorite({favoriBook, uid});
+        setIsFavori(true);
+      }
     } else {
-      await props.add_to_favorite({favoriBook, uid});
-      setIsFavori(true);
+      Alert.alert(
+        'Lütfen Giriş Yapın.',
+        'Favori listesini kullanmak için giriş yapınız.',
+        [
+          {
+            text: 'Tamam',
+          },
+          {
+            text: 'Giriş Yap',
+            onPress: () => navigation.navigate('Login'),
+          },
+        ],
+      );
     }
   };
 

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image, ImageBackground, Dimensions} from 'react-native';
+import {View, Text, Image, ImageBackground, Dimensions, Alert} from 'react-native';
 import {styles, colors} from './styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
@@ -15,14 +15,30 @@ const CardItemMini = (props) => {
   const navigation = useNavigation();
   const [isFavori, setIsFavori] = useState(false);
   const addFav = async () => {
-    const favoriBook = props.book;
-    const uid = props.uid;
-    if (isFavori) {
-      await props.removeFromFavori({favoriBook, uid});
-      setIsFavori(false);
+    if (props.user) {
+      const favoriBook = props.book;
+      const uid = props.uid;
+      if (isFavori) {
+        await props.removeFromFavori({favoriBook, uid});
+        setIsFavori(false);
+      } else {
+        await props.add_to_favorite({favoriBook, uid});
+        setIsFavori(true);
+      }
     } else {
-      await props.add_to_favorite({favoriBook, uid});
-      setIsFavori(true);
+      Alert.alert(
+        'Lütfen Giriş Yapın.',
+        'Favori listesini kullanmak için giriş yapınız.',
+        [
+          {
+            text: 'Tamam',
+          },
+          {
+            text: 'Giriş Yap',
+            onPress: () => navigation.navigate('Login'),
+          },
+        ],
+      );
     }
   };
   const checkIsFav = async () => {

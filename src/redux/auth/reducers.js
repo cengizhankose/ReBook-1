@@ -11,6 +11,7 @@ import {
 
 const INITIAL_STATE = {
   isAuth: false,
+  registerLoading: false,
   loading: false,
   user: null,
   uid: null,
@@ -26,12 +27,12 @@ export default (state = INITIAL_STATE, action) => {
     case REGİSTER_USER:
       return {
         ...state,
-        loading: true,
+        registerLoading: true,
       };
     case REGİSTER_USER_SUCCESS:
       return {
         ...state,
-        loading: false,
+        registerLoading: false,
         isAuth: true,
         user: action.user,
         uid: action.uid,
@@ -39,7 +40,7 @@ export default (state = INITIAL_STATE, action) => {
     case REGİSTER_USER_FAIL:
       return {
         ...state,
-        loading: false,
+        registerLoading: false,
       };
 
     case LOGIN_USER:
