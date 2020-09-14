@@ -5,7 +5,7 @@ import ImagePicker from 'react-native-image-picker';
 import {Spinner, Fab} from 'native-base';
 import {connect} from 'react-redux';
 
-import Input from '../../components/Input/';
+import Input from '../../components/Input';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {updateBookAction} from '../../redux/addBook/actions';
 
