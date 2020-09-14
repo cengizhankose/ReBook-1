@@ -25,19 +25,19 @@ const CardItemMini = (props) => {
       setIsFavori(true);
     }
   };
-  const checkIsFav = () => {
-    props.user.favorites.map((item) => {
+  const checkIsFav = async () => {
+    await props.user.favorites.map((item) => {
       item.id === props.book.id && setIsFavori(true);
     });
   };
+
   useEffect(() => {
     const getCheck = async () => {
       await checkIsFav();
     };
     getCheck();
-  }, []);
+  }, [props.user]);
 
-  console.log(props.user);
   const {widthP, heightP} = props;
 
   const {
@@ -49,7 +49,6 @@ const CardItemMini = (props) => {
     price,
     location = location ? location : 'Istanbul',
   } = props.book;
-  console.log(image);
   return (
     <View style={styles.main}>
       <TouchableOpacity

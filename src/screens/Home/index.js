@@ -32,4 +32,5 @@ const mapStateToProps = ({auth}) => {
   const {user, isAuth} = auth;
   return {user, isAuth};
 };
+
 export default connect(mapStateToProps, null)(Index);

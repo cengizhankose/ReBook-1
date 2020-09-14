@@ -32,8 +32,8 @@ export const add_to_favorite = (params) => {
         favorites: firestore.FieldValue.arrayUnion(favoriItem),
       })
       .then((res) => {
-        Alert.alert('Ürününüz başarıyla favorilere eklendi');
         dispatch({type: ADD_FAVORI_SUCCESS, payload: favoriItem});
+        Alert.alert('Ürününüz başarıyla favorilere eklendi');
       })
       .catch((error) => {
         Alert.alert(
@@ -57,7 +57,6 @@ export const removeFromFavori = (params) => {
   };
   return (dispatch) => {
     dispatch({type: REMOVE_FAVORI});
-    
     firestore()
       .collection('Users')
       .doc(params.uid)
@@ -65,8 +64,8 @@ export const removeFromFavori = (params) => {
         favorites: firestore.FieldValue.arrayRemove(favoriItem),
       })
       .then((res) => {
-        Alert.alert('Ürünün Favorilerden Çıkarıldı');
         dispatch({type: REMOVE_FAVORI_SUCCESS, payload: id});
+        Alert.alert('Ürünün Favorilerden Çıkarıldı');
       })
       .catch((error) => {
         Alert.alert(

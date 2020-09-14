@@ -17,7 +17,7 @@ const mockData = [
     location: 'İstanbul',
   },
 ];
-const index = () => {
+const Index = () => {
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -28,16 +28,13 @@ const index = () => {
       </View>
       <View style={styles.scroll}>
         <ScrollView horizontal>
-          {
-            // TODO: Buraya fetch edilen kitap listesi arrayı her biri bookcard olacak şekilde yazdırırılacak.!
-            mockData.map((book) => (
-              <CardItemMini key={book.id} book={book} />
-            ))
-          }
+          {mockData.map((book) => (
+            <CardItemMini key={book.title + Math.random()} book={book} />
+          ))}
         </ScrollView>
       </View>
     </View>
   );
 };
 
-export default index;
+export default Index;

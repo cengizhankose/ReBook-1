@@ -17,7 +17,7 @@ const Index = (props) => {
     };
     func();
     return () => func();
-  }, [dispatch, props.uid]);
+  },[dispatch, props.uid]);
 
   const renderItem = ({item}) => (
     <CardItemMini
@@ -57,7 +57,7 @@ const Index = (props) => {
 
 const mapStateToProps = ({Favorites, auth}) => {
   const {favorites} = Favorites;
-  const {uid} = auth;
+  const {uid, user} = auth;
   return {favorites, uid};
 };
 
