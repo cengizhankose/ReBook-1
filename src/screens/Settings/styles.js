@@ -33,4 +33,13 @@ export const styles = StyleSheet.create({
   cancelContainer: {
     alignItems: 'center',
   },
+  top: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  body: {
+    flex: 4,
+  },
 });

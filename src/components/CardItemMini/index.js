@@ -1,5 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, Image, ImageBackground, Dimensions, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  ImageBackground,
+  Dimensions,
+  Alert,
+} from 'react-native';
 import {styles, colors} from './styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';

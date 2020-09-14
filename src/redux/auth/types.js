@@ -9,3 +9,7 @@ export const LOGIN_USER_FAIL = '@LOGIN_USER_FAIL';
 export const LOGIN_USER = '@LOGIN_USER';
 
 export const USER_LOG_OUT = '@USER_LOG_OUT';
+
+export const USER_CHANGE_PROFILE_IMG = '@USER_CHANGE_PROFILE_IMG';
+export const USER_CHANGE_SUCCESS = '@USER_CHANGE_SUCCESS';
+export const USER_CHANGE_FAIL = '@USER_CHANGE_FAIL';

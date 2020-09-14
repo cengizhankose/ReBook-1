@@ -8,6 +8,9 @@ import {
   LOGIN_USER_FAIL,
   LOGIN_USER_SUCCESS,
   USER_LOG_OUT,
+  USER_CHANGE_PROFILE_IMG,
+  USER_CHANGE_SUCCESS,
+  USER_CHANGE_FAIL,
 } from './types';
 import auth from '@react-native-firebase/auth';
 import {Alert} from 'react-native';
@@ -130,19 +133,45 @@ export const checkUserStatus = () => {
   };
 };
 
-export const changePassword = async (newPassword, navigation) => {
+export const changePassword = async (params, navigation) => {
   const user = auth().currentUser;
 
-  await user.updatePassword(newPassword).catch((err) => {
-    Alert.alert(
-      'Şifre Hatası',
-      `Şifre değişikliğinde hata oluştu. \nHata kodu: ${err.message}`,
-    );
-  });
-  Alert.alert('Başarılı', 'Şifreniz değişti.', [
-    {
-      text: 'Tamam',
-      onPress: navigation,
-    },
-  ]);
+  return async (dispatch) => {
+    dispatch({type: USER_CHANGE_PROFILE_IMG});
+    await user
+      .updatePassword(params.newPassword)
+      .then(() => {
+        const ref = storage().ref(
+          '/usersProfile/' + `${params.name}_${params.uid}_${Math.random()}`,
+        );
+        ref.putFile(params.newImage).then(() => {
+          ref.getDownloadURL().then((imageURL) => {
+            console.log('imageurl', imageURL);
+            firestore()
+              .collection('Users')
+              .doc(params.uid)
+              .update({profile_img: imageURL})
+              .then(() => {
+                dispatch({
+                  type: USER_CHANGE_SUCCESS,
+                  imageURL,
+                });
+                Alert.alert('Başarılı', 'Şifreniz değişti.', [
+                  {
+                    text: 'Tamam',
+                    onPress: navigation,
+                  },
+                ]);
+              });
+          });
+        });
+      })
+      .catch((err) => {
+        dispatch({type: USER_CHANGE_FAIL});
+        Alert.alert(
+          'Şifre Hatası',
+          `Şifre değişikliğinde hata oluştu. \nHata kodu: ${err.message}`,
+        );
+      });
+  };
 };

@@ -7,6 +7,9 @@ import {
   LOGIN_USER_FAIL,
   LOGIN_USER_SUCCESS,
   USER_LOG_OUT,
+  USER_CHANGE_PROFILE_IMG,
+  USER_CHANGE_SUCCESS,
+  USER_CHANGE_FAIL,
 } from './types';
 
 const INITIAL_STATE = {
@@ -15,6 +18,7 @@ const INITIAL_STATE = {
   loading: false,
   user: null,
   uid: null,
+  changeLoading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -70,7 +74,22 @@ export default (state = INITIAL_STATE, action) => {
         isAuth: false,
         uid: null,
       };
-
+    case USER_CHANGE_PROFILE_IMG:
+      return {
+        ...state,
+        changeLoading: true,
+      };
+    case USER_CHANGE_SUCCESS:
+      return {
+        ...state,
+        user: {...user, profile_img: action.imageURL},
+        changeLoading: false,
+      };
+    case USER_CHANGE_FAIL:
+      return {
+        ...state,
+        changeLoading: false,
+      };
     default:
       return state;
   }
