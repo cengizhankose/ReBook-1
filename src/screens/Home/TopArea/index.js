@@ -31,7 +31,7 @@ const index = () => {
           {
             // TODO: Buraya fetch edilen kitap listesi arrayı her biri bookcard olacak şekilde yazdırırılacak.!
             mockData.map((book) => (
-              <CardItemMini book={book} />
+              <CardItemMini key={book.id} book={book} />
             ))
           }
         </ScrollView>

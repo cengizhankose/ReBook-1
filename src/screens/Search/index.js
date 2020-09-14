@@ -14,7 +14,7 @@ const Index = (props) => {
 
   const handleSearch = () => {
     const searchedList = props.books.filter((book) => {
-      if (book.title.includes(searchText)) {
+      if (book.title.includes(searchText) || book.author.includes(searchText)) {
         return book;
       }
     });

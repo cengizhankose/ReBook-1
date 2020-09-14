@@ -47,7 +47,7 @@ const Index = (props) => {
         <FlatList
           data={props.favorites}
           renderItem={renderItem}
-          keyExtractor={(item) => item.title + Math.random(0, 6)}
+          keyExtractor={(item) => item.title + Math.random(0, 6).toString()}
           numColumns={2}
         />
       </View>
