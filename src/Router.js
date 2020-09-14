@@ -14,6 +14,7 @@ import AuthStackScreens from './screens/Auth/AuthStackScreens';
 import Settings from './screens/Settings';
 import AddBook from './screens/AddBook';
 import BookDetail from './screens/BookDetail';
+import MyBooks from './screens/MyBooks';
 
 //Components
 import MyTabbar from './components/MyTabbar/myTabbar';
@@ -97,7 +98,7 @@ const Router = (props) => {
       />
 
       <DrawerStackScreens.Screen name="Ayarlar" component={Settings} />
-
+      <DrawerStackScreens.Screen name="Kitaplarım" component={MyBooks} />
       <DrawerStackScreens.Screen name="Mesajlar" component={TabScreens} />
     </DrawerStackScreens.Navigator>
   );

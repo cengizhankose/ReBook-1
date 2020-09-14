@@ -6,6 +6,9 @@ import {
   GET_BOOK,
   GET_BOOK_FAILD,
   GET_BOOK_SUCCESS,
+  GET_MY_BOOK,
+  GET_MY_BOOK_FAILD,
+  GET_MY_BOOK_SUCCESS,
 } from './types';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
@@ -90,5 +93,11 @@ export const getBook = () => {
       dispatch({type: GET_BOOK_FAILD});
       Alert.alert('Hata', `Hata Alındı. \nHata Kodu: ${error.message}`);
     }
+  };
+};
+
+export const getMyBooks = (userId) => {
+  return (dispatch) => {
+    dispatch({type: GET_MY_BOOK, userId});
   };
 };

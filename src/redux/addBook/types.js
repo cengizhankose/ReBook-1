@@ -6,3 +6,7 @@ export const ADD_ONE_BOOK = '@ADD_ONE_BOOK';
 export const GET_BOOK = '@GET_BOOK';
 export const GET_BOOK_SUCCESS = '@GET_BOOK_SUCCESS';
 export const GET_BOOK_FAILD = '@GET_BOOK_FAILD';
+
+export const GET_MY_BOOK = '@GET_MY_BOOK';
+export const GET_MY_BOOK_SUCCESS = '@GET_MY_BOOK_SUCCESS';
+export const GET_MY_BOOK_FAILD = '@GET_MY_BOOK_FAILD';
