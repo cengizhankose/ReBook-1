@@ -37,7 +37,7 @@ const CardItemMini = (props) => {
       await checkIsFav();
     };
     getCheck();
-  }, [checkIsFav]);
+  }, []);
 
   const {widthP, heightP} = props;
 
