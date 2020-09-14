@@ -82,18 +82,19 @@ export const getUserAction = async (userId) => {
 };
 
 export const logOutAction = () => {
-  return (dispatch) => {
-    auth()
+  return async (dispatch) => {
+    await auth()
       .signOut()
       .then((res) => {
         dispatch({type: USER_LOG_OUT});
       })
-      .catch((error) =>
+      .catch((error) => {
         Alert.alert(
           'Çıkış Başarısız',
           `Çıkış yapılırken hata oluştu. \nHata kodu: ${error.message}`,
-        ),
-      );
+        );
+        dispatch({type: USER_LOG_OUT});
+      });
   };
 };
 

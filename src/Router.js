@@ -98,9 +98,13 @@ const Router = (props) => {
         component={TabScreens}
       />
 
-      <DrawerStackScreens.Screen name="Ayarlar" component={Settings} />
-      <DrawerStackScreens.Screen name="Kitaplarım" component={MyBooks} />
-      <DrawerStackScreens.Screen name="Mesajlar" component={TabScreens} />
+      {props.isAuth && (
+        <>
+          <DrawerStackScreens.Screen name="Ayarlar" component={Settings} />
+          <DrawerStackScreens.Screen name="Kitaplarım" component={MyBooks} />
+          <DrawerStackScreens.Screen name="Mesajlar" component={TabScreens} />
+        </>
+      )}
     </DrawerStackScreens.Navigator>
   );
   return (
@@ -121,23 +125,27 @@ const Router = (props) => {
           name="FirstScreen"
           component={FirstScreen}
         />
-        <StackScreens.Screen
-          options={{title: 'Kitap Düzenle'}}
-          name="BookEdit"
-          component={BookEdit}
-        />
-        <DrawerStackScreens.Screen
-          name="KitapEkle"
-          component={AddBook}
-          options={{title: 'Kitap Ekle'}}
-        />
+        {props.isAuth && (
+          <>
+            <StackScreens.Screen
+              options={{title: 'Kitap Düzenle'}}
+              name="BookEdit"
+              component={BookEdit}
+            />
+            <DrawerStackScreens.Screen
+              name="KitapEkle"
+              component={AddBook}
+              options={{title: 'Kitap Ekle'}}
+            />
+          </>
+        )}
       </StackScreens.Navigator>
     </NavigationContainer>
   );
 };
 const mapStateToProps = ({auth}) => {
-  const {isAuth} = auth;
-  return {isAuth};
+  const {isAuth, user} = auth;
+  return {isAuth, user};
 };
 
 export default connect(mapStateToProps, null)(Router);
