@@ -14,6 +14,8 @@ import AuthStackScreens from './screens/Auth/AuthStackScreens';
 import Settings from './screens/Settings';
 import AddBook from './screens/AddBook';
 import BookDetail from './screens/BookDetail';
+import MyBooks from './screens/MyBooks';
+import BookEdit from './screens/BookEdit';
 
 //Components
 import MyTabbar from './components/MyTabbar/myTabbar';
@@ -97,7 +99,7 @@ const Router = (props) => {
       />
 
       <DrawerStackScreens.Screen name="Ayarlar" component={Settings} />
-
+      <DrawerStackScreens.Screen name="Kitaplarım" component={MyBooks} />
       <DrawerStackScreens.Screen name="Mesajlar" component={TabScreens} />
     </DrawerStackScreens.Navigator>
   );
@@ -109,8 +111,21 @@ const Router = (props) => {
           component={DrawerScreens}
           options={{title: 'ReBook', headerShown: false, headerLeft: null}}
         />
-        <StackScreens.Screen name="BookDetail" component={BookDetail} />
-        <StackScreens.Screen name="FirstScreen" component={FirstScreen} />
+        <StackScreens.Screen
+          options={{title: 'Kitap Ayrıntıları'}}
+          name="BookDetail"
+          component={BookDetail}
+        />
+        <StackScreens.Screen
+          options={{title: 'Hoşgeldiniz'}}
+          name="FirstScreen"
+          component={FirstScreen}
+        />
+        <StackScreens.Screen
+          options={{title: 'Kitap Düzenle'}}
+          name="BookEdit"
+          component={BookEdit}
+        />
         <DrawerStackScreens.Screen
           name="KitapEkle"
           component={AddBook}

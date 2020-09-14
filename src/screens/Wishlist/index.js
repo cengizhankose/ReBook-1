@@ -17,7 +17,7 @@ const Index = (props) => {
     };
     func();
     return () => func();
-  },[dispatch, props.uid]);
+  }, []);
 
   const renderItem = ({item}) => (
     <CardItemMini

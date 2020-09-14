@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Text, Image, Alert} from 'react-native';
+import {View, Text, Image, Alert, ScrollView} from 'react-native';
 import {Spinner, Fab} from 'native-base';
 import ImagePicker from 'react-native-image-picker';
 import Input from '../../components/Input/';
@@ -10,7 +10,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {styles} from './styles';
 import {Colors} from '../../constant/colors/colors';
-import {ScrollView} from 'react-native-gesture-handler';
 
 class index extends Component {
   state = {

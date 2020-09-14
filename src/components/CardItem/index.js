@@ -36,9 +36,10 @@ const CardItem = (props) => {
   }, []);
 
   const checkIsFav = () => {
-    props.user.favorites.map((item) => {
-      item.id === props.book.id && setIsFavori(true);
-    });
+    props.user &&
+      props.user.favorites.map((item) => {
+        item.id === props.book.id && setIsFavori(true);
+      });
   };
 
   const {title, image, author, content, seller_id, price, isFav} = props.book;

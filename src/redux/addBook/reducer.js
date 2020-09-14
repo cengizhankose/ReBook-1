@@ -6,6 +6,7 @@ import {
   GET_BOOK,
   GET_BOOK_FAILD,
   GET_BOOK_SUCCESS,
+  GET_MY_BOOK,
 } from './types';
 
 const initialState = {
@@ -13,6 +14,7 @@ const initialState = {
   addedBook: null,
   books: [],
   bookDownloading: true,
+  myBooks: [],
 };
 
 export default (state = initialState, action) => {
@@ -53,6 +55,14 @@ export default (state = initialState, action) => {
       return {
         ...state,
         bookDownloading: false,
+      };
+    case GET_MY_BOOK:
+      let myBooks = state.books.filter(
+        (book) => book.seller_id === action.userId,
+      );
+      return {
+        ...state,
+        myBooks,
       };
     default:
       return state;

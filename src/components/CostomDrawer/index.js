@@ -57,7 +57,10 @@ const Index = (props) => {
               [
                 {
                   text: 'Evet',
-                  onPress: () => dispatch(logOutAction()),
+                  onPress: async () => {
+                    await dispatch(logOutAction());
+                    navigation.replace('FirstScreen');
+                  },
                 },
                 {
                   text: 'Vazgeç',

@@ -6,6 +6,9 @@ import {
   GET_BOOK,
   GET_BOOK_FAILD,
   GET_BOOK_SUCCESS,
+  GET_MY_BOOK,
+  GET_MY_BOOK_FAILD,
+  GET_MY_BOOK_SUCCESS,
 } from './types';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
@@ -90,5 +93,80 @@ export const getBook = () => {
       dispatch({type: GET_BOOK_FAILD});
       Alert.alert('Hata', `Hata Alındı. \nHata Kodu: ${error.message}`);
     }
+  };
+};
+
+export const getMyBooks = (userId) => {
+  return (dispatch) => {
+    dispatch({type: GET_MY_BOOK, userId});
+  };
+};
+
+export const updateBookAction = (params, newImages, callback) => {
+  let counter = 0; // Birden fazla resim yüklemenmesi durumunda kaçıncı resmin yüklendiğini takip edecek
+  return (dispatch) => {
+    dispatch({type: ADD_BOOK});
+
+    firestore()
+      .collection('Products')
+      .doc(params.id)
+      .update(params)
+      .then(() => {
+        if (newImages.length !== 0) {
+          // eğer upload edilecekler varsa
+
+          newImages.map((imageUri) => {
+            const reference = storage().ref(
+              `/products/${params.id + Math.random()}`,
+            );
+            reference.putFile(imageUri).then(() => {
+              reference.getDownloadURL().then((imageURL) => {
+                // Resim yüklendikten sonra yüklendiği url alıp, product içerisindeki objemize ekliyoruz.
+                firestore()
+                  .collection('Products')
+                  .doc(params.id)
+                  .update({image: firestore.FieldValue.arrayUnion(imageURL)})
+                  .then(() => {
+                    dispatch({type: ADD_ONE_BOOK, book: imageURL});
+                    counter++;
+                    if (counter === newImages.length) {
+                      Alert.alert(
+                        'Başarılı',
+                        'Kitabınız Başarıyla Güncellendi',
+                        [
+                          {
+                            text: 'Tamam',
+                            onPress: callback,
+                          },
+                        ],
+                      );
+                      dispatch({
+                        type: ADD_BOOK_SUCCESS,
+                      });
+                    }
+                  })
+                  .catch(
+                    (error) =>
+                      Alert.alert(
+                        'Hata',
+                        `Kitap güncellenme sırasında hata oluştu. \nHata:${error.message}`,
+                      ),
+                    dispatch({type: ADD_BOOK_FAILD}),
+                  );
+              });
+            });
+          });
+        } else {
+          dispatch({
+            type: ADD_BOOK_SUCCESS,
+          });
+          Alert.alert('Başarılı', 'Kitabınız Başarıyla Güncellendi', [
+            {
+              text: 'Tamam',
+              onPress: callback,
+            },
+          ]);
+        }
+      });
   };
 };
