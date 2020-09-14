@@ -4,10 +4,11 @@ import {styles} from './styles';
 import {useRoute} from '@react-navigation/native';
 import BookCarousel from './BookCarousel';
 import Button from '../../components/Button';
-import {useDispatch} from 'react-redux';
+import {useDispatch, connect} from 'react-redux';
 import {getUserAction} from '../../redux/auth/actions';
-const Index = () => {
+const Index = (props) => {
   const [sellerUser, setsellerUser] = React.useState({});
+  const [isMyBook, setIsMyBook] = React.useState(false);
   const route = useRoute();
   const {book} = route.params;
   const dispatch = useDispatch();
@@ -16,8 +17,14 @@ const Index = () => {
       const user = await getUserAction(book.seller_id);
       setsellerUser(user);
     };
+
     fetch();
+    if (props.uid === book.seller_id) {
+      setIsMyBook(true);
+    }
   }, []);
+
+  console.log('uid', props.uid);
   return (
     <View style={styles.pageContainer}>
       <View style={styles.imgContainer}>
@@ -45,14 +52,19 @@ const Index = () => {
         <View style={styles.btnContainer}>
           <Button
             onPress={() =>
-              Alert.alert('Eklendi', `${book.title} listenize eklendi.`)
+              isMyBook
+                ? props.navigation.navigate('BookEdit', book)
+                : Alert.alert('mesaj yolla sayfası')
             }
-            text="Satıcıya yaz"
+            text={isMyBook ? 'Kitabı düzenle' : 'Satıcıya yaz'}
           />
         </View>
       </View>
     </View>
   );
 };
-
-export default Index;
+const mapStateToProps = ({auth}) => {
+  let {uid} = auth;
+  return {uid};
+};
+export default connect(mapStateToProps, null)(Index);

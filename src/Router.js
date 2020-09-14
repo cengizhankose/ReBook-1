@@ -15,6 +15,7 @@ import Settings from './screens/Settings';
 import AddBook from './screens/AddBook';
 import BookDetail from './screens/BookDetail';
 import MyBooks from './screens/MyBooks';
+import BookEdit from './screens/BookEdit';
 
 //Components
 import MyTabbar from './components/MyTabbar/myTabbar';
@@ -112,6 +113,7 @@ const Router = (props) => {
         />
         <StackScreens.Screen name="BookDetail" component={BookDetail} />
         <StackScreens.Screen name="FirstScreen" component={FirstScreen} />
+        <StackScreens.Screen name="BookEdit" component={BookEdit} />
         <DrawerStackScreens.Screen
           name="KitapEkle"
           component={AddBook}

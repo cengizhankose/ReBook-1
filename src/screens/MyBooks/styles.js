@@ -16,7 +16,6 @@ export const styles = StyleSheet.create({
     fontSize: 26,
     textAlign: 'center',
     marginVertical: 10,
-    fontFamily: fonts.bold,
   },
   img: {
     width: 30,
