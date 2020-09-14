@@ -29,7 +29,7 @@ export const add_to_favorite = (params) => {
       .collection('Users')
       .doc(params.uid)
       .update({
-        favorites: firestore.FieldValue.arrayUnion(favoriItem),
+        favorites: firestore.FieldValue.arrayUnion(params.favoriBook),
       })
       .then((res) => {
         dispatch({type: ADD_FAVORI_SUCCESS, payload: favoriItem});

@@ -23,10 +23,10 @@ const CardItem = (props) => {
     const favoriBook = props.book;
     const uid = props.uid;
     if (isFavori) {
-      await props.removeFromFavori({favoriBook, isFavori, uid});
+      await props.removeFromFavori({favoriBook, uid});
       setIsFavori(false);
     } else {
-      await props.add_to_favorite({favoriBook, isFavori, uid});
+      await props.add_to_favorite({favoriBook, uid});
       setIsFavori(true);
     }
   };
