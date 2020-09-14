@@ -106,9 +106,7 @@ export const updateBookAction = (params, newImages, callback) => {
   let counter = 0; // Birden fazla resim yüklemenmesi durumunda kaçıncı resmin yüklendiğini takip edecek
   return (dispatch) => {
     dispatch({type: ADD_BOOK});
-    console.log('------------ın action');
-    console.log('params:', params);
-    console.log('new', newImages);
+
     firestore()
       .collection('Products')
       .doc(params.id)

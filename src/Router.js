@@ -111,9 +111,21 @@ const Router = (props) => {
           component={DrawerScreens}
           options={{title: 'ReBook', headerShown: false, headerLeft: null}}
         />
-        <StackScreens.Screen name="BookDetail" component={BookDetail} />
-        <StackScreens.Screen name="FirstScreen" component={FirstScreen} />
-        <StackScreens.Screen name="BookEdit" component={BookEdit} />
+        <StackScreens.Screen
+          options={{title: 'Kitap Ayrıntıları'}}
+          name="BookDetail"
+          component={BookDetail}
+        />
+        <StackScreens.Screen
+          options={{title: 'Hoşgeldiniz'}}
+          name="FirstScreen"
+          component={FirstScreen}
+        />
+        <StackScreens.Screen
+          options={{title: 'Kitap Düzenle'}}
+          name="BookEdit"
+          component={BookEdit}
+        />
         <DrawerStackScreens.Screen
           name="KitapEkle"
           component={AddBook}

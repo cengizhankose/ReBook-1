@@ -26,9 +26,10 @@ const CardItemMini = (props) => {
     }
   };
   const checkIsFav = async () => {
-    await props.user.favorites.map((item) => {
-      item.id === props.book.id && setIsFavori(true);
-    });
+    props.user &&
+      props.user.favorites.map((item) => {
+        item.id === props.book.id && setIsFavori(true);
+      });
   };
 
   useEffect(() => {
@@ -36,7 +37,7 @@ const CardItemMini = (props) => {
       await checkIsFav();
     };
     getCheck();
-  }, [props.user]);
+  }, []);
 
   const {widthP, heightP} = props;
 
