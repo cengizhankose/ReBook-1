@@ -68,7 +68,5 @@ export const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     resizeMode: 'cover',
   },
-  content: {
-    
-  }
+  content: {},
 });

@@ -15,7 +15,6 @@ const Index = (props) => {
   const route = useRoute();
   const [book, setBook] = useState(route.params);
   const [newImages, setnewImages] = useState([]);
-  const firstImageArray = route.params.image;
 
   const addBookHandler = (params, images) => {
     props.updateBookAction(params, images, () =>
