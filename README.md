@@ -14,5 +14,4 @@ This is a final project for React Native Bootcamp run by kodluyoruz.com
 # Screenshots
 
 
-
 ![Image of Yaktocat](https://firebasestorage.googleapis.com/v0/b/rebook-6d8b6.appspot.com/o/rebook%2Fre.jpg?alt=media&token=0227344f-4056-4023-bbc2-daa85077bc68)
