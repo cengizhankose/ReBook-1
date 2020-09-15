@@ -67,7 +67,11 @@ const CardItem = (props) => {
         }}>
         <View style={{flex: 3}} key={seller_id}>
           <ImageBackground
-            source={{uri: image[0]}}
+            source={
+              image
+                ? {uri: image[0]}
+                : require('../../constant/images/loadingImage.png')
+            }
             imageStyle={{
               borderTopRightRadius: 20,
               borderTopLeftRadius: 20,

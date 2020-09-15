@@ -85,7 +85,11 @@ const CardItemMini = (props) => {
           },
         ]}>
         <ImageBackground
-          source={{uri: Array.isArray(image) ? image[0] : image}}
+          source={
+            image
+              ? {uri: image[0]}
+              : require('../../constant/images/loadingImage.png')
+          }
           imageStyle={{
             borderTopRightRadius: 20,
             borderTopLeftRadius: 20,
