@@ -1,16 +1,32 @@
 import React, {useEffect} from 'react';
 import {View, Text, ScrollView, Alert} from 'react-native';
 import {styles} from './styles';
-import {useRoute} from '@react-navigation/native';
+import {useRoute, useNavigation} from '@react-navigation/native';
 import BookCarousel from './BookCarousel';
 import Button from '../../components/Button';
 import {useDispatch, connect} from 'react-redux';
 import {getUserAction} from '../../redux/auth/actions';
+import {startRoom} from '../../redux/messages/actions';
 const Index = (props) => {
   const [sellerUser, setsellerUser] = React.useState({});
   const route = useRoute();
   const {book} = route.params;
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const sendMessage = () => {
+    let currentId = props.uid;
+    let userObj = {...props.user, ['id']: currentId};
+
+    let path = props.uid + '+' + book.seller_id;
+    let item = {
+      createDate: new Date(),
+      senderUser: userObj,
+      recieverUser: {...sellerUser, id: book.seller_id},
+      path,
+    };
+    dispatch(startRoom(path, item));
+    navigation.navigate('Messages', {item});
+  };
   useEffect(() => {
     const fetch = async () => {
       const user = await getUserAction(book.seller_id);
@@ -48,8 +64,8 @@ const Index = (props) => {
           <Button
             onPress={() =>
               props.uid === book.seller_id
-                ? props.navigation.navigate('BookEdit', book)
-                : Alert.alert('mesaj yolla sayfası')
+                ? navigation.navigate('BookEdit', book)
+                : sendMessage()
             }
             text={
               props.uid === book.seller_id ? 'Kitabı düzenle' : 'Satıcıya yaz'
@@ -61,7 +77,7 @@ const Index = (props) => {
   );
 };
 const mapStateToProps = ({auth}) => {
-  let {uid} = auth;
-  return {uid};
+  let {uid, user} = auth;
+  return {uid, user};
 };
 export default connect(mapStateToProps, null)(Index);

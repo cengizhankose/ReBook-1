@@ -80,12 +80,10 @@ export default (state = INITIAL_STATE, action) => {
         changeLoading: true,
       };
     case USER_CHANGE_SUCCESS:
-      console.log('redıcer', action);
       const updatedUser =
         action.imageURL !== null
           ? {...state.user, profile_img: action.imageURL}
           : {...state.user};
-      console.log('reducer user', updatedUser);
       return {
         ...state,
         user: updatedUser,

@@ -16,6 +16,8 @@ import AddBook from './screens/AddBook';
 import BookDetail from './screens/BookDetail';
 import MyBooks from './screens/MyBooks';
 import BookEdit from './screens/BookEdit';
+import ChatRoom from './screens/Messages/ChatRoom';
+import MessagesList from './screens/Messages/MessagesList';
 
 //Components
 import MyTabbar from './components/MyTabbar/myTabbar';
@@ -100,7 +102,7 @@ const Router = (props) => {
 
       <DrawerStackScreens.Screen name="Ayarlar" component={Settings} />
       <DrawerStackScreens.Screen name="Kitaplarım" component={MyBooks} />
-      <DrawerStackScreens.Screen name="Mesajlar" component={TabScreens} />
+      <DrawerStackScreens.Screen name="Mesajlar" component={MessagesList} />
     </DrawerStackScreens.Navigator>
   );
   return (
@@ -131,6 +133,11 @@ const Router = (props) => {
           name="KitapEkle"
           component={AddBook}
           options={{title: 'Kitap Ekle'}}
+        />
+        <StackScreens.Screen
+          name="Messages"
+          component={ChatRoom}
+          options={{headerShown: false}}
         />
       </StackScreens.Navigator>
     </NavigationContainer>
