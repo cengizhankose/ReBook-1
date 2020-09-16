@@ -93,7 +93,10 @@ const Index = (props) => {
                     alignSelf:
                       item.senderUser === props.uid ? 'flex-end' : 'flex-start',
                   }}>
-                  <MessageText text={item.text} />
+                  <MessageText
+                    isUser={item.senderUser === props.uid}
+                    text={item.text}
+                  />
                 </View>
               );
             }}

@@ -9,11 +9,11 @@ const index = (props) => (
       {
         flexDirection: 'row',
         alignSelf: 'flex-start',
-        backgroundColor: 'white',
-        margin:10,
-        marginTop:2,
-        padding:15,
-        borderRadius:15
+        backgroundColor: props.isUser ? '#fff6ed' : '#dcfcde',
+        margin: 10,
+        marginTop: 2,
+        padding: 15,
+        borderRadius: 15,
       },
       props.style,
     ]}>
