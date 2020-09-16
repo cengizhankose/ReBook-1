@@ -32,7 +32,7 @@ const Index = (props) => {
       style={styles.mainContainer}
       imageStyle={{flex: 1}}
       source={require('../../../img/MessagesBackground.png')}>
-      <View style={{height:70,}}>
+      <View style={{height: 70}}>
         <View
           style={{
             flex: 1,
@@ -121,10 +121,10 @@ const Index = (props) => {
               text: message,
               createdDate: new Date(),
               senderUser: props.uid,
-              recieverUser: props.route.params.item.recieverUser,
+              recieverUser: props.route.params.item.recieverUser.id,
             };
             props.addMessages(props.route.params.item.path, params);
-            setMessage();
+            setMessage('');
           }}
         />
       </View>

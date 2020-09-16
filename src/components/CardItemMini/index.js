@@ -2,23 +2,27 @@ import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
-  Image,
   ImageBackground,
   Dimensions,
   Alert,
+  Linking,
 } from 'react-native';
 import {styles, colors} from './styles';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import LinearGradient from 'react-native-linear-gradient';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, Link} from '@react-navigation/native';
 import {connect} from 'react-redux';
 import {add_to_favorite, removeFromFavori} from '../../redux/wishList/actions';
-
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import RedHeart from '../../svg/HeartFilledSvg';
 import Heart from '../../svg/HeartSvg';
+import {Colors} from '../../constant/colors/colors';
+import {Line} from 'react-native-svg';
+
 const {height, width} = Dimensions.get('window');
 
 const CardItemMini = (props) => {
+  Icon.loadFont();
   const navigation = useNavigation();
   const [isFavori, setIsFavori] = useState(false);
   const addFav = async () => {
@@ -72,15 +76,16 @@ const CardItemMini = (props) => {
     seller_id,
     location = location ? location : 'Istanbul',
     price,
+    link,
   } = props.book;
 
   return (
     <View style={[styles.main, {marginTop: props.marginTop ? '0.1%' : '2%'}]}>
       <TouchableOpacity
         onPress={() =>
-          image.map
+          Array.isArray(image)
             ? navigation.navigate('BookDetail', {book: props.book})
-            : null
+            : Linking.openURL(link)
         }
         style={[
           styles.touchableArea,
@@ -92,7 +97,7 @@ const CardItemMini = (props) => {
         <ImageBackground
           source={
             image
-              ? {uri: image[0]}
+              ? {uri: Array.isArray(image) ? image[0] : image}
               : require('../../constant/images/loadingImage.gif')
           }
           imageStyle={{
@@ -101,7 +106,11 @@ const CardItemMini = (props) => {
           }}
           style={{width: '100%', height: '100%'}}>
           <LinearGradient colors={colors} style={styles.LinearGradient}>
-            <Text style={[styles.headerText, {fontSize: 16}]}>
+            <Text
+              style={[
+                styles.headerText,
+                {fontSize: 16, textTransform: 'capitalize'},
+              ]}>
               {title}{' '}
               <Text style={[styles.headerText, {fontSize: 6}]}>{author}</Text>
             </Text>
@@ -118,9 +127,13 @@ const CardItemMini = (props) => {
           </Text>
         </View>
         <View>
-          <TouchableOpacity onPress={addFav}>
-            {isFavori ? <RedHeart /> : <Heart />}
-          </TouchableOpacity>
+          {location !== 'NY Times' ? (
+            <TouchableOpacity onPress={addFav}>
+              {isFavori ? <RedHeart /> : <Heart />}
+            </TouchableOpacity>
+          ) : (
+            <Icon name="trending-up" size={20} color={Colors.softPink} />
+          )}
         </View>
       </View>
     </View>

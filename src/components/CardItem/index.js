@@ -78,7 +78,11 @@ const CardItem = (props) => {
             }}
             style={{flex: 1, width: 200, height: 220}}>
             <LinearGradient colors={colors} style={styles.LinearGradient}>
-              <Text style={[styles.headerText, {fontSize: 18}]}>
+              <Text
+                style={[
+                  styles.headerText,
+                  {fontSize: 18, textTransform: 'capitalize'},
+                ]}>
                 {title}{' '}
                 <Text style={[styles.headerText, {fontSize: 10}]}>
                   {author}

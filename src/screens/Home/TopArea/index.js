@@ -3,44 +3,47 @@ import {View, Text, ScrollView, Image} from 'react-native';
 import {styles} from './styles';
 import CardItemMini from '../../../components/CardItemMini';
 import axios from 'axios';
+import {Spinner} from 'native-base';
+import {Colors} from '../../../constant/colors/colors';
 
 const Index = () => {
   const [popiBook, setPopiBook] = useState([]);
-  const [bookDowload, setBookDownload] = useState(false);
+  const [bookDowload, setBookDownload] = useState(true);
 
   useEffect(() => {
     const popularBooks = async () => {
-      let allBooks = [];
+      //let allBooks = [];
       setBookDownload(true);
-      await axios
+      axios
         .get(
           'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=oGsKUARnGzfSGCzD8Yh4bWPtfoMjAVSR',
         )
         .then((res) => {
-          res.data.results.books
-            .map(async (item) => {
-              //console.log(item.title);
-              const newObj = {
-                title: item.title,
-                author: item.author,
-                image: item.book_image,
-                location: 'İstanbul',
-                content: item.description,
-                price: 30,
-              };
+          let allBooks = res.data.results.books.map((item) => {
+            console.log(item);
+            const newObj = {
+              title: item.title,
+              author: item.author,
+              image: item.book_image,
+              location: 'NY Times',
+              content: item.description,
+              price: 30,
+              link: item.buy_links[1].url,
+            };
 
-              await populerBooks.push(newObj);
-            })
-            .then((result) => setBookDownload(false))
-            .catch((err) => {
-              setBookDownload(false);
-              console.log(err);
-            });
+            return newObj;
+          });
+
+          setPopiBook(allBooks);
+          setBookDownload(false);
           //console.log(res.data.results);
+        })
+        .catch((err) => {
+          setBookDownload(false);
+          console.log(err);
         });
-      setPopiBook(allBooks);
     };
-    //popularBooks();
+    popularBooks();
   }, []);
   //console.log('popiiii', popiBook);
   return (
@@ -53,13 +56,17 @@ const Index = () => {
       </View>
       <View style={styles.scroll}>
         <ScrollView horizontal>
-          {popiBook.map((book) => (
-            <CardItemMini
-              key={book.title + Math.random()}
-              book={book}
-              marginTop={0.1}
-            />
-          ))}
+          {!bookDowload ? (
+            popiBook.map((book) => (
+              <CardItemMini
+                key={book.title + Math.random()}
+                book={book}
+                marginTop={0.1}
+              />
+            ))
+          ) : (
+            <Spinner shouldRasterizeIOS color={Colors.orange} />
+          )}
         </ScrollView>
       </View>
     </View>
