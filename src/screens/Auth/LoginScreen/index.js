@@ -12,17 +12,19 @@ import Button from '../../../components/Button/index';
 import ReBookLogo from '../../../components/ReBookLogo/index';
 import Input from '../../../components/Input/index';
 import CheckBox from '../../../components/CheckBox/index';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import {styles} from './styles';
 import {Spinner} from 'native-base';
 
 const index = (props) => {
+  const [isCheck, setIsCheck] = useState(false);
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const dispatch = useDispatch();
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [email, setEmail] = useState('test@gmail.com');
+  const [email, setEmail] = useState('');
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [password, setPassword] = useState('test123');
+  const [password, setPassword] = useState('');
 
   const onLoginUser = (email, password) => {
     dispatch(loginUserAction(email, password));
@@ -61,7 +63,18 @@ const index = (props) => {
         </View>
         <View style={styles.subInfos}>
           <View style={styles.checkBoxView}>
-            <CheckBox />
+            <CheckBox
+              isCheck={isCheck}
+              onPress={() => {
+                AsyncStorage.getItem('userInfo')
+                  .then((res) => JSON.parse(res))
+                  .then((result) => {
+                    setEmail(result.email);
+                    setPassword(result.password);
+                    setIsCheck(true);
+                  });
+              }}
+            />
             <Text>Beni Hatırla</Text>
           </View>
           <View style={styles.ınfoTextView}>

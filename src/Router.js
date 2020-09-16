@@ -16,7 +16,7 @@ import AddBook from './screens/AddBook';
 import BookDetail from './screens/BookDetail';
 import MyBooks from './screens/MyBooks';
 import BookEdit from './screens/BookEdit';
-import ChatRoom from './screens/Messages/ChatRoom';
+import ChatRoom from './screens/Messages/ChatRoom/index';
 import MessagesList from './screens/Messages/MessagesList';
 
 //Components

@@ -5,6 +5,7 @@ import ImagePicker from 'react-native-image-picker';
 import {connect} from 'react-redux';
 import {registerUserAction} from '../../../redux/auth/actions';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import ReBookLogo from '../../../components/ReBookLogo/index';
 import Input from '../../../components/Input/index';
@@ -49,6 +50,7 @@ const Index = () => {
     });
   };
   const onSubmitUser = (params) => {
+    AsyncStorage.setItem('userInfo', JSON.stringify({email, password}));
     dispatch(registerUserAction(params));
   };
   return (

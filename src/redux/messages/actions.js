@@ -68,7 +68,7 @@ export const getMessages = (path, uid) => {
         let data = [];
         message.forEach((doc) => {
           let currentId = doc.id;
-        
+
           let msgObj = {...doc.data(), ['id']: currentId};
           data.push(msgObj);
         });
@@ -86,13 +86,10 @@ export const addMessages = (path, params) => {
       .collection('items')
       .add(params)
       .then((data) => {
-        console.log('MEssage send!', data);
-
         dispatch({type: ADD_MESSAGES_SUCCESS});
       })
       .catch(() => {
         dispatch({type: ADD_MESSAGES_FAILD});
-        console.log('Message not send!');
       });
   };
 };
