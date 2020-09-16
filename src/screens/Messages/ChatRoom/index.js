@@ -60,7 +60,7 @@ const Index = (props) => {
                           ? recieverUser.profile_img
                           : senderUser.profile_img,
                     }
-                  : require('../../../constant/images/loadingImage.png')
+                  : require('../../../constant/images/loadingImage.gif')
               }
             />
           </View>
