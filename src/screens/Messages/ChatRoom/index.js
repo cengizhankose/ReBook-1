@@ -32,7 +32,7 @@ const Index = (props) => {
       style={styles.mainContainer}
       imageStyle={{flex: 1}}
       source={require('../../../img/MessagesBackground.png')}>
-      <View style={{flex: 1}}>
+      <View style={{height:70,}}>
         <View
           style={{
             flex: 1,

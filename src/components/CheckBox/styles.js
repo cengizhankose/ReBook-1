@@ -8,12 +8,11 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'transparent',
     borderWidth: 2,
-    borderColor: 'pink',
+    borderColor: '#CDEAC0',
     marginRight: 10,
   },
   checkSubView: {
     width: 18,
     height: 18,
-    backgroundColor: '#fff',
   },
 });

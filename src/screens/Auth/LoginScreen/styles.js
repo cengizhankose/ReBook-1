@@ -26,7 +26,6 @@ export const styles = StyleSheet.create({
   formArea: {
     flex: 4,
     alignItems: 'center',
-    justifyContent: 'center',
     borderBottomLeftRadius: 16,
     borderBottomRightRadius: 16,
     backgroundColor: Colors.softPink,

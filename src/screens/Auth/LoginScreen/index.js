@@ -31,7 +31,7 @@ const index = (props) => {
   return (
     <View style={styles.loginView}>
       <View style={styles.logo}>
-        <ReBookLogo color={'#fff'} />
+        <ReBookLogo textStyle={{color: '#fff'}} color={'#fff'} />
       </View>
       <View style={styles.formArea}>
         <View style={styles.textView}>
@@ -39,13 +39,23 @@ const index = (props) => {
         </View>
         <View style={styles.form}>
           <Input
-            style={{marginBottom: 15}}
+            style={{
+              marginBottom: 15,
+              borderRadius: 0,
+              borderWidth: 2,
+              borderColor: '#CDEAC0',
+            }}
             placeholder={'Email'}
             value={email}
             onChangeText={(value) => setEmail(value)}
           />
           <Input
-            style={{marginBottom: 15}}
+            style={{
+              marginBottom: 15,
+              borderRadius: 0,
+              borderWidth: 2,
+              borderColor: '#CDEAC0',
+            }}
             placeholder={'Password'}
             value={password}
             onChangeText={(value) => setPassword(value)}
@@ -54,6 +64,7 @@ const index = (props) => {
             <Spinner color={'white'} />
           ) : (
             <Button
+              buttonStyle={{borderRadius: 0}}
               text={'Giriş Yap'}
               onPress={() => onLoginUser(email, password)}
             />
@@ -62,17 +73,18 @@ const index = (props) => {
         <View style={styles.subInfos}>
           <View style={styles.checkBoxView}>
             <CheckBox />
-            <Text>Beni Hatırla</Text>
+            <Text style={{color: 'white'}}>Beni Hatırla</Text>
           </View>
           <View style={styles.ınfoTextView}>
-            <Text>Hesabın yok mu? </Text>
-            <Text onPress={() => props.navigation.navigate('Register')}>
+            <Text style={{color: 'white'}}>Hesabın yok mu? </Text>
+            <Text
+              style={{color: '#CDEAC0'}}
+              onPress={() => props.navigation.navigate('Register')}>
               Kayıt ol{' '}
             </Text>
           </View>
         </View>
       </View>
-      <View style={styles.bottomView} />
       <View style={styles.bottomView2} />
     </View>
   );

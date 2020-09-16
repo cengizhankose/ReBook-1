@@ -15,7 +15,7 @@ import Settings from './screens/Settings';
 import AddBook from './screens/AddBook';
 import BookDetail from './screens/BookDetail';
 import MyBooks from './screens/MyBooks';
-import BookEdit from './screens/BookEdit';
+import BookEdit from './screens/BookEdit/Index';
 import ChatRoom from './screens/Messages/ChatRoom';
 import MessagesList from './screens/Messages/MessagesList';
 
@@ -42,7 +42,7 @@ const Router = (props) => {
           name="Home"
           component={Home}
           options={{
-            title: 'Home',
+            headerShown: false,
           }}
         />
       </HomeScreens.Navigator>
@@ -69,7 +69,11 @@ const Router = (props) => {
           options={{headerShown: false}}
         />
       ) : (
-        <TabsStackScreens.Screen name="Login" component={AuthStackScreens} />
+        <TabsStackScreens.Screen
+          name="Login"
+          component={AuthStackScreens}
+          options={{headerShown: false}}
+        />
       )}
     </TabsStackScreens.Navigator>
   );
@@ -119,7 +123,7 @@ const Router = (props) => {
           component={BookDetail}
         />
         <StackScreens.Screen
-          options={{title: 'Hoşgeldiniz'}}
+          options={{headerShown: false}}
           name="FirstScreen"
           component={FirstScreen}
         />
