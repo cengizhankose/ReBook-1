@@ -83,6 +83,7 @@ const Index = () => {
 
         <View style={styles.inputContainer}>
           <Input
+            style={styles.passInput}
             onChangeText={(text) => setNewPassword(text)}
             value={newPassword}
             placeholder="Yeni şifrenizi giriniz"
@@ -98,6 +99,7 @@ const Index = () => {
                   handleChangePassword({newPassword, newImage, uid})
                 }
                 text="Değişiklikler Kaydet"
+                style={styles.saveChangesBtn}
               />
             </View>
             <View style={styles.cancelContainer}>

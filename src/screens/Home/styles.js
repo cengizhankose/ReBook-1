@@ -2,15 +2,15 @@ import {StyleSheet} from 'react-native';
 
 export const styles = StyleSheet.create({
   header: {
-    flex: 1,
+    flex: 0.7,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     margin: '5%',
     marginBottom: '3%',
   },
-  body: {flex: 1, marginLeft: '5%'},
-  footer: {flex: 2, marginLeft: '5%'},
+  body: {flex: 2.3, marginLeft: '5%'},
+  footer: {flex: 4, marginLeft: '5%'},
   textStart: {
     color: '#FFAC81',
     fontSize: 18,

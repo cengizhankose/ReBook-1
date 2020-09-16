@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     flex: 4,
     backgroundColor: Colors.orange,
     alignItems: 'center',
-    marginTop: 5,
+    marginBottom: 15,
     padding: 5,
   },
   registerBottom: {
@@ -35,11 +35,13 @@ export const styles = StyleSheet.create({
   },
 
   formText: {
+    paddingTop:10,
     fontSize: 36,
     color: '#fff',
     justifyContent: 'flex-start',
   },
   addBtn: {
+    borderRadius:0,
     backgroundColor: 'white',
     alignSelf: 'center',
     marginVertical: '2%',
