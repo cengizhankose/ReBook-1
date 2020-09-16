@@ -5,7 +5,7 @@ import {Colors} from '../../constant/colors/colors';
 const index = (props) => {
   return (
     <View style={styles.allView}>
-      <Text style={styles.text}>Rebook</Text>
+      <Text style={[styles.text,props.textStyle]}>Rebook</Text>
       <Image
         source={require('../../constant/images/book.png')}
         size={34}

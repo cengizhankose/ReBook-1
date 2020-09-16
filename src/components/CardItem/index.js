@@ -70,7 +70,7 @@ const CardItem = (props) => {
             source={
               image
                 ? {uri: image[0]}
-                : require('../../constant/images/loadingImage.png')
+                : require('../../constant/images/loadingImage.gif')
             }
             imageStyle={{
               borderTopRightRadius: 20,

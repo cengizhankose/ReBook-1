@@ -5,7 +5,7 @@ import {styles} from './styles';
 const index = (props) => {
   return (
     <View style={props.style && props.style}>
-      <TouchableOpacity style={styles.buttonView} onPress={props.onPress}>
+      <TouchableOpacity style={[styles.buttonView,props.buttonStyle]} onPress={props.onPress}>
         <Text style={styles.buttonText}>{props.text}</Text>
       </TouchableOpacity>
     </View>

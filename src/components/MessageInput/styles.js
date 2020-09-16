@@ -12,7 +12,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor:"white",
     width: '80%',
-    height: "70%",
+    height: 45,
     borderRadius:15,
   },
 });

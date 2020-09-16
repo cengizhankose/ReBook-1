@@ -21,6 +21,23 @@ const Index = (props) => {
   }, []);
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.toggleDrawer()}>
+          <View style={{width: 50, height: 50}}>
+            <Image
+              style={{width: "100%", height: "100%",borderRadius:200}}
+              source={
+                props.isAuth
+                  ? {
+                      uri: props.user.profile_img,
+                    }
+                  : require('../../constant/images/profile.png')
+              }
+            />
+          </View>
+        </TouchableOpacity>
+        <Logo />
+      </View>
       <View style={styles.body}>
         <TopArea />
       </View>
@@ -29,12 +46,6 @@ const Index = (props) => {
       </View>
     </SafeAreaView>
   );
-};
-
-Index.navigationOptions = (data) => {
-  return {
-    headerTitle: 'Zeybek',
-  };
 };
 
 const mapStateToProps = ({auth}) => {

@@ -9,4 +9,11 @@ export const styles = StyleSheet.create({
   logo: {
     marginTop: '4%',
   },
+  headerText:{
+    color: '#FFAC81',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginLeft: '5%',
+    marginTop: '4%',
+  },
 });

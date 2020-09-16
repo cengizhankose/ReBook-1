@@ -21,7 +21,7 @@ const Index = (props) => {
         <View style={{alignItems: 'center'}}>
           <View style={styles.imgContainer}>
             <Image
-              style={{width: 100, height: 100, borderRadius: 50}}
+              style={{width: 100, height: 100, borderRadius: 50,marginTop:"6%"}}
               source={{
                 uri: props.user.profile_img,
               }}

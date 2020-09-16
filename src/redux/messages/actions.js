@@ -68,7 +68,6 @@ export const getMessages = (path, uid) => {
         let data = [];
         message.forEach((doc) => {
           let currentId = doc.id;
-
           let msgObj = {...doc.data(), ['id']: currentId};
           data.push(msgObj);
         });
