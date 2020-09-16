@@ -30,6 +30,10 @@ export const styles = StyleSheet.create({
     backgroundColor: Colors.orange,
     alignItems: 'center',
     justifyContent: 'center',
+    width: 166,
+    height: 50,
+    marginLeft: 'auto',
+    marginRight: 'auto',
   },
   kitapEkle: {
     color: 'white',

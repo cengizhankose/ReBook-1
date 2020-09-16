@@ -85,13 +85,10 @@ export const addMessages = (path, params) => {
       .collection('items')
       .add(params)
       .then((data) => {
-        console.log('MEssage send!', data);
-
         dispatch({type: ADD_MESSAGES_SUCCESS});
       })
       .catch(() => {
         dispatch({type: ADD_MESSAGES_FAILD});
-        console.log('Message not send!');
       });
   };
 };

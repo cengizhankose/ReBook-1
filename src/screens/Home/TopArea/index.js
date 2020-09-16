@@ -1,23 +1,48 @@
-import React from 'react';
-import {View, Text, ScrollView, Image, ImageBackground} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {View, Text, ScrollView, Image} from 'react-native';
 import {styles} from './styles';
 import CardItemMini from '../../../components/CardItemMini';
-const mockData = [
-  {
-    title: 'Steve Jobs 2',
-    image: [
-      'https://images-na.ssl-images-amazon.com/images/I/514CVwOrybL._SX333_BO1,204,203,200_.jpg',
-      'https://i.dr.com.tr/cache/600x600-0/originals/0000000064038-1.jpg',
-    ],
-    author: 'Walter Isaacson',
-    price: 30,
-    content:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mollis justo quis egestas porta. Duis mollis augue eget eleifend blandit. Sed et pulvinar nisi. Donec vulputate ex nec mauris consequat facilisis. Maecenas odio odio, facilisis placerat imperdiet eu, tempus non lorem. Praesent bibendum leo erat, a lacinia ligula venenatis in. Suspendisse eleifend felis sit amet ante porttitor, vitae condimentum justo molestie.',
-    seller_id: 'Oktay İbiş',
-    location: 'İstanbul',
-  },
-];
+import axios from 'axios';
+
 const Index = () => {
+  const [popiBook, setPopiBook] = useState([]);
+  const [bookDowload, setBookDownload] = useState(false);
+
+  useEffect(() => {
+    const popularBooks = async () => {
+      let allBooks = [];
+      setBookDownload(true);
+      await axios
+        .get(
+          'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=oGsKUARnGzfSGCzD8Yh4bWPtfoMjAVSR',
+        )
+        .then((res) => {
+          res.data.results.books
+            .map(async (item) => {
+              //console.log(item.title);
+              const newObj = {
+                title: item.title,
+                author: item.author,
+                image: item.book_image,
+                location: 'İstanbul',
+                content: item.description,
+                price: 30,
+              };
+
+              await populerBooks.push(newObj);
+            })
+            .then((result) => setBookDownload(false))
+            .catch((err) => {
+              setBookDownload(false);
+              console.log(err);
+            });
+          //console.log(res.data.results);
+        });
+      setPopiBook(allBooks);
+    };
+    //popularBooks();
+  }, []);
+  //console.log('popiiii', popiBook);
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -28,8 +53,12 @@ const Index = () => {
       </View>
       <View style={styles.scroll}>
         <ScrollView horizontal>
-          {mockData.map((book) => (
-            <CardItemMini key={book.title + Math.random()} book={book} />
+          {popiBook.map((book) => (
+            <CardItemMini
+              key={book.title + Math.random()}
+              book={book}
+              marginTop={0.1}
+            />
           ))}
         </ScrollView>
       </View>

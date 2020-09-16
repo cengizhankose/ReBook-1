@@ -1,12 +1,12 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {styles} from './styles';
 
 const index = (props) => {
   return (
-    <View style={styles.checkView}>
-      <View style={styles.checkSubView} />
-    </View>
+    <TouchableOpacity style={styles.checkView} onPress={props.onPress}>
+      {props.isCheck && <View style={styles.checkSubView} />}
+    </TouchableOpacity>
   );
 };
 

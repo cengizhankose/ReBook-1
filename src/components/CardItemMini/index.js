@@ -70,13 +70,18 @@ const CardItemMini = (props) => {
     author,
     content,
     seller_id,
-    price,
     location = location ? location : 'Istanbul',
+    price,
   } = props.book;
+
   return (
-    <View style={styles.main}>
+    <View style={[styles.main, {marginTop: props.marginTop ? '0.1%' : '2%'}]}>
       <TouchableOpacity
-        onPress={() => navigation.navigate('BookDetail', {book: props.book})}
+        onPress={() =>
+          image.map
+            ? navigation.navigate('BookDetail', {book: props.book})
+            : null
+        }
         style={[
           styles.touchableArea,
           {

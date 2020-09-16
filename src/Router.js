@@ -15,7 +15,7 @@ import Settings from './screens/Settings';
 import AddBook from './screens/AddBook';
 import BookDetail from './screens/BookDetail';
 import MyBooks from './screens/MyBooks';
-import BookEdit from './screens/BookEdit/Index';
+import BookEdit from './screens/BookEdit/index';
 import ChatRoom from './screens/Messages/ChatRoom';
 import MessagesList from './screens/Messages/MessagesList';
 
