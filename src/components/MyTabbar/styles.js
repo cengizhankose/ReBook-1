@@ -20,7 +20,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 3,
     borderRadius: 50,
-    marginTop: -4,
   },
   chooseSohbet: {
     borderRadius: 50,

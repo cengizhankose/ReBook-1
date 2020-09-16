@@ -36,7 +36,11 @@ const Index = (props) => {
           data={props.chatRooms}
           renderItem={({item}) => (
             <Message
-              firstLetters={item.recieverUser.name.charAt(0).toUpperCase()}
+              firstLetters={
+                item.senderUser.id === props.uid
+                  ? item.recieverUser.name.charAt(0).toUpperCase()
+                  : item.senderUser.name.charAt(0).toUpperCase()
+              }
               onPress={() => {
                 navigation.navigate('Messages', {item});
               }}
@@ -47,7 +51,6 @@ const Index = (props) => {
     </View>
   );
 };
-
 const mapStateToProps = ({auth, messages}) => {
   const {user, uid} = auth;
   const {chatRoom, chatRoomsDownloading, chatRooms, allUsers} = messages;

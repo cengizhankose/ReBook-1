@@ -2,14 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
- 	<key>NSPhotoLibraryUsageDescription</key>
-    <string>$(PRODUCT_NAME) fotoğraf galerinize ulaşmak istiyor.</string>
-    <key>NSCameraUsageDescription</key>
-    <string>$(PRODUCT_NAME) kameranızı kullanmak istiyor.</string>
-    <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>$(PRODUCT_NAME) galerinize fotoğraf kaydetmek istiyor.</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>$(PRODUCT_NAME) video kaydı için mikrofonunuza ulaşmak istiyor.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>$(PRODUCT_NAME) fotoğraf galerinize ulaşmak istiyor.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>$(PRODUCT_NAME) kameranızı kullanmak istiyor.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>$(PRODUCT_NAME) galerinize fotoğraf kaydetmek istiyor.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>$(PRODUCT_NAME) video kaydı için mikrofonunuza ulaşmak istiyor.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -66,6 +66,23 @@
 		<string>Roboto_medium.ttf</string>
 		<string>Roboto.ttf</string>
 		<string>rubicon-icon-font.ttf</string>
+		<string>Kanit-Black.ttf</string>
+		<string>Kanit-Bold.ttf</string>
+		<string>Kanit-ExtraBold.ttf</string>
+		<string>Kanit-Italic.ttf</string>
+		<string>Kanit-Medium.ttf</string>
+		<string>Kanit-Regular.ttf</string>
+		<string>Kanit-SemiBold.ttf</string>
+		<string>AntDesign.ttf</string>
+		<string>Entypo.ttf</string>
+		<string>EvilIcons.ttf</string>
+		<string>Feather.ttf</string>
+		<string>FontAwesome.ttf</string>
+		<string>FontAwesome5_Regular.ttf</string>
+		<string>Fontisto.ttf</string>
+		<string>MaterialCommunityIcons.ttf</string>
+		<string>SimpleLineIcons.ttf</string>
+		<string>Zocial.ttf</string>
 	</array>
 </dict>
 </plist>

@@ -34,12 +34,7 @@ const Index = (props) => {
       </View>
       <View style={{flex: 0.1}}>
         <Text
-          style={{
-            color: '#FFAC81',
-            fontSize: 18,
-            fontWeight: 'bold',
-            marginLeft: '5%',
-          }}>
+          style={styles.headerText}>
           Wi<Text style={{color: 'black'}}>shlist</Text>
         </Text>
       </View>

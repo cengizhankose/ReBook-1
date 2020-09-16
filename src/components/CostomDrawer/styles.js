@@ -3,17 +3,18 @@ import {Colors} from '../../constant/colors/colors';
 
 export const styles = StyleSheet.create({
   logOut: {
-    marginBottom: 20,
+    marginBottom: "6%",
     alignSelf: 'center',
   },
   label: {
     fontSize: 22,
     color: Colors.softPink,
     marginLeft: 20,
+    fontSize:16
   },
   mail: {
     color: '#9A9A9A',
-    fontSize: 13,
+    fontSize: 12,
   },
   name: {
     fontSize: 22,
@@ -35,5 +36,6 @@ export const styles = StyleSheet.create({
     fontSize: 22,
     alignSelf: 'center',
     marginLeft: 20,
+    fontSize:18,
   },
 });

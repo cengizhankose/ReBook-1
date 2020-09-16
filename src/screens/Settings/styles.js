@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'white',
   },
   textContainer: {
     backgroundColor: Colors.softPink,
@@ -43,5 +44,9 @@ export const styles = StyleSheet.create({
   },
   body: {
     flex: 4,
+  },
+  passInput: {
+    borderWidth: 2,
+    borderColor: '#C4C4C4',
   },
 });
