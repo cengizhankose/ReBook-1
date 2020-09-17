@@ -11,14 +11,7 @@ import TopArea from './TopArea';
 import MainArea from './MainArea';
 const Index = (props) => {
   const navigation = useNavigation();
-  useEffect(() => {
-    const infos = async () => {
-      AsyncStorage.getItem('userInfo').then((res) => {
-        console.log(res);
-      });
-    };
-    infos();
-  }, []);
+
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
       <View style={styles.header}>

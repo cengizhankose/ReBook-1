@@ -1,51 +1,22 @@
 import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import {View, Text, ScrollView, Image} from 'react-native';
-import {styles} from './styles';
 import CardItemMini from '../../../components/CardItemMini';
-import axios from 'axios';
+import {getPopularBooks} from '../../../redux/addBook/actions';
+import {styles} from './styles';
+
 import {Spinner} from 'native-base';
 import {Colors} from '../../../constant/colors/colors';
 
 const Index = () => {
-  const [popiBook, setPopiBook] = useState([]);
-  const [bookDowload, setBookDownload] = useState(true);
 
+  const dispatch = useDispatch();
+  const {popularBooks, popularBooksLoading} = useSelector(
+    (state) => state.addBook,
+  );
   useEffect(() => {
-    const popularBooks = async () => {
-      //let allBooks = [];
-      setBookDownload(true);
-      axios
-        .get(
-          'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=oGsKUARnGzfSGCzD8Yh4bWPtfoMjAVSR',
-        )
-        .then((res) => {
-          let allBooks = res.data.results.books.map((item) => {
-            console.log(item);
-            const newObj = {
-              title: item.title,
-              author: item.author,
-              image: item.book_image,
-              location: 'NY Times',
-              content: item.description,
-              price: 30,
-              link: item.buy_links[1].url,
-            };
-
-            return newObj;
-          });
-
-          setPopiBook(allBooks);
-          setBookDownload(false);
-          //console.log(res.data.results);
-        })
-        .catch((err) => {
-          setBookDownload(false);
-          console.log(err);
-        });
-    };
-    popularBooks();
+    dispatch(getPopularBooks());
   }, []);
-  //console.log('popiiii', popiBook);
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
@@ -56,8 +27,8 @@ const Index = () => {
       </View>
       <View style={styles.scroll}>
         <ScrollView horizontal>
-          {!bookDowload ? (
-            popiBook.map((book) => (
+          {!popularBooksLoading ? (
+            popularBooks.map((book) => (
               <CardItemMini
                 key={book.title + Math.random()}
                 book={book}

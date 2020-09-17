@@ -9,10 +9,15 @@ import {
   GET_MY_BOOK,
   GET_MY_BOOK_FAILD,
   GET_MY_BOOK_SUCCESS,
+  GET_POPULER_BOOK,
+  GET_POPULER_BOOK_FAILD,
+  GET_POPULER_BOOK_SUCCESS,
 } from './types';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import {Alert} from 'react-native';
+import {Toast} from 'native-base';
+import Axios from 'axios';
 
 export const addBookAction = (params, images, callback) => {
   let counter = 0; // Birden fazla resim yüklemenmesi durumunda kaçıncı resmin yüklendiğini takip edecek
@@ -160,13 +165,49 @@ export const updateBookAction = (params, newImages, callback) => {
           dispatch({
             type: ADD_BOOK_SUCCESS,
           });
-          Alert.alert('Başarılı', 'Kitabınız Başarıyla Güncellendi', [
-            {
-              text: 'Tamam',
-              onPress: callback,
-            },
-          ]);
+          Toast.show({
+            text: 'Kitap Eklendi',
+          });
+          // Alert.alert('Başarılı', 'Kitabınız Başarıyla Güncellendi', [
+          //   {
+          //     text: 'Tamam',
+          //     onPress: callback,
+          //   },
+          // ]);
         }
+      });
+  };
+};
+
+export const getPopularBooks = () => {
+  return async (dispatch) => {
+    dispatch({type: GET_POPULER_BOOK});
+    Axios.get(
+      'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=oGsKUARnGzfSGCzD8Yh4bWPtfoMjAVSR',
+    )
+      .then((res) => {
+        let allBooks = res.data.results.books.map((item) => {
+          const newObj = {
+            title: item.title,
+            author: item.author,
+            image: item.book_image,
+            location: 'NY Times',
+            content: item.description,
+            price: 30,
+            link: item.buy_links[1].url,
+          };
+
+          return newObj;
+        });
+
+        dispatch({type: GET_POPULER_BOOK_SUCCESS, books: allBooks});
+      })
+      .catch((err) => {
+        dispatch({type: GET_POPULER_BOOK_FAILD});
+        Toast.show({
+          text: 'Hata',
+          position: 'bottom',
+        });
       });
   };
 };

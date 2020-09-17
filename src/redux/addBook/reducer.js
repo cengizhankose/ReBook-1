@@ -7,6 +7,9 @@ import {
   GET_BOOK_FAILD,
   GET_BOOK_SUCCESS,
   GET_MY_BOOK,
+  GET_POPULER_BOOK,
+  GET_POPULER_BOOK_FAILD,
+  GET_POPULER_BOOK_SUCCESS,
 } from './types';
 
 const initialState = {
@@ -15,6 +18,8 @@ const initialState = {
   books: [],
   bookDownloading: true,
   myBooks: [],
+  popularBooks: [],
+  popularBooksLoading: false,
 };
 
 export default (state = initialState, action) => {
@@ -63,6 +68,22 @@ export default (state = initialState, action) => {
       return {
         ...state,
         myBooks,
+      };
+    case GET_POPULER_BOOK:
+      return {
+        ...state,
+        popularBooksLoading: true,
+      };
+    case GET_POPULER_BOOK_SUCCESS:
+      return {
+        ...state,
+        popularBooksLoading: false,
+        popularBooks: action.books,
+      };
+    case GET_POPULER_BOOK_FAILD:
+      return {
+        ...state,
+        popularBooksLoading: false,
       };
     default:
       return state;
