@@ -17,7 +17,10 @@ import {connect} from 'react-redux';
 const Index = (props) => {
   const navigation = useNavigation();
   useEffect(() => {
-    props.getRooms(props.uid);
+    const fetch = async () => {
+      await props.getRooms(props.uid);
+    };
+    fetch();
   }, []);
 
   return (

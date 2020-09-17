@@ -82,7 +82,7 @@ export const loginUserAction = (email, password) => {
       .signInWithEmailAndPassword(email, password)
       .then(async (res) => {
         const user = await getUserAction(res.user.uid);
-        dispatch({type: LOGIN_USER_SUCCESS, user: user});
+        dispatch({type: LOGIN_USER_SUCCESS, user: user, uid: res.user.uid});
       })
       .catch((err) => {
         Alert.alert(

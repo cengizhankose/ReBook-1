@@ -40,9 +40,9 @@ export const startRoom = (path, params) => {
 };
 
 export const getRooms = (uid) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch({type: GET_ROOM_START});
-    firestore()
+    await firestore()
       .collection('Messages')
       .onSnapshot((room) => {
         let data = [];

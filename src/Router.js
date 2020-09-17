@@ -133,7 +133,7 @@ const Router = (props) => {
           name="BookEdit"
           component={BookEdit}
         />
-        <DrawerStackScreens.Screen
+        <StackScreens.Screen
           name="KitapEkle"
           component={AddBook}
           options={{title: 'Kitap Ekle'}}
