@@ -63,9 +63,25 @@ const Index = (props) => {
         <View style={styles.btnContainer}>
           <Button
             onPress={() =>
-              props.uid === book.seller_id
-                ? navigation.navigate('BookEdit', book)
-                : sendMessage()
+              props.uid
+                ? props.uid === book.seller_id
+                  ? navigation.navigate('BookEdit', book)
+                  : sendMessage()
+                : 'Satıcıya yaz'[
+                    Alert.alert(
+                      'Lütfen Giriş Yapın.',
+                      'Satıcıya Yazmak için giriş yapınız.',
+                      [
+                        {
+                          text: 'Tamam',
+                        },
+                        {
+                          text: 'Giriş Yap',
+                          onPress: () => navigation.navigate('Login'),
+                        },
+                      ],
+                    )
+                  ]
             }
             text={
               props.uid === book.seller_id ? 'Kitabı düzenle' : 'Satıcıya yaz'

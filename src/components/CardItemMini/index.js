@@ -60,10 +60,7 @@ const CardItemMini = (props) => {
   };
 
   useEffect(() => {
-    const getCheck = async () => {
-      await checkIsFav();
-    };
-    getCheck();
+    checkIsFav();
   }, []);
 
   const {widthP, heightP} = props;

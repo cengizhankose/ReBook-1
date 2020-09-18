@@ -12,6 +12,7 @@ import {
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
 import {Alert} from 'react-native';
+import {showMessage} from 'react-native-flash-message';
 
 export const add_to_favorite = (params) => {
   const {author, content, image, price, title, id} = params.favoriBook;
@@ -29,11 +30,14 @@ export const add_to_favorite = (params) => {
       .collection('Users')
       .doc(params.uid)
       .update({
-        favorites: firestore.FieldValue.arrayUnion(params.favoriBook),
+        favorites: firestore.FieldValue.arrayUnion(favoriItem),
       })
       .then((res) => {
         dispatch({type: ADD_FAVORI_SUCCESS, payload: favoriItem});
-        Alert.alert('Ürününüz başarıyla favorilere eklendi');
+        showMessage({
+          message: 'Ürün Favorilere Eklendi',
+          type: 'success',
+        });
       })
       .catch((error) => {
         Alert.alert(
@@ -65,7 +69,10 @@ export const removeFromFavori = (params) => {
       })
       .then((res) => {
         dispatch({type: REMOVE_FAVORI_SUCCESS, payload: id});
-        Alert.alert('Ürünün Favorilerden Çıkarıldı');
+        showMessage({
+          message: 'Favorilerden çıkarıldı',
+          type: 'warning',
+        });
       })
       .catch((error) => {
         Alert.alert(

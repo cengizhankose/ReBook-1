@@ -26,6 +26,7 @@
     "react": "16.13.1",
     "react-native": "0.63.2",
     "react-native-awesome-alerts": "^1.4.0",
+    "react-native-flash-message": "^0.1.16",
     "react-native-flipper": "^0.56.0",
     "react-native-gesture-handler": "^1.8.0",
     "react-native-image-picker": "^2.3.3",

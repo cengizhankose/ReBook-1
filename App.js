@@ -11,6 +11,8 @@ import Router from './src/Router';
 import Home from './src/screens/Home/index';
 import {createStore, applyMiddleware} from 'redux';
 import ReduxThunk from 'redux-thunk';
+import FlashMessage from 'react-native-flash-message';
+
 import reducers from './src/redux';
 import {Provider} from 'react-redux';
 const App: () => React$Node = () => {
@@ -25,6 +27,7 @@ const App: () => React$Node = () => {
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={{flex: 1}}>
         <Router />
+        <FlashMessage position="bottom" />
       </SafeAreaView>
     </Provider>
   );
