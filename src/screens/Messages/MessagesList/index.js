@@ -44,11 +44,7 @@ const Index = (props) => {
                   ? item.recieverUser.name.charAt(0).toUpperCase()
                   : item.senderUser.name.charAt(0).toUpperCase()
               }
-              lastMessage={
-                item.senderUser.id === props.uid
-                  ? item.recieverUser.name
-                  : item.senderUser.name
-              }
+              lastMessage={item.recieverUser.name}
               onPress={() => {
                 navigation.navigate('Messages', {item});
               }}
