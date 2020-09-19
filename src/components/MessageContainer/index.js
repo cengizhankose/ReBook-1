@@ -16,10 +16,10 @@ const index = (props) => (
         </View>
         <Text>{props.lastMessage}</Text>
       </View>
-      <View
+      {/*<View
         style={styles.notificationIcon}>
         <Text style={{fontSize: 12, color: 'white'}}>{props.messageCount}</Text>
-      </View>
+      </View>*/}
     </View>
   </TouchableOpacity>
 );
