@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     color: Colors.softPink,
   },
   container: {
-    padding: 10,
+    marginBottom: 1,
   },
   titleContainer: {
     padding: 20,

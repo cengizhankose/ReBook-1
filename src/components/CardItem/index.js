@@ -15,6 +15,8 @@ import {connect} from 'react-redux';
 import {add_to_favorite, removeFromFavori} from '../../redux/wishList/actions';
 import {useNavigation} from '@react-navigation/native';
 
+import {showMessage} from 'react-native-flash-message';
+
 const CardItem = (props) => {
   const navigation = useNavigation();
   const [isFavori, setIsFavori] = useState(false);
@@ -28,6 +30,7 @@ const CardItem = (props) => {
         setIsFavori(false);
       } else {
         await props.add_to_favorite({favoriBook, uid});
+
         setIsFavori(true);
       }
     } else {
@@ -58,7 +61,7 @@ const CardItem = (props) => {
       });
   };
 
-  const {title, image, author, content, seller_id, price, isFav} = props.book;
+  const {title, image, author, content, seller_id, price} = props.book;
   return (
     <View style={styles.main} key={title}>
       <TouchableOpacity
