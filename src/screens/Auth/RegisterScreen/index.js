@@ -7,9 +7,9 @@ import {
   Alert,
   KeyboardAvoidingView,
   Keyboard,
+  Platform,
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-import {connect} from 'react-redux';
 import {registerUserAction} from '../../../redux/auth/actions';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -58,7 +58,6 @@ const Index = () => {
     });
   };
   const onSubmitUser = (params) => {
-    AsyncStorage.setItem('userInfo', JSON.stringify({email, password}));
     dispatch(registerUserAction(params));
   };
   return (
@@ -82,85 +81,80 @@ const Index = () => {
             <Text style={styles.formText}>Kayıt Ol</Text>
           </View>
           <View style={styles.form}>
-            <TouchableWithoutFeedback
-              onPress={() => {
-                Keyboard.dismiss();
-              }}>
-              <Input
-                style={{
-                  marginBottom: 15,
-                  borderRadius: 0,
-                  borderWidth: 2,
-                  borderColor: '#CDEAC0',
-                }}
-                placeholder={'Name Surname'}
-                value={name}
-                onChangeText={(value) => setName(value)}
-              />
-              <Input
-                style={{
-                  marginBottom: 15,
-                  borderRadius: 0,
-                  borderWidth: 2,
-                  borderColor: '#CDEAC0',
-                }}
-                placeholder={'Username'}
-                value={username}
-                onChangeText={(value) => setUsername(value)}
-              />
-              <Input
-                style={{
-                  marginBottom: 15,
-                  borderRadius: 0,
-                  borderWidth: 2,
-                  borderColor: '#CDEAC0',
-                }}
-                placeholder={'Email'}
-                value={email}
-                onChangeText={(value) => setEmail(value)}
-              />
-              <Input
-                style={{
-                  marginBottom: 15,
-                  borderRadius: 0,
-                  borderWidth: 2,
-                  borderColor: '#CDEAC0',
-                }}
-                placeholder={'Password'}
-                value={password}
-                onChangeText={(value) => setPassword(value)}
-              />
-              <Image style={styles.profileImg} source={{uri: profileImage}} />
-              {registerLoading ? (
-                <Spinner color={'white'} />
-              ) : (
-                <>
-                  <View>
-                    <Icon.Button
-                      onPress={chooseBook}
-                      backgroundColor={Colors.orange}
-                      name="plus"
-                      color={Colors.orange}
-                      style={styles.addBtn}>
-                      <Text style={styles.btnText}>Profil Resmini Ekle</Text>
-                    </Icon.Button>
-                  </View>
-                  <Button
-                    buttonStyle={{borderRadius: 0}}
-                    text={'Kayıt Ol'}
-                    onPress={() => {
-                      onSubmitUser({
-                        email,
-                        password,
-                        name,
-                        username,
-                        profileImage,
-                      });
-                    }}
-                  />
-                </>
-              )}
-            </TouchableWithoutFeedback>
+            <Input
+              style={{
+                marginBottom: 15,
+                borderRadius: 0,
+                borderWidth: 2,
+                borderColor: '#CDEAC0',
+              }}
+              placeholder={'Name Surname'}
+              value={name}
+              onChangeText={(value) => setName(value)}
+            />
+            <Input
+              style={{
+                marginBottom: 15,
+                borderRadius: 0,
+                borderWidth: 2,
+                borderColor: '#CDEAC0',
+              }}
+              placeholder={'Username'}
+              value={username}
+              onChangeText={(value) => setUsername(value)}
+            />
+            <Input
+              style={{
+                marginBottom: 15,
+                borderRadius: 0,
+                borderWidth: 2,
+                borderColor: '#CDEAC0',
+              }}
+              placeholder={'Email'}
+              value={email}
+              onChangeText={(value) => setEmail(value)}
+            />
+            <Input
+              style={{
+                marginBottom: 15,
+                borderRadius: 0,
+                borderWidth: 2,
+                borderColor: '#CDEAC0',
+              }}
+              placeholder={'Password'}
+              value={password}
+              onChangeText={(value) => setPassword(value)}
+            />
+            <Image style={styles.profileImg} source={{uri: profileImage}} />
+            {registerLoading ? (
+              <Spinner color={'white'} />
+            ) : (
+              <>
+                <View>
+                  <Icon.Button
+                    onPress={chooseBook}
+                    backgroundColor={Colors.orange}
+                    name="plus"
+                    color={Colors.orange}
+                    style={styles.addBtn}>
+                    <Text style={styles.btnText}>Profil Resmini Ekle</Text>
+                  </Icon.Button>
+                </View>
+                <Button
+                  buttonStyle={{borderRadius: 0}}
+                  text={'Kayıt Ol'}
+                  onPress={() => {
+                    onSubmitUser({
+                      email,
+                      password,
+                      name,
+                      username,
+                      profileImage,
+                    });
+                  }}
+                />
+              </>
+            )}
           </View>
         </View>
       </View>

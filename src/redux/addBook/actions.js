@@ -135,18 +135,21 @@ export const updateBookAction = (params, newImages, callback) => {
                     dispatch({type: ADD_ONE_BOOK, book: imageURL});
                     counter++;
                     if (counter === newImages.length) {
-                      Alert.alert(
-                        'Başarılı',
-                        'Kitabınız Başarıyla Güncellendi',
-                        [
-                          {
-                            text: 'Tamam',
-                            onPress: callback,
-                          },
-                        ],
-                      );
+                      // Alert.alert(
+                      //   'Başarılı',
+                      //   'Kitabınız Başarıyla Güncellendi',
+                      //   [
+                      //     {
+                      //       text: 'Tamam',
+                      //       onPress: callback,
+                      //     },
+                      //   ],
+                      // );
                       dispatch({
                         type: ADD_BOOK_SUCCESS,
+                      });
+                      Toast.show({
+                        text: 'Kitap Eklendi',
                       });
                     }
                   })

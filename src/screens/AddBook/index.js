@@ -13,10 +13,10 @@ import {Colors} from '../../constant/colors/colors';
 
 class index extends Component {
   state = {
-    title: 'Deneme',
-    content: 'deneme1',
-    price: '40',
-    author: 'George Orwell',
+    title: '',
+    content: '',
+    price: '',
+    author: '',
     images: [],
   };
 
@@ -41,7 +41,7 @@ class index extends Component {
         path: 'images',
       },
       quality: 0.4,
-      allowsEditing: true,
+      mediaType: 'photo',
     };
     ImagePicker.showImagePicker(options, (response) => {
       if (response.didCancel) {
